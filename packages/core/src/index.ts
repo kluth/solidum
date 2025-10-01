@@ -18,3 +18,8 @@ export type { EffectFn, Dispose } from './reactive/effect.js';
 export { createElement, Fragment, render, mount, onMount, onCleanup } from './dom/index.js';
 
 export type { VNode, ComponentFunction, JSX } from './dom/index.js';
+
+// Context API
+export { createContext, useContext } from './context/index.js';
+
+export type { Context } from './context/index.js';
