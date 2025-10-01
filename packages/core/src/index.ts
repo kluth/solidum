@@ -28,3 +28,8 @@ export type { Context } from './context/index.js';
 export { createStore } from './store/index.js';
 
 export type { Store, StoreConfig, Action, EffectContext, Middleware } from './store/index.js';
+
+// Component Utilities
+export { mergeProps, cn } from './utils/index.js';
+
+export type { Props, ClassValue } from './utils/index.js';
