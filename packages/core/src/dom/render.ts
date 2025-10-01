@@ -48,7 +48,13 @@ export function render(
   if (typeof vnode.type === 'function') {
     enterRender();
     try {
-      const componentVNode = (vnode.type as ComponentFunction)(vnode.props);
+      // Merge children into props for component access
+      const propsWithChildren = {
+        ...vnode.props,
+        children: vnode.children.length === 1 ? vnode.children[0] : vnode.children.length > 0 ? vnode.children : undefined,
+      };
+
+      const componentVNode = (vnode.type as ComponentFunction)(propsWithChildren);
       if (componentVNode) {
         return render(componentVNode, document);
       }
