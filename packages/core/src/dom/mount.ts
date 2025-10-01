@@ -9,13 +9,21 @@ import { render } from './render.js';
 import { effect } from '../reactive/effect.js';
 
 /**
- * Current component context (for lifecycle hooks)
+ * Current component context (for lifecycle hooks and context API)
  */
 let currentContext: ComponentContext | null = null;
 
 interface ComponentContext {
   onMountCallbacks: Array<() => void>;
   onCleanupCallbacks: Array<() => void>;
+}
+
+/**
+ * Get current component context
+ * @internal
+ */
+export function getCurrentContext(): ComponentContext | null {
+  return currentContext;
 }
 
 /**

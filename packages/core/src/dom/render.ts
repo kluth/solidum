@@ -6,6 +6,7 @@
 
 import type { VNode, ComponentFunction } from './vnode.js';
 import { Fragment } from './vnode.js';
+import { pushContext, popContext, enterRender, exitRender } from '../context/context.js';
 
 /**
  * Render a VNode to a DOM element
@@ -21,21 +22,41 @@ export function render(
 
   // Handle fragments
   if (vnode.type === Fragment) {
-    const fragment = document.createDocumentFragment();
-    for (const child of vnode.children) {
-      fragment.appendChild(render(child, document));
+    // Check if this fragment has context metadata (from Context.Provider)
+    const hasContext = '__contextId' in vnode && '__contextValue' in vnode;
+
+    if (hasContext) {
+      // Push context before rendering children
+      pushContext((vnode as any).__contextId, (vnode as any).__contextValue);
     }
-    return fragment;
+
+    try {
+      const fragment = document.createDocumentFragment();
+      for (const child of vnode.children) {
+        fragment.appendChild(render(child, document));
+      }
+      return fragment;
+    } finally {
+      if (hasContext) {
+        // Pop context after rendering children
+        popContext();
+      }
+    }
   }
 
   // Handle component functions
   if (typeof vnode.type === 'function') {
-    const componentVNode = (vnode.type as ComponentFunction)(vnode.props);
-    if (componentVNode) {
-      return render(componentVNode, document);
+    enterRender();
+    try {
+      const componentVNode = (vnode.type as ComponentFunction)(vnode.props);
+      if (componentVNode) {
+        return render(componentVNode, document);
+      }
+      // Component returned null
+      return document.createTextNode('');
+    } finally {
+      exitRender();
     }
-    // Component returned null
-    return document.createTextNode('');
   }
 
   // Handle regular elements
