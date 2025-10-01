@@ -1,0 +1,181 @@
+/**
+ * Store Pattern for State Management
+ *
+ * Centralized state management for complex applications
+ */
+
+import { atom } from '../reactive/atom.js';
+import { computed } from '../reactive/computed.js';
+import { batch as batchFn } from '../reactive/batch.js';
+import type { Atom } from '../reactive/atom.js';
+import type { Computed } from '../reactive/computed.js';
+
+/**
+ * Store configuration
+ */
+export interface StoreConfig<State, Actions, Getters, Effects> {
+  state: State;
+  actions?: Actions;
+  getters?: Getters;
+  effects?: Effects;
+  middleware?: Middleware<State> | Middleware<State>[];
+}
+
+/**
+ * Action function type
+ */
+export type Action<State, Payload = void> = Payload extends void
+  ? (state: State) => State
+  : (state: State, payload: Payload) => State;
+
+/**
+ * Effect context
+ */
+export interface EffectContext<State> {
+  dispatch: <K extends string>(action: K, ...args: any[]) => void;
+  getState: () => State;
+}
+
+/**
+ * Middleware function type
+ */
+export type Middleware<State> = (
+  store: { getState: () => State }
+) => (
+  next: (action: string, payload?: any) => void
+) => (action: string, payload?: any) => void;
+
+/**
+ * Store interface
+ */
+export interface Store<State, Actions, Getters, Effects> {
+  getState: () => State;
+  select: <Result>(selector: (state: State) => Result) => Computed<Result>;
+  dispatch: <K extends keyof Actions>(
+    action: K,
+    ...args: Actions[K] extends Action<State, infer P> ? (P extends void ? [] : [P]) : never
+  ) => void;
+  batch: (fn: () => void) => void;
+  getters: {
+    [K in keyof Getters]: Getters[K] extends (state: State) => infer R ? (state: State) => R : never;
+  };
+  effects: {
+    [K in keyof Effects]: Effects[K] extends (ctx: EffectContext<State>) => infer R ? () => R : never;
+  };
+}
+
+/**
+ * Create a new store
+ *
+ * @example
+ * ```typescript
+ * const store = createStore({
+ *   state: { count: 0 },
+ *   actions: {
+ *     increment(state) {
+ *       return { ...state, count: state.count + 1 };
+ *     }
+ *   },
+ *   getters: {
+ *     doubled(state) {
+ *       return state.count * 2;
+ *     }
+ *   }
+ * });
+ *
+ * store.dispatch('increment');
+ * const doubled = store.select(state => store.getters.doubled(state));
+ * ```
+ */
+export function createStore<State, Actions = {}, Getters = {}, Effects = {}>(
+  config: StoreConfig<State, Actions, Getters, Effects>
+): Store<State, Actions, Getters, Effects> {
+  // Create reactive state atom
+  const stateAtom = atom<State>(config.state);
+
+  // Build middleware chain
+  let dispatchFn = (action: string, payload?: any) => {
+    executeAction(action, payload);
+  };
+
+  if (config.middleware) {
+    const middlewares = Array.isArray(config.middleware) ? config.middleware : [config.middleware];
+    for (let i = middlewares.length - 1; i >= 0; i--) {
+      const middleware = middlewares[i];
+      dispatchFn = middleware({ getState })(dispatchFn);
+    }
+  }
+
+  /**
+   * Get current state
+   */
+  function getState(): State {
+    return stateAtom();
+  }
+
+  /**
+   * Execute an action
+   */
+  function executeAction(action: string, payload?: any): void {
+    const actions = config.actions as any;
+
+    if (!actions || !(action in actions)) {
+      throw new Error(`Unknown action: ${action}`);
+    }
+
+    const actionFn = actions[action];
+    const currentState = getState();
+
+    // Call action and update state
+    const newState = payload === undefined ? actionFn(currentState) : actionFn(currentState, payload);
+
+    stateAtom(newState);
+  }
+
+  /**
+   * Dispatch an action
+   */
+  function dispatch(action: string, payload?: any): void {
+    dispatchFn(action, payload);
+  }
+
+  /**
+   * Select a reactive slice of state
+   */
+  function select<Result>(selector: (state: State) => Result): Computed<Result> {
+    return computed(() => selector(stateAtom()));
+  }
+
+  /**
+   * Batch multiple updates
+   */
+  function batch(fn: () => void): void {
+    batchFn(fn);
+  }
+
+  /**
+   * Build effects object
+   */
+  const effects = {} as any;
+  if (config.effects) {
+    const effectsConfig = config.effects as any;
+    for (const key in effectsConfig) {
+      effects[key] = () => {
+        const ctx: EffectContext<State> = {
+          dispatch,
+          getState
+        };
+        return effectsConfig[key](ctx);
+      };
+    }
+  }
+
+  return {
+    getState,
+    select,
+    dispatch: dispatch as any,
+    batch,
+    getters: (config.getters || {}) as any,
+    effects
+  };
+}
