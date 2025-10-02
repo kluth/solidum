@@ -5,9 +5,8 @@
  * without having to pass props down manually at every level.
  */
 
-import type { VNode, ComponentFunction } from '../dom/vnode.js';
+import type { ComponentFunction } from '../dom/vnode.js';
 import { createElement, Fragment } from '../dom/vnode.js';
-import { getCurrentContext } from '../dom/mount.js';
 
 /**
  * Context object

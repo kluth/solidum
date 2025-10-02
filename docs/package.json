@@ -1,16 +1,19 @@
 {
   "name": "@solidum/docs",
   "version": "0.1.0",
-  "description": "Documentation site for Solidum framework",
+  "description": "Documentation site for Solidum framework - built with Solidum!",
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "vitepress dev",
-    "build": "vitepress build",
-    "preview": "vitepress preview"
+    "dev": "node build.js && python -m http.server 8080 --directory dist",
+    "build": "node build.js"
+  },
+  "dependencies": {
+    "@solidum/core": "workspace:*",
+    "@solidum/ui": "workspace:*"
   },
   "devDependencies": {
-    "vitepress": "^1.6.4",
-    "vue": "^3.5.22"
+    "@types/node": "^20.11.0",
+    "typescript": "^5.3.0"
   }
 }

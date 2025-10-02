@@ -7,7 +7,6 @@
 import { atom } from '../reactive/atom.js';
 import { computed } from '../reactive/computed.js';
 import { batch as batchFn } from '../reactive/batch.js';
-import type { Atom } from '../reactive/atom.js';
 import type { Computed } from '../reactive/computed.js';
 
 /**
