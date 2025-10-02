@@ -17,7 +17,7 @@ Solidum is a lightweight, performant framework that combines fine-grained reacti
 
 ## Documentation
 
-📚 **[View the full documentation](https://yourusername.github.io/Solidum/)**
+📚 **[View the full documentation](https://kluth.github.io/solidum/)**
 
 The comprehensive documentation includes:
 - Detailed guides and tutorials

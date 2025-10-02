@@ -4,10 +4,10 @@ export default defineConfig({
   title: 'Solidum',
   description: 'A fine-grained reactive JavaScript framework for building user interfaces',
 
-  base: '/Solidum/',
+  base: '/solidum/',
 
   head: [
-    ['link', { rel: 'icon', href: '/Solidum/favicon.ico' }],
+    ['link', { rel: 'icon', href: '/solidum/favicon.ico' }],
     ['meta', { name: 'theme-color', content: '#667eea' }],
     ['meta', { name: 'og:type', content: 'website' }],
     ['meta', { name: 'og:locale', content: 'en' }],
@@ -84,7 +84,7 @@ export default defineConfig({
     },
 
     socialLinks: [
-      { icon: 'github', link: 'https://github.com/yourusername/Solidum' }
+      { icon: 'github', link: 'https://github.com/kluth/solidum' }
     ],
 
     footer: {
@@ -97,7 +97,7 @@ export default defineConfig({
     },
 
     editLink: {
-      pattern: 'https://github.com/yourusername/Solidum/edit/master/docs/:path',
+      pattern: 'https://github.com/kluth/solidum/edit/main/docs/:path',
       text: 'Edit this page on GitHub'
     }
   }
