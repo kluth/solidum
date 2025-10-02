@@ -3,7 +3,7 @@
  * Renders VNodes to HTML strings
  */
 
-import { renderToString } from '@solidum/ssr';
+import { renderToString } from '@sldm/ssr';
 
 // Re-export renderToString from SSR package for backward compatibility
 export { renderToString };

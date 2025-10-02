@@ -4,6 +4,8 @@
 
 Solidum is a lightweight, performant framework that combines fine-grained reactivity with a flexible component model. Build modern web applications with reactive primitives, centralized state management, and a rich extensibility system.
 
+> **Note**: This project uses the `@sldm` npm organization for package publishing.
+
 ## Features
 
 - **Fine-Grained Reactivity**: Efficient updates with atom, computed, and effect primitives
@@ -43,13 +45,13 @@ Then visit `http://localhost:5173`
 ## Installation
 
 ```bash
-npm install @solidum/core
+npm install @sldm/core
 ```
 
 ## Quick Start
 
 ```typescript
-import { atom, computed, effect, createElement, mount } from '@solidum/core';
+import { atom, computed, effect, createElement, mount } from '@sldm/core';
 
 // Create reactive state
 const count = atom(0);
@@ -92,7 +94,7 @@ mount(document.getElementById('app'), () => createElement(Counter));
 #### Atom - Mutable State
 
 ```typescript
-import { atom } from '@solidum/core';
+import { atom } from '@sldm/core';
 
 // Create atom with initial value
 const count = atom(0);
@@ -115,7 +117,7 @@ unsubscribe();
 #### Computed - Derived State
 
 ```typescript
-import { atom, computed } from '@solidum/core';
+import { atom, computed } from '@sldm/core';
 
 const firstName = atom('John');
 const lastName = atom('Doe');
@@ -133,7 +135,7 @@ console.log(fullName()); // "Jane Doe"
 #### Effect - Side Effects
 
 ```typescript
-import { atom, effect } from '@solidum/core';
+import { atom, effect } from '@sldm/core';
 
 const count = atom(0);
 
@@ -149,7 +151,7 @@ count(5); // Updates document.title
 #### Batch - Optimize Updates
 
 ```typescript
-import { atom, batch } from '@solidum/core';
+import { atom, batch } from '@sldm/core';
 
 const firstName = atom('John');
 const lastName = atom('Doe');
@@ -167,7 +169,7 @@ batch(() => {
 Pass data through component tree without prop drilling:
 
 ```typescript
-import { createContext, useContext, createElement } from '@solidum/core';
+import { createContext, useContext, createElement } from '@sldm/core';
 
 // Create context
 const ThemeContext = createContext();
@@ -198,7 +200,7 @@ function Button() {
 Centralized state management for complex applications:
 
 ```typescript
-import { createStore } from '@solidum/core';
+import { createStore } from '@sldm/core';
 
 const todoStore = createStore({
   // Initial state
@@ -261,7 +263,7 @@ await todoStore.effects.loadTodos();
 Helper functions for building component libraries:
 
 ```typescript
-import { mergeProps, cn } from '@solidum/core';
+import { mergeProps, cn } from '@sldm/core';
 
 // Conditional class names
 const classes = cn(
@@ -291,7 +293,7 @@ const merged = mergeProps(
 ### Creating Components
 
 ```typescript
-import { createElement, atom } from '@solidum/core';
+import { createElement, atom } from '@sldm/core';
 
 function Counter() {
   const count = atom(0);
@@ -337,7 +339,7 @@ createElement(Greeting, { name: 'Alice', age: 30 });
 ### Lifecycle Hooks
 
 ```typescript
-import { onMount, onCleanup } from '@solidum/core';
+import { onMount, onCleanup } from '@sldm/core';
 
 function Timer() {
   const seconds = atom(0);
@@ -380,7 +382,7 @@ python -m http.server 8080
 ## Architecture
 
 ```
-@solidum/core
+@sldm/core
 ├── reactive/      # Reactive primitives (atom, computed, effect, batch)
 ├── context/       # Context API for dependency injection
 ├── store/         # Store pattern for state management
@@ -395,10 +397,10 @@ python -m http.server 8080
 pnpm test
 
 # Run specific package tests
-pnpm --filter @solidum/core test
+pnpm --filter @sldm/core test
 
 # Watch mode
-pnpm --filter @solidum/core test:watch
+pnpm --filter @sldm/core test:watch
 ```
 
 ## Development
@@ -456,7 +458,7 @@ Solidum is designed to be extensible. Build your own:
 ### UI Component Libraries
 
 ```typescript
-import { cn, mergeProps, useContext } from '@solidum/core';
+import { cn, mergeProps, useContext } from '@sldm/core';
 
 export function Button({ variant = 'primary', size = 'md', ...props }) {
   const theme = useContext(ThemeContext);
@@ -476,7 +478,7 @@ export function Button({ variant = 'primary', size = 'md', ...props }) {
 ### State Management Libraries
 
 ```typescript
-import { createStore, createContext } from '@solidum/core';
+import { createStore, createContext } from '@sldm/core';
 
 export function createGlobalStore(config) {
   const store = createStore(config);
@@ -495,7 +497,7 @@ export function createGlobalStore(config) {
 ### Form Libraries
 
 ```typescript
-import { atom, computed } from '@solidum/core';
+import { atom, computed } from '@sldm/core';
 
 export function useForm(config) {
   const values = atom(config.initialValues);

@@ -152,7 +152,7 @@ const { play, pause, reset } = useAnimation(element, {
 ### Material-Style UI Library
 
 ```typescript
-// @solidum/material
+// @sldm/material
 export function Button({ variant = 'contained', color = 'primary', ...props }) {
   const theme = useContext(ThemeContext);
   const ripple = useRipple();
@@ -189,7 +189,7 @@ export function Dialog({ open, onClose, children }) {
 ### State Management Library
 
 ```typescript
-// @solidum/store
+// @sldm/store
 export const todoStore = createStore({
   state: {
     todos: [],
@@ -227,7 +227,7 @@ export const todoStore = createStore({
 ### Form Library
 
 ```typescript
-// @solidum/forms
+// @sldm/forms
 export function useForm<T>(config: FormConfig<T>) {
   const values = atom<T>(config.initialValues);
   const errors = atom<Record<string, string>>({});

@@ -4,12 +4,12 @@
  * Convert VNodes to real DOM elements
  */
 
-import { _getOrCreateComponentId, _setComponentId, _clearComponentId } from '../reactive/state.js';
 import { effect } from '../reactive/effect.js';
+import { _getOrCreateComponentId, _setComponentId, _clearComponentId } from '../reactive/state.js';
 
 import type { VNode, ComponentFunction } from './vnode.js';
 import { Fragment } from './vnode.js';
-// Context functions moved to @solidum/context package
+// Context functions moved to @sldm/context package
 
 /**
  * Check if an element name is an SVG element
@@ -125,7 +125,7 @@ export function render(
 
     if (hasContext) {
       // Push context before rendering children
-      // Context handling moved to @solidum/context package
+      // Context handling moved to @sldm/context package
     }
 
     try {
@@ -137,14 +137,14 @@ export function render(
     } finally {
       if (hasContext) {
         // Pop context after rendering children
-        // Context cleanup moved to @solidum/context package
+        // Context cleanup moved to @sldm/context package
       }
     }
   }
 
   // Handle component functions
   if (typeof vnode.type === 'function') {
-    // Render tracking moved to @solidum/context package
+    // Render tracking moved to @sldm/context package
 
     const componentId = _getOrCreateComponentId(vnode.type, vnode.props);
 
@@ -209,7 +209,7 @@ export function render(
         return document.createTextNode('');
       } finally {
         _clearComponentId();
-        // Render cleanup moved to @solidum/context package
+        // Render cleanup moved to @sldm/context package
       }
     }
   }

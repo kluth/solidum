@@ -1,21 +1,21 @@
 {
-  "name": "@solidum/docs",
+  "name": "@sldm/docs",
   "version": "0.1.0",
   "description": "Documentation site for Solidum framework - built with Solidum!",
   "private": true,
   "type": "module",
   "scripts": {
     "dev": "node build.js && python -m http.server 8080 --directory dist",
-    "build": "pnpm --filter @solidum/core build && pnpm --filter @solidum/utils build && pnpm --filter @solidum/ui build && pnpm --filter @solidum/router build && pnpm --filter @solidum/store build && pnpm --filter @solidum/context build && pnpm --filter @solidum/ssr build && tsc && node build.js"
+    "build": "pnpm --filter @sldm/core build && pnpm --filter @sldm/utils build && pnpm --filter @sldm/ui build && pnpm --filter @sldm/router build && pnpm --filter @sldm/store build && pnpm --filter @sldm/context build && pnpm --filter @sldm/ssr build && tsc && node build.js"
   },
   "dependencies": {
-    "@solidum/core": "workspace:*",
-    "@solidum/ui": "workspace:*",
-    "@solidum/router": "workspace:*",
-    "@solidum/store": "workspace:*",
-    "@solidum/context": "workspace:*",
-    "@solidum/utils": "workspace:*",
-    "@solidum/ssr": "workspace:*"
+    "@sldm/core": "workspace:*",
+    "@sldm/ui": "workspace:*",
+    "@sldm/router": "workspace:*",
+    "@sldm/store": "workspace:*",
+    "@sldm/context": "workspace:*",
+    "@sldm/utils": "workspace:*",
+    "@sldm/ssr": "workspace:*"
   },
   "devDependencies": {
     "@types/node": "^20.11.0",

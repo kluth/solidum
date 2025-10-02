@@ -5,7 +5,7 @@ The Context API provides dependency injection, allowing you to pass data through
 ## Creating a Context
 
 ```typescript
-import { createContext } from '@solidum/core';
+import { createContext } from '@sldm/core';
 
 const ThemeContext = createContext();
 ```

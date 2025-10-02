@@ -1,5 +1,5 @@
 {
-  "name": "@solidum/ssr",
+  "name": "@sldm/ssr",
   "version": "0.1.0",
   "description": "Server-side rendering utilities for Solidum applications",
   "type": "module",
@@ -22,7 +22,7 @@
     "lint:fix": "eslint src/**/*.{ts,js} --fix"
   },
   "dependencies": {
-    "@solidum/core": "^0.1.0"
+    "@sldm/core": "^0.1.0"
   },
   "devDependencies": {
     "@types/node": "^20.11.0",
@@ -38,11 +38,11 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/kluth/solidum-ssr.git"
+    "url": "git+https://github.com/kluth/solidum.git"
   },
-  "homepage": "https://github.com/kluth/solidum-ssr#readme",
+  "homepage": "https://kluth.github.io/solidum",
   "bugs": {
-    "url": "https://github.com/kluth/solidum-ssr/issues"
+    "url": "https://github.com/kluth/solidum/issues"
   },
   "publishConfig": {
     "access": "public"

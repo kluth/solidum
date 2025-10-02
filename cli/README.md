@@ -2,6 +2,8 @@
 
 > Code generator and project scaffolding tool for Solidum framework
 
+> **Note**: Generated projects use the `@sldm` npm organization for dependencies.
+
 ## Installation
 
 ### From Source
@@ -70,20 +72,23 @@ solidum add store
 Create a new Solidum project.
 
 **Options:**
+
 - `-t, --template <type>` - Project template (basic, spa, ssr)
-- `--router` - Include @solidum/router
-- `--ui` - Include @solidum/ui
-- `--ssr` - Include @solidum/ssr
+- `--router` - Include @sldm/router
+- `--ui` - Include @sldm/ui
+- `--ssr` - Include @sldm/ssr
 
 ### `solidum generate|g`
 
 Generate code scaffolding.
 
 **Subcommands:**
+
 - `component|c [name]` - Generate a component
 - `page|p [name]` - Generate a page
 
 **Options:**
+
 - `-p, --path <path>` - Output directory
 - `--functional` - Generate functional component (default: true)
 
@@ -92,12 +97,13 @@ Generate code scaffolding.
 Add a Solidum package to your project.
 
 **Available packages:**
-- `router` - @solidum/router (SPA routing)
-- `ui` - @solidum/ui (UI components)
-- `store` - @solidum/store (State management)
-- `context` - @solidum/context (Dependency injection)
-- `ssr` - @solidum/ssr (Server-side rendering)
-- `testing` - @solidum/testing (Test utilities)
+
+- `router` - @sldm/router (SPA routing)
+- `ui` - @sldm/ui (UI components)
+- `store` - @sldm/store (State management)
+- `context` - @sldm/context (Dependency injection)
+- `ssr` - @sldm/ssr (Server-side rendering)
+- `testing` - @sldm/testing (Test utilities)
 
 ## Examples
 
@@ -161,11 +167,13 @@ go build -o solidum
 ### Add to PATH
 
 **macOS/Linux:**
+
 ```bash
 cp solidum /usr/local/bin/
 ```
 
 **Windows:**
+
 ```powershell
 # Add the CLI directory to your PATH
 $env:Path += ";C:\path\to\cli"

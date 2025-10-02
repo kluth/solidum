@@ -1,5 +1,5 @@
 {
-  "name": "@solidum/core",
+  "name": "@sldm/core",
   "version": "0.1.0",
   "description": "Reactive primitives and core runtime for Solidum framework",
   "type": "module",
@@ -24,7 +24,7 @@
   },
   "dependencies": {},
   "devDependencies": {
-    "@solidum/testing": "workspace:*",
+    "@sldm/testing": "workspace:*",
     "@types/node": "^20.11.0",
     "tsx": "^4.7.0",
     "typescript": "^5.3.0"
@@ -36,11 +36,11 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/kluth/solidum-core.git"
+    "url": "git+https://github.com/kluth/solidum.git"
   },
-  "homepage": "https://github.com/kluth/solidum-core#readme",
+  "homepage": "https://kluth.github.io/solidum",
   "bugs": {
-    "url": "https://github.com/kluth/solidum-core/issues"
+    "url": "https://github.com/kluth/solidum/issues"
   },
   "publishConfig": {
     "access": "public"

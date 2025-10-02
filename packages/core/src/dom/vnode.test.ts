@@ -4,7 +4,7 @@
  * Tests written FIRST before implementation!
  */
 
-import { describe, test, expect, runTests } from '@solidum/testing';
+import { describe, test, expect, runTests } from '@sldm/testing';
 
 import { createElement, Fragment } from './vnode.js';
 

@@ -6,7 +6,7 @@
  * Note: These tests require a DOM environment (JSDOM or browser)
  */
 
-import { describe, test, expect, runTests } from '@solidum/testing';
+import { describe, test, expect, runTests } from '@sldm/testing';
 
 import { render } from './render.js';
 import { createElement } from './vnode.js';

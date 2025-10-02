@@ -1,11 +1,11 @@
 /**
- * @solidum/ssr - Server-Side Rendering Utilities
+ * @sldm/ssr - Server-Side Rendering Utilities
  *
  * Provides utilities for rendering Solidum components to HTML strings
  * on the server side.
  */
 
-import { _getOrCreateComponentId, _setComponentId, _clearComponentId } from '@solidum/core';
+import { _getOrCreateComponentId, _setComponentId, _clearComponentId } from '@sldm/core';
 
 // Types
 export interface VNode {

@@ -1,5 +1,5 @@
 /**
- * @solidum/core - Context API
+ * @sldm/core - Context API
  *
  * @packageDocumentation
  */

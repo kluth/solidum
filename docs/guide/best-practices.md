@@ -374,7 +374,7 @@ test('should update items array', () => {
 Leverage built-in testing utilities:
 
 ```typescript
-import { createDOMEnvironment, UserInteraction } from '@solidum/testing';
+import { createDOMEnvironment, UserInteraction } from '@sldm/testing';
 
 test('should handle user input', async () => {
   const env = createDOMEnvironment();

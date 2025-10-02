@@ -62,7 +62,9 @@
       "Bash(\"C:\\Program Files\\GitHub CLI\\gh.exe\" repo create kluth/solidum-context --public --description \"Context and dependency injection for Solidum\")",
       "Bash(\"C:\\Program Files\\GitHub CLI\\gh.exe\" repo create kluth/solidum-ssr --public --description \"Server-side rendering for Solidum applications\")",
       "Bash(\"C:\\Program Files\\GitHub CLI\\gh.exe\" repo create kluth/solidum-testing --public --description \"Testing utilities and test runner for Solidum\")",
-      "Bash(\"C:\\Program Files\\GitHub CLI\\gh.exe\" repo create kluth/solidum-utils --public --description \"Utility functions for Solidum framework\")"
+      "Bash(\"C:\\Program Files\\GitHub CLI\\gh.exe\" repo create kluth/solidum-utils --public --description \"Utility functions for Solidum framework\")",
+      "Bash(npm:*)",
+      "Bash(find:*)"
     ],
     "deny": [],
     "ask": []

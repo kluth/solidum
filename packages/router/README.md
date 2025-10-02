@@ -1,13 +1,13 @@
-# @solidum/router
+# @sldm/router
 
 > Simple SPA router for Solidum applications
 
 ## Installation
 
 ```bash
-npm install @solidum/router @solidum/core
+npm install @sldm/router @sldm/core
 # or
-pnpm add @solidum/router @solidum/core
+pnpm add @sldm/router @sldm/core
 ```
 
 ## Features
@@ -20,16 +20,16 @@ pnpm add @solidum/router @solidum/core
 ## Quick Start
 
 ```typescript
-import { createRouter, navigate } from '@solidum/router';
-import { mount } from '@solidum/core';
+import { createRouter, navigate } from '@sldm/router';
+import { mount } from '@sldm/core';
 
 // Define routes
 const router = createRouter({
   routes: {
     '/': 'HomePage',
     '/about': 'AboutPage',
-    '/users/:id': 'UserPage'
-  }
+    '/users/:id': 'UserPage',
+  },
 });
 
 // Get current route info
@@ -40,7 +40,7 @@ const currentPage = router.getCurrentPage(); // 'HomePage'
 navigate('/about');
 
 // Listen for route changes
-window.addEventListener('routechange', (event) => {
+window.addEventListener('routechange', event => {
   console.log('Navigated to:', event.detail.path);
 });
 ```
@@ -56,9 +56,9 @@ const router = createRouter({
   routes: {
     '/': 'HomePage',
     '/products': 'ProductsPage',
-    '/products/:id': 'ProductDetailPage'
+    '/products/:id': 'ProductDetailPage',
   },
-  initialPath: window.location.pathname
+  initialPath: window.location.pathname,
 });
 ```
 

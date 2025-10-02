@@ -4,7 +4,7 @@
  * Additional tests for edge cases and advanced scenarios
  */
 
-import { describe, test, expect, runTests } from '@solidum/testing';
+import { describe, test, expect, runTests } from '@sldm/testing';
 
 import { atom } from './atom.js';
 import { batch } from './batch.js';

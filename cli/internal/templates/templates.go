@@ -6,7 +6,7 @@ import (
 )
 
 func ComponentTemplate(name string) string {
-	return fmt.Sprintf(`import { createElement } from '@solidum/core';
+	return fmt.Sprintf(`import { createElement } from '@sldm/core';
 
 export interface %sProps {
   // Add your props here
@@ -22,8 +22,8 @@ export function %s(props: %sProps) {
 }
 
 func PageTemplate(name string) string {
-	return fmt.Sprintf(`import { createElement } from '@solidum/core';
-import { Container } from '@solidum/ui';
+	return fmt.Sprintf(`import { createElement } from '@sldm/core';
+import { Container } from '@sldm/ui';
 
 export function %sPage() {
   return createElement(Container, { maxWidth: 'lg' },
@@ -39,12 +39,12 @@ export function %sPage() {
 func MainTemplate(template string, withUI bool) string {
 	uiImport := ""
 	if withUI {
-		uiImport = "\nimport '@solidum/ui/styles.css';"
+		uiImport = "\nimport '@sldm/ui/styles.css';"
 	}
 
 	if template == "spa" {
-		return fmt.Sprintf(`import { mount } from '@solidum/core';
-import { createRouter, navigate } from '@solidum/router';%s
+		return fmt.Sprintf(`import { mount } from '@sldm/core';
+import { createRouter, navigate } from '@sldm/router';%s
 import { App } from './components/App';
 
 const router = createRouter({
@@ -57,7 +57,7 @@ mount(document.getElementById('app')!, App);
 `, uiImport)
 	}
 
-	return fmt.Sprintf(`import { mount } from '@solidum/core';%s
+	return fmt.Sprintf(`import { mount } from '@sldm/core';%s
 import { App } from './components/App';
 
 mount(document.getElementById('app')!, App);
@@ -66,8 +66,8 @@ mount(document.getElementById('app')!, App);
 
 func AppComponentTemplate(withUI bool) string {
 	if withUI {
-		return `import { createElement, useState } from '@solidum/core';
-import { Button, Card, Container, Stack } from '@solidum/ui';
+		return `import { createElement, useState } from '@sldm/core';
+import { Button, Card, Container, Stack } from '@sldm/ui';
 
 export function App() {
   const count = useState(0);
@@ -87,7 +87,7 @@ export function App() {
 `
 	}
 
-	return `import { createElement, useState } from '@solidum/core';
+	return `import { createElement, useState } from '@sldm/core';
 
 export function App() {
   const count = useState(0);

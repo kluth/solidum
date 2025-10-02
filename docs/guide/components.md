@@ -81,7 +81,7 @@ function Counter() {
 Use `onMount` and `onCleanup` for lifecycle management:
 
 ```typescript
-import { onMount, onCleanup } from '@solidum/core';
+import { onMount, onCleanup } from '@sldm/core';
 
 function Timer() {
   const seconds = atom(0);

@@ -1,9 +1,9 @@
 /**
- * @solidum/testing - TDD-First Testing Framework
+ * @sldm/testing - TDD-First Testing Framework
  *
  * @example
  * ```typescript
- * import { describe, test, expect } from '@solidum/testing';
+ * import { describe, test, expect } from '@sldm/testing';
  *
  * describe('My Feature', () => {
  *   test('should work', () => {

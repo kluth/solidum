@@ -1,5 +1,5 @@
 /**
- * @solidum/core - DOM and Component System
+ * @sldm/core - DOM and Component System
  *
  * @packageDocumentation
  */

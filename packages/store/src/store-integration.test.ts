@@ -4,8 +4,8 @@
  * Real-world scenarios and integration tests for the store pattern
  */
 
-import { effect } from '@solidum/core';
-import { describe, test, expect, runTests } from '@solidum/testing';
+import { effect } from '@sldm/core';
+import { describe, test, expect, runTests } from '@sldm/testing';
 
 import { createStore } from './store.js';
 

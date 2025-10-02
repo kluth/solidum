@@ -1,13 +1,13 @@
-# @solidum/core
+# @sldm/core
 
 > Reactive primitives and core runtime for Solidum framework
 
 ## Installation
 
 ```bash
-npm install @solidum/core
+npm install @sldm/core
 # or
-pnpm add @solidum/core
+pnpm add @sldm/core
 ```
 
 ## Features
@@ -21,7 +21,7 @@ pnpm add @solidum/core
 ## Quick Start
 
 ```typescript
-import { atom, computed, effect, createElement, mount } from '@solidum/core';
+import { atom, computed, effect, createElement, mount } from '@sldm/core';
 
 // Create reactive state
 const count = atom(0);
@@ -37,11 +37,17 @@ count(5); // Console: Count: 5, Doubled: 10
 
 // Create UI
 function Counter() {
-  return createElement('div', {},
+  return createElement(
+    'div',
+    {},
     createElement('p', {}, `Count: ${count()}`),
-    createElement('button', {
-      onClick: () => count(count() + 1)
-    }, 'Increment')
+    createElement(
+      'button',
+      {
+        onClick: () => count(count() + 1),
+      },
+      'Increment'
+    )
   );
 }
 

@@ -7,15 +7,15 @@ Get up and running with Solidum in 5 minutes.
 ::: code-group
 
 ```bash [npm]
-npm install @solidum/core
+npm install @sldm/core
 ```
 
 ```bash [pnpm]
-pnpm add @solidum/core
+pnpm add @sldm/core
 ```
 
 ```bash [yarn]
-yarn add @solidum/core
+yarn add @sldm/core
 ```
 
 :::
@@ -25,7 +25,7 @@ yarn add @solidum/core
 Create a simple counter application:
 
 ```typescript
-import { atom, createElement, mount } from '@solidum/core';
+import { atom, createElement, mount } from '@sldm/core';
 
 // Create reactive state
 const count = atom(0);
@@ -63,7 +63,7 @@ mount(document.getElementById('app'), () => createElement(Counter));
 Let's make it look nicer:
 
 ```typescript
-import { atom, createElement, mount, cn } from '@solidum/core';
+import { atom, createElement, mount, cn } from '@sldm/core';
 
 const count = atom(0);
 
@@ -146,7 +146,7 @@ mount(document.getElementById('app'), () => createElement(Counter));
 Let's add derived state:
 
 ```typescript
-import { atom, computed, createElement, mount } from '@solidum/core';
+import { atom, computed, createElement, mount } from '@sldm/core';
 
 const count = atom(0);
 const doubled = computed(() => count() * 2);
@@ -179,7 +179,7 @@ mount(document.getElementById('app'), () => createElement(Counter));
 Run side effects when data changes:
 
 ```typescript
-import { atom, effect, createElement, mount } from '@solidum/core';
+import { atom, effect, createElement, mount } from '@sldm/core';
 
 const count = atom(0);
 
@@ -221,7 +221,7 @@ mount(document.getElementById('app'), () => createElement(Counter));
 Share state across components without prop drilling:
 
 ```typescript
-import { atom, createContext, useContext, createElement, mount } from '@solidum/core';
+import { atom, createContext, useContext, createElement, mount } from '@sldm/core';
 
 // Create context
 const CountContext = createContext();
@@ -276,7 +276,7 @@ mount(document.getElementById('app'), () => createElement(App));
 For larger apps, use the store pattern:
 
 ```typescript
-import { createStore, createElement, mount } from '@solidum/core';
+import { createStore, createElement, mount } from '@sldm/core';
 
 // Create store
 const counterStore = createStore({

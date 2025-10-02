@@ -27,9 +27,9 @@ var newCmd = &cobra.Command{
 
 func init() {
 	newCmd.Flags().StringVarP(&projectTemplate, "template", "t", "basic", "Project template (basic, spa, ssr)")
-	newCmd.Flags().BoolVar(&withRouter, "router", false, "Include @solidum/router")
-	newCmd.Flags().BoolVar(&withUI, "ui", false, "Include @solidum/ui")
-	newCmd.Flags().BoolVar(&withSSR, "ssr", false, "Include @solidum/ssr")
+	newCmd.Flags().BoolVar(&withRouter, "router", false, "Include @sldm/router")
+	newCmd.Flags().BoolVar(&withUI, "ui", false, "Include @sldm/ui")
+	newCmd.Flags().BoolVar(&withSSR, "ssr", false, "Include @sldm/ssr")
 }
 
 func runNew(cmd *cobra.Command, args []string) error {
@@ -47,16 +47,16 @@ func runNew(cmd *cobra.Command, args []string) error {
 	cyan.Printf("\n🚀 Creating Solidum project: %s\n\n", projectName)
 
 	// Determine packages based on template and flags
-	packages := []string{"@solidum/core"}
+	packages := []string{"@sldm/core"}
 
 	if projectTemplate == "spa" || withRouter {
-		packages = append(packages, "@solidum/router")
+		packages = append(packages, "@sldm/router")
 	}
 	if projectTemplate == "ssr" || withSSR {
-		packages = append(packages, "@solidum/ssr")
+		packages = append(packages, "@sldm/ssr")
 	}
 	if withUI {
-		packages = append(packages, "@solidum/ui")
+		packages = append(packages, "@sldm/ui")
 	}
 
 	// Create project

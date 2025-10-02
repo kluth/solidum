@@ -1,5 +1,5 @@
-import { createElement } from '@solidum/core';
-import { cn } from '@solidum/utils';
+import { createElement } from '@sldm/core';
+import { cn } from '@sldm/utils';
 
 import { Button } from './Button.js';
 

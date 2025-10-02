@@ -1,13 +1,13 @@
-# @solidum/testing
+# @sldm/testing
 
 > Testing utilities and test runner for Solidum
 
 ## Installation
 
 ```bash
-npm install @solidum/testing --save-dev
+npm install @sldm/testing --save-dev
 # or
-pnpm add @solidum/testing -D
+pnpm add @sldm/testing -D
 ```
 
 ## Features
@@ -19,8 +19,8 @@ pnpm add @solidum/testing -D
 ## Quick Start
 
 ```typescript
-import { describe, test, expect } from '@solidum/testing';
-import { atom } from '@solidum/core';
+import { describe, test, expect } from '@sldm/testing';
+import { atom } from '@sldm/core';
 
 describe('atom()', () => {
   test('should create reactive atom', () => {

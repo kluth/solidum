@@ -1,5 +1,5 @@
 /**
- * @solidum/core - Reactive primitives and core runtime
+ * @sldm/core - Reactive primitives and core runtime
  *
  * @packageDocumentation
  */
@@ -26,6 +26,6 @@ export { createElement, Fragment, render, mount, onMount, onCleanup } from './do
 export type { VNode, ComponentFunction, JSX } from './dom/index.js';
 
 // Note: Context, Store, and Utils have been moved to separate packages:
-// - @solidum/context for Context API
-// - @solidum/store for Store Pattern
-// - @solidum/utils for Component Utilities
+// - @sldm/context for Context API
+// - @sldm/store for Store Pattern
+// - @sldm/utils for Component Utilities

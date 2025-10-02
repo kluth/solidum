@@ -1,4 +1,5 @@
-import { createElement, type ComponentFunction } from '@solidum/core';
+import { createElement, type ComponentFunction } from '@sldm/core';
+import { navigate } from '@sldm/router';
 import {
   Container,
   Stack,
@@ -13,8 +14,7 @@ import {
   DataTable,
   Tabs,
   Switch,
-} from '@solidum/ui';
-import { navigate } from '@solidum/router';
+} from '@sldm/ui';
 
 export function HomePage() {
   // Sample data for Chart3D
@@ -348,7 +348,12 @@ export function HomePage() {
               },
               'Efficient updates with atom, computed, and effect primitives. Only what changes gets updated.'
             ),
-            createElement(Progress as unknown as ComponentFunction, { value: 95, variant: 'gradient', showLabel: true, glow: true })
+            createElement(Progress as unknown as ComponentFunction, {
+              value: 95,
+              variant: 'gradient',
+              showLabel: true,
+              glow: true,
+            })
           ),
           // Feature 2
           createElement(
@@ -713,7 +718,7 @@ export function HomePage() {
           createElement(
             'code',
             null,
-            `import { atom, computed, effect } from '@solidum/core';
+            `import { atom, computed, effect } from '@sldm/core';
 
 // Create reactive state
 const count = atom(0);

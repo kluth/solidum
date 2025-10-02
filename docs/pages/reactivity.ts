@@ -1,6 +1,6 @@
-import { createElement } from '@solidum/core';
-import { Container, Card, Button } from '@solidum/ui';
-import { navigate } from '@solidum/router';
+import { createElement } from '@sldm/core';
+import { navigate } from '@sldm/router';
+import { Container, Card, Button } from '@sldm/ui';
 
 export function ReactivityPage() {
   return createElement(

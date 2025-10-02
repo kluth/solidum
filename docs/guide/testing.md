@@ -5,14 +5,14 @@ Solidum includes lightweight testing utilities for testing reactive code and DOM
 ## Installation
 
 ```bash
-npm install -D @solidum/testing
+npm install -D @sldm/testing
 ```
 
 ## Basic Testing
 
 ```typescript
-import { describe, test, expect, runTests } from '@solidum/testing';
-import { atom, computed } from '@solidum/core';
+import { describe, test, expect, runTests } from '@sldm/testing';
+import { atom, computed } from '@sldm/core';
 
 describe('Counter', () => {
   test('should increment', () => {
@@ -36,7 +36,7 @@ runTests();
 Test components with jsdom-based utilities:
 
 ```typescript
-import { createDOMEnvironment, DOMEvents } from '@solidum/testing';
+import { createDOMEnvironment, DOMEvents } from '@sldm/testing';
 
 describe('Button Component', () => {
   test('should handle clicks', () => {
@@ -64,7 +64,7 @@ describe('Button Component', () => {
 Simulate realistic user interactions:
 
 ```typescript
-import { UserInteraction, DOMWait } from '@solidum/testing';
+import { UserInteraction, DOMWait } from '@sldm/testing';
 
 test('should type into input', async () => {
   const input = document.createElement('input');
@@ -80,7 +80,7 @@ test('should type into input', async () => {
 Test async effects and operations:
 
 ```typescript
-import { DOMWait } from '@solidum/testing';
+import { DOMWait } from '@sldm/testing';
 
 test('should update after delay', async () => {
   const data = atom(null);

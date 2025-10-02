@@ -1,13 +1,13 @@
-# @solidum/context
+# @sldm/context
 
 > Context/dependency injection for Solidum
 
 ## Installation
 
 ```bash
-npm install @solidum/context @solidum/core
+npm install @sldm/context @sldm/core
 # or
-pnpm add @solidum/context @solidum/core
+pnpm add @sldm/context @sldm/core
 ```
 
 ## Features
@@ -19,25 +19,27 @@ pnpm add @solidum/context @solidum/core
 ## Quick Start
 
 ```typescript
-import { createContext, useContext } from '@solidum/context';
-import { createElement } from '@solidum/core';
+import { createContext, useContext } from '@sldm/context';
+import { createElement } from '@sldm/core';
 
 // Create context
 const ThemeContext = createContext('light');
 
 // Provider
 function App() {
-  return createElement(ThemeContext.Provider, { value: 'dark' },
-    createElement(ThemedButton, {})
-  );
+  return createElement(ThemeContext.Provider, { value: 'dark' }, createElement(ThemedButton, {}));
 }
 
 // Consumer
 function ThemedButton() {
   const theme = useContext(ThemeContext);
-  return createElement('button', {
-    className: `btn-${theme}`
-  }, 'Click me');
+  return createElement(
+    'button',
+    {
+      className: `btn-${theme}`,
+    },
+    'Click me'
+  );
 }
 ```
 

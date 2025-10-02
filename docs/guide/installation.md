@@ -7,19 +7,19 @@ Install Solidum via your preferred package manager:
 ::: code-group
 
 ```bash [npm]
-npm install @solidum/core
+npm install @sldm/core
 ```
 
 ```bash [pnpm]
-pnpm add @solidum/core
+pnpm add @sldm/core
 ```
 
 ```bash [yarn]
-yarn add @solidum/core
+yarn add @sldm/core
 ```
 
 ```bash [bun]
-bun add @solidum/core
+bun add @sldm/core
 ```
 
 :::
@@ -56,7 +56,7 @@ Solidum works great with Vite:
 ```bash
 npm create vite@latest my-solidum-app
 cd my-solidum-app
-npm install @solidum/core
+npm install @sldm/core
 ```
 
 **vite.config.ts:**
@@ -119,7 +119,7 @@ For quick prototyping, you can use Solidum via CDN:
     <div id="app"></div>
 
     <script type="module">
-      import { atom, createElement, mount } from 'https://esm.sh/@solidum/core';
+      import { atom, createElement, mount } from 'https://esm.sh/@sldm/core';
 
       const count = atom(0);
 
@@ -170,7 +170,7 @@ my-solidum-app/
 Install testing utilities:
 
 ```bash
-npm install -D @solidum/testing
+npm install -D @sldm/testing
 ```
 
 See the [Testing Guide](/guide/testing) for more details.

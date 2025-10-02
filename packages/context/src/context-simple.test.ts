@@ -4,7 +4,7 @@
  * Tests the core context functionality without DOM rendering
  */
 
-import { describe, test, expect, runTests } from '@solidum/testing';
+import { describe, test, expect, runTests } from '@sldm/testing';
 
 import { createContext } from './context.js';
 

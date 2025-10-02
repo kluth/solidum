@@ -1,13 +1,13 @@
-# @solidum/store
+# @sldm/store
 
 > Global state management for Solidum applications
 
 ## Installation
 
 ```bash
-npm install @solidum/store @solidum/core
+npm install @sldm/store @sldm/core
 # or
-pnpm add @solidum/store @solidum/core
+pnpm add @sldm/store @sldm/core
 ```
 
 ## Features
@@ -20,12 +20,12 @@ pnpm add @solidum/store @solidum/core
 ## Quick Start
 
 ```typescript
-import { createStore } from '@solidum/store';
+import { createStore } from '@sldm/store';
 
 // Create a store
 const [state, setState] = createStore({
   user: { name: 'Alice', age: 30 },
-  todos: []
+  todos: [],
 });
 
 // Read state

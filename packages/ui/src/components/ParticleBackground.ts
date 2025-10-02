@@ -1,5 +1,5 @@
-import { createElement, useState, effect, onCleanup } from '@solidum/core';
-import { cn } from '@solidum/utils';
+import { createElement, useState, effect, onCleanup } from '@sldm/core';
+import { cn } from '@sldm/utils';
 
 export interface ParticleBackgroundProps {
   count?: number;

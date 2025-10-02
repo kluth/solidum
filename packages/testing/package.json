@@ -1,5 +1,5 @@
 {
-  "name": "@solidum/testing",
+  "name": "@sldm/testing",
   "version": "0.1.0",
   "description": "TDD-first testing framework for Solidum",
   "type": "module",
@@ -38,11 +38,11 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/kluth/solidum-testing.git"
+    "url": "git+https://github.com/kluth/solidum.git"
   },
-  "homepage": "https://github.com/kluth/solidum-testing#readme",
+  "homepage": "https://kluth.github.io/solidum",
   "bugs": {
-    "url": "https://github.com/kluth/solidum-testing/issues"
+    "url": "https://github.com/kluth/solidum/issues"
   },
   "publishConfig": {
     "access": "public"

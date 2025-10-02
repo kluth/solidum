@@ -1,13 +1,13 @@
-# @solidum/ssr
+# @sldm/ssr
 
 > Server-side rendering for Solidum applications
 
 ## Installation
 
 ```bash
-npm install @solidum/ssr @solidum/core
+npm install @sldm/ssr @sldm/core
 # or
-pnpm add @solidum/ssr @solidum/core
+pnpm add @sldm/ssr @sldm/core
 ```
 
 ## Features
@@ -19,8 +19,8 @@ pnpm add @solidum/ssr @solidum/core
 ## Quick Start
 
 ```typescript
-import { renderToString } from '@solidum/ssr';
-import { createElement } from '@solidum/core';
+import { renderToString } from '@sldm/ssr';
+import { createElement } from '@sldm/core';
 
 function App() {
   return createElement('h1', {}, 'Hello from SSR!');

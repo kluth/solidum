@@ -1,5 +1,5 @@
 /**
- * @solidum/core - Component Utilities
+ * @sldm/core - Component Utilities
  *
  * @packageDocumentation
  */

@@ -1,13 +1,13 @@
-# @solidum/utils
+# @sldm/utils
 
 > Utility functions for Solidum framework
 
 ## Installation
 
 ```bash
-npm install @solidum/utils
+npm install @sldm/utils
 # or
-pnpm add @solidum/utils
+pnpm add @sldm/utils
 ```
 
 ## Features
@@ -19,12 +19,12 @@ pnpm add @solidum/utils
 ## Quick Start
 
 ```typescript
-import { cn, mergeProps } from '@solidum/utils';
+import { cn, mergeProps } from '@sldm/utils';
 
 // Conditional classNames
 const className = cn('btn', {
   'btn-primary': isPrimary,
-  'btn-disabled': isDisabled
+  'btn-disabled': isDisabled,
 });
 
 // Merge props
@@ -42,7 +42,7 @@ const props = mergeProps(
 Conditionally join classNames together.
 
 ```typescript
-cn('btn', { 'btn-active': isActive }, ['extra', 'classes'])
+cn('btn', { 'btn-active': isActive }, ['extra', 'classes']);
 // => 'btn btn-active extra classes'
 ```
 

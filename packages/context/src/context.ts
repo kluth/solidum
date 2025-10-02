@@ -5,8 +5,8 @@
  * without having to pass props down manually at every level.
  */
 
-import type { ComponentFunction } from '@solidum/core';
-import { createElement, Fragment } from '@solidum/core';
+import type { ComponentFunction } from '@sldm/core';
+import { createElement, Fragment } from '@sldm/core';
 
 /**
  * Context object

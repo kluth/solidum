@@ -14,7 +14,7 @@ import {
   DOMAssertions,
   UserInteraction,
   DOMWait,
-} from '@solidum/testing';
+} from '@sldm/testing';
 
 import { atom } from '../reactive/atom.js';
 import { computed } from '../reactive/computed.js';

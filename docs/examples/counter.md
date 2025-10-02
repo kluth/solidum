@@ -5,7 +5,7 @@ A simple counter to demonstrate Solidum's reactive primitives.
 ## Basic Counter
 
 ```typescript
-import { atom, createElement, mount } from '@solidum/core';
+import { atom, createElement, mount } from '@sldm/core';
 
 const count = atom(0);
 
@@ -90,7 +90,7 @@ mount(document.getElementById('app'), () => createElement(Counter));
 ## With Computed Values
 
 ```typescript
-import { atom, computed, createElement, mount } from '@solidum/core';
+import { atom, computed, createElement, mount } from '@sldm/core';
 
 const count = atom(0);
 const doubled = computed(() => count() * 2);
@@ -120,7 +120,7 @@ mount(document.getElementById('app'), () => createElement(Counter));
 ## With Effects
 
 ```typescript
-import { atom, effect, createElement, mount } from '@solidum/core';
+import { atom, effect, createElement, mount } from '@sldm/core';
 
 const count = atom(0);
 
@@ -160,7 +160,7 @@ mount(document.getElementById('app'), () => createElement(Counter));
 ## With Store
 
 ```typescript
-import { createStore, createElement, mount } from '@solidum/core';
+import { createStore, createElement, mount } from '@sldm/core';
 
 const counterStore = createStore({
   state: {

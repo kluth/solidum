@@ -1,11 +1,11 @@
 /**
- * @solidum/router - Simple SPA Router for Solidum Applications
+ * @sldm/router - Simple SPA Router for Solidum Applications
  *
  * A lightweight, reactive router that integrates seamlessly with Solidum's
  * fine-grained reactivity system.
  */
 
-import { atom } from '@solidum/core';
+import { atom } from '@sldm/core';
 
 // Types
 export interface RouteConfig {

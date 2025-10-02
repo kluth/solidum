@@ -5,7 +5,7 @@ The Store pattern provides centralized state management for complex applications
 ## Creating a Store
 
 ```typescript
-import { createStore } from '@solidum/core';
+import { createStore } from '@sldm/core';
 
 const todoStore = createStore({
   state: {

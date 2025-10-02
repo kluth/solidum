@@ -1,4 +1,4 @@
-import { createElement, type ComponentFunction } from '@solidum/core';
+import { createElement, type ComponentFunction } from '@sldm/core';
 
 import { Navigation } from './Navigation.js';
 import type { NavigationProps } from './Navigation.js';

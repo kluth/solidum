@@ -7,7 +7,7 @@ Solidum provides helpful utilities for building component libraries.
 Intelligently merge props objects:
 
 ```typescript
-import { mergeProps } from '@solidum/core';
+import { mergeProps } from '@sldm/core';
 
 const merged = mergeProps(
   { className: 'base', onClick: handler1 },
@@ -60,7 +60,7 @@ props.onClick(); // Logs: "First", "Second"
 Conditional class name builder:
 
 ```typescript
-import { cn } from '@solidum/core';
+import { cn } from '@sldm/core';
 
 // Strings
 cn('foo', 'bar'); // 'foo bar'

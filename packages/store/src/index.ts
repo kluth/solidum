@@ -1,5 +1,5 @@
 /**
- * @solidum/core - Store Pattern for State Management
+ * @sldm/core - Store Pattern for State Management
  *
  * @packageDocumentation
  */

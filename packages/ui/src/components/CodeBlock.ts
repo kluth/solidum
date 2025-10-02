@@ -1,5 +1,5 @@
-import { createElement, useState } from '@solidum/core';
-import { cn } from '@solidum/utils';
+import { createElement, useState } from '@sldm/core';
+import { cn } from '@sldm/utils';
 
 export interface CodeBlockProps {
   code: string;

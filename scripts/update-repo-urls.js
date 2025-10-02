@@ -12,14 +12,14 @@ const rootDir = path.resolve(__dirname, '..');
 const packagesDir = path.join(rootDir, 'packages');
 
 const repoMap = {
-  core: 'solidum-core',
-  ui: 'solidum-ui',
-  router: 'solidum-router',
-  store: 'solidum-store',
-  context: 'solidum-context',
-  ssr: 'solidum-ssr',
-  testing: 'solidum-testing',
-  utils: 'solidum-utils',
+  core: 'solidum',
+  ui: 'solidum',
+  router: 'solidum',
+  store: 'solidum',
+  context: 'solidum',
+  ssr: 'solidum',
+  testing: 'solidum',
+  utils: 'solidum',
 };
 
 // Get all package directories

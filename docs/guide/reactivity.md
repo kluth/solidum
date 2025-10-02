@@ -9,7 +9,7 @@ Solidum's reactivity system is based on four core primitives. Master these and y
 ### Basic Usage
 
 ```typescript
-import { atom } from '@solidum/core';
+import { atom } from '@sldm/core';
 
 // Create an atom
 const count = atom(0);
@@ -85,7 +85,7 @@ todos(prev => prev.map((todo, i) => (i === 0 ? 'Updated task' : todo)));
 ### Basic Usage
 
 ```typescript
-import { atom, computed } from '@solidum/core';
+import { atom, computed } from '@sldm/core';
 
 const firstName = atom('John');
 const lastName = atom('Doe');
@@ -195,7 +195,7 @@ console.log(computeCount); // 2
 ### Basic Usage
 
 ```typescript
-import { atom, effect } from '@solidum/core';
+import { atom, effect } from '@sldm/core';
 
 const count = atom(0);
 
@@ -324,7 +324,7 @@ console.log(runs); // 3 (two additional runs)
 Use `batch()` to combine updates:
 
 ```typescript
-import { atom, effect, batch } from '@solidum/core';
+import { atom, effect, batch } from '@sldm/core';
 
 const firstName = atom('John');
 const lastName = atom('Doe');

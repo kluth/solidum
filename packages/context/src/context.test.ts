@@ -4,8 +4,8 @@
  * Tests written FIRST before implementation!
  */
 
-import { atom, createElement, mount } from '@solidum/core';
-import { describe, test, expect, runTests } from '@solidum/testing';
+import { atom, createElement, mount } from '@sldm/core';
+import { describe, test, expect, runTests } from '@sldm/testing';
 
 import { createContext, useContext } from './context.js';
 

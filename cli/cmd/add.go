@@ -14,12 +14,12 @@ var addCmd = &cobra.Command{
 	Long: `Add a Solidum package to your project and update package.json.
 
 Available packages:
-  - router    : @solidum/router (SPA routing)
-  - ui        : @solidum/ui (UI components)
-  - store     : @solidum/store (State management)
-  - context   : @solidum/context (Dependency injection)
-  - ssr       : @solidum/ssr (Server-side rendering)
-  - testing   : @solidum/testing (Test utilities)`,
+  - router    : @sldm/router (SPA routing)
+  - ui        : @sldm/ui (UI components)
+  - store     : @sldm/store (State management)
+  - context   : @sldm/context (Dependency injection)
+  - ssr       : @sldm/ssr (Server-side rendering)
+  - testing   : @sldm/testing (Test utilities)`,
 	Args: cobra.ExactArgs(1),
 	RunE: runAdd,
 }
@@ -33,12 +33,12 @@ func runAdd(cmd *cobra.Command, args []string) error {
 	cyan.Printf("\n📦 Adding package: %s\n\n", pkg)
 
 	packageMap := map[string]string{
-		"router":  "@solidum/router",
-		"ui":      "@solidum/ui",
-		"store":   "@solidum/store",
-		"context": "@solidum/context",
-		"ssr":     "@solidum/ssr",
-		"testing": "@solidum/testing",
+		"router":  "@sldm/router",
+		"ui":      "@sldm/ui",
+		"store":   "@sldm/store",
+		"context": "@sldm/context",
+		"ssr":     "@sldm/ssr",
+		"testing": "@sldm/testing",
 	}
 
 	packageName, ok := packageMap[pkg]
