@@ -1,0 +1,76 @@
+import { createElement, cn, atom } from '@solidum/core';
+
+export interface InputProps {
+  type?: 'text' | 'email' | 'password' | 'number' | 'tel' | 'url' | 'search';
+  placeholder?: string;
+  value?: string;
+  disabled?: boolean;
+  error?: boolean;
+  helperText?: string;
+  leftIcon?: string;
+  rightIcon?: string;
+  animated?: boolean;
+  className?: string;
+  onInput?: (value: string) => void;
+  [key: string]: any;
+}
+
+export function Input(props: InputProps) {
+  const {
+    type = 'text',
+    placeholder,
+    value = '',
+    disabled = false,
+    error = false,
+    helperText,
+    leftIcon,
+    rightIcon,
+    animated = true,
+    className,
+    onInput,
+    ...rest
+  } = props;
+
+  const focused = atom(false);
+
+  const containerClasses = cn(
+    'solidum-input-container',
+    {
+      'solidum-input-container--focused': focused(),
+      'solidum-input-container--error': error,
+      'solidum-input-container--disabled': disabled,
+      'solidum-input-container--animated': animated,
+    },
+    className
+  );
+
+  return createElement(
+    'div',
+    { className: 'solidum-input-wrapper' },
+    createElement(
+      'div',
+      { className: containerClasses },
+      leftIcon && createElement('span', { className: 'solidum-input-icon solidum-input-icon--left' }, leftIcon),
+      createElement('input', {
+        type,
+        placeholder,
+        value,
+        disabled,
+        className: cn('solidum-input', {
+          'solidum-input--has-left-icon': leftIcon,
+          'solidum-input--has-right-icon': rightIcon,
+        }),
+        onFocus: () => focused(true),
+        onBlur: () => focused(false),
+        onInput: (e: any) => onInput?.(e.target.value),
+        ...rest,
+      }),
+      rightIcon && createElement('span', { className: 'solidum-input-icon solidum-input-icon--right' }, rightIcon)
+    ),
+    helperText && createElement(
+      'span',
+      { className: cn('solidum-input-helper', { 'solidum-input-helper--error': error }) },
+      helperText
+    )
+  );
+}
