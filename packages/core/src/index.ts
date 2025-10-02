@@ -9,7 +9,7 @@ export { atom } from './reactive/atom.js';
 export { computed } from './reactive/computed.js';
 export { effect } from './reactive/effect.js';
 export { batch } from './reactive/batch.js';
-export { useState } from './reactive/state.js';
+export { useState, _getOrCreateComponentId, _setComponentId, _clearComponentId } from './reactive/state.js';
 
 export type { Atom, Subscriber, Setter, Unsubscribe } from './reactive/atom.js';
 export type { Computed } from './reactive/computed.js';
