@@ -1292,6 +1292,9 @@
 .solidum-chart3d {
   display: block;
   user-select: none;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
 }
 
 .solidum-chart3d--animated {

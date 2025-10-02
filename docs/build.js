@@ -44,15 +44,22 @@ function htmlTemplate(content, title = 'Solidum - Fine-Grained Reactive Framewor
   <title>${title}</title>
   <link rel="stylesheet" href="./styles.css">
   <style>
-    * {
+    /* Minimal CSS reset that preserves SVG functionality */
+    body {
       margin: 0;
       padding: 0;
-      box-sizing: border-box;
-    }
-    body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
       line-height: 1.6;
       color: #1f2937;
+    }
+    /* Ensure SVG elements work properly */
+    svg {
+      display: block;
+    }
+    /* Force Chart3D SVG to maintain its dimensions */
+    .solidum-chart3d {
+      width: 700px !important;
+      height: 450px !important;
     }
   </style>
 </head>

@@ -10,6 +10,30 @@ import { pushContext, popContext, enterRender, exitRender } from '../context/con
 import { _getOrCreateComponentId, _setComponentId, _clearComponentId } from '../reactive/state.js';
 
 /**
+ * Check if an element name is an SVG element
+ */
+function isSVGElement(elementName: string): boolean {
+  const svgElements = [
+    'svg', 'rect', 'circle', 'ellipse', 'line', 'polyline', 'polygon', 'path',
+    'text', 'tspan', 'textPath', 'g', 'defs', 'clipPath', 'mask', 'pattern',
+    'linearGradient', 'radialGradient', 'stop', 'image', 'use', 'symbol',
+    'marker', 'foreignObject', 'switch', 'foreignObject', 'animate',
+    'animateTransform', 'set', 'animateMotion', 'mpath', 'script', 'style',
+    'title', 'desc', 'metadata', 'a', 'altGlyph', 'altGlyphDef', 'altGlyphItem',
+    'glyph', 'glyphRef', 'hkern', 'vkern', 'font', 'font-face', 'font-face-format',
+    'font-face-name', 'font-face-src', 'font-face-uri', 'missing-glyph',
+    'feBlend', 'feColorMatrix', 'feComponentTransfer', 'feComposite',
+    'feConvolveMatrix', 'feDiffuseLighting', 'feDisplacementMap', 'feDistantLight',
+    'feDropShadow', 'feFlood', 'feFuncA', 'feFuncB', 'feFuncG', 'feFuncR',
+    'feGaussianBlur', 'feImage', 'feMerge', 'feMergeNode', 'feMorphology',
+    'feOffset', 'fePointLight', 'feSpecularLighting', 'feSpotLight', 'feTile',
+    'feTurbulence', 'filter', 'hatch', 'hatchpath', 'mesh', 'meshgradient',
+    'meshpatch', 'meshrow', 'radialGradient', 'solidcolor', 'view'
+  ];
+  return svgElements.includes(elementName.toLowerCase());
+}
+
+/**
  * Render a VNode to a DOM element
  */
 export function render(
@@ -73,7 +97,10 @@ export function render(
   }
 
   // Handle regular elements
-  const element = document.createElement(vnode.type as string);
+  const elementName = vnode.type as string;
+  const element = isSVGElement(elementName) 
+    ? document.createElementNS('http://www.w3.org/2000/svg', elementName)
+    : document.createElement(elementName);
 
   // Set props/attributes
   setProps(element, vnode.props);

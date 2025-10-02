@@ -107,21 +107,22 @@ export function Chart3D(props: Chart3DProps) {
   return createElement(
     'div',
     { className: cn('solidum-chart3d-wrapper', className) },
-    createElement(
-      'svg',
-      {
-        className: cn('solidum-chart3d', {
-          'solidum-chart3d--animated': animated,
-          'solidum-chart3d--interactive': interactive,
-        }),
-        width,
-        height,
-        onMouseDown: handleMouseDown,
-        onMouseMove: handleMouseMove,
-        onMouseUp: handleMouseUp,
-        onMouseLeave: handleMouseUp,
-        style: { cursor: interactive ? (isDragging() ? 'grabbing' : 'grab') : 'default' },
-      },
+      createElement(
+        'svg',
+        {
+          className: cn('solidum-chart3d', {
+            'solidum-chart3d--animated': animated,
+            'solidum-chart3d--interactive': interactive,
+          }),
+          width,
+          height,
+          xmlns: 'http://www.w3.org/2000/svg',
+          onMouseDown: handleMouseDown,
+          onMouseMove: handleMouseMove,
+          onMouseUp: handleMouseUp,
+          onMouseLeave: handleMouseUp,
+          style: { cursor: interactive ? (isDragging() ? 'grabbing' : 'grab') : 'default' },
+        },
       // Background
       createElement('rect', {
         width,
