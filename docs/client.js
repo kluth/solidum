@@ -8,13 +8,13 @@ if (document.readyState === 'loading') {
     if (root) {
       // Clear SSR content and mount interactive version
       root.innerHTML = '';
-      mount(root, HomePage());
+      mount(root, HomePage);
     }
   });
 } else {
   const root = document.getElementById('app');
   if (root) {
     root.innerHTML = '';
-    mount(root, HomePage());
+    mount(root, HomePage);
   }
 }
