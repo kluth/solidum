@@ -1,4 +1,4 @@
-import { createElement } from '@solidum/core';
+import { createElement, type ComponentFunction } from '@solidum/core';
 import {
   Container,
   Stack,
@@ -154,7 +154,7 @@ export function HomePage() {
         ),
 
         // Tabs for different demos
-        createElement(Tabs, {
+        createElement(Tabs as unknown as ComponentFunction, {
           tabs: [
             {
               id: 'chart3d',
@@ -172,7 +172,7 @@ export function HomePage() {
                     borderRadius: '1rem',
                   },
                 },
-                createElement(Chart3D, {
+                createElement(Chart3D as unknown as ComponentFunction, {
                   data: chartData,
                   type: 'bar',
                   width: 700,
@@ -187,7 +187,7 @@ export function HomePage() {
               id: 'datatable',
               label: 'Drag & Drop Table',
               icon: '📋',
-              content: createElement(DataTable, {
+              content: createElement(DataTable as unknown as ComponentFunction, {
                 columns: tableColumns,
                 data: tableData,
                 draggableRows: true,
@@ -348,7 +348,7 @@ export function HomePage() {
               },
               'Efficient updates with atom, computed, and effect primitives. Only what changes gets updated.'
             ),
-            createElement(Progress, { value: 95, variant: 'gradient', showLabel: true, glow: true })
+            createElement(Progress as unknown as ComponentFunction, { value: 95, variant: 'gradient', showLabel: true, glow: true })
           ),
           // Feature 2
           createElement(

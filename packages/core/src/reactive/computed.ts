@@ -34,6 +34,7 @@ import {
 
 export interface Computed<T> {
   (): T;
+  // eslint-disable-next-line no-unused-vars
   subscribe(subscriber: Subscriber<T>): Unsubscribe;
 }
 
@@ -64,6 +65,7 @@ export function computed<T>(fn: ComputeFn<T>): Computed<T> {
       try {
         subscriber(value);
       } catch (error) {
+        // eslint-disable-next-line no-console
         console.error('Error in computed subscriber:', error);
       }
     }

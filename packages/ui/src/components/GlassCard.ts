@@ -8,9 +8,9 @@ export interface GlassCardProps {
   hoverable?: boolean;
   glow?: boolean;
   animated?: boolean;
-  children?: any;
+  children?: unknown;
   className?: string;
-  [key: string]: any;
+  [key: string]: unknown;
 }
 
 export function GlassCard(props: GlassCardProps) {

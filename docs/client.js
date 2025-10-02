@@ -1,3 +1,4 @@
+/* eslint-env browser */
 import { mount } from '@solidum/core';
 import { HomePage } from './pages/index.js';
 import { ReactivityPage } from './pages/reactivity.js';
@@ -8,15 +9,15 @@ console.log('🚀 Solidum client.js loaded!', 'readyState:', document.readyState
 const pageComponents = {
     HomePage,
     ReactivityPage,
-    ComponentsPage
+    ComponentsPage,
 };
 // Initialize router
 const router = createRouter({
     routes: {
         '/': 'HomePage',
         '/reactivity': 'ReactivityPage',
-        '/components': 'ComponentsPage'
-    }
+        '/components': 'ComponentsPage',
+    },
 });
 // Mount the app when DOM is ready
 if (document.readyState === 'loading') {
@@ -31,7 +32,7 @@ else {
     mountApp();
 }
 // Listen for route changes
-window.addEventListener('routechange', (event) => {
+window.addEventListener('routechange', event => {
     const customEvent = event;
     console.log('🔄 Route changed to:', customEvent.detail.path);
     mountApp();

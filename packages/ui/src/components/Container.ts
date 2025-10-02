@@ -4,9 +4,9 @@ import { cn } from '@solidum/utils';
 export interface ContainerProps {
   maxWidth?: 'sm' | 'md' | 'lg' | 'xl' | 'full';
   padding?: boolean;
-  children?: any;
+  children?: unknown;
   className?: string;
-  [key: string]: any;
+  [key: string]: unknown;
 }
 
 export function Container(props: ContainerProps) {

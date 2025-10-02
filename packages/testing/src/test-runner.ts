@@ -10,6 +10,7 @@
  */
 
 import { EventEmitter } from 'node:events';
+
 import pc from 'picocolors';
 
 export interface TestContext {
@@ -31,7 +32,8 @@ export interface SuiteResult {
   duration: number;
 }
 
-type TestFn = (ctx: TestContext) => void | Promise<void>;
+// eslint-disable-next-line no-unused-vars
+type TestFn = (_ctx: TestContext) => void | Promise<void>;
 type SuiteFn = () => void | Promise<void>;
 
 class TestRegistry extends EventEmitter {
@@ -150,22 +152,27 @@ export class ConsoleReporter {
   private failed = 0;
   private totalDuration = 0;
 
-  constructor(private registry: TestRegistry) {
-    this.registry.on('test:pass', this.onTestPass.bind(this));
-    this.registry.on('test:fail', this.onTestFail.bind(this));
-    this.registry.on('suite:complete', this.onSuiteComplete.bind(this));
+  // eslint-disable-next-line no-unused-vars
+  constructor(private _registry: TestRegistry) {
+    this._registry.on('test:pass', this.onTestPass.bind(this));
+    this._registry.on('test:fail', this.onTestFail.bind(this));
+    this._registry.on('suite:complete', this.onSuiteComplete.bind(this));
   }
 
   private onTestPass(data: { suite: string; test: string; duration: number }): void {
     this.passed++;
+    // eslint-disable-next-line no-console
     console.log(`  ${pc.green('✓')} ${data.test} ${pc.dim(`(${data.duration.toFixed(2)}ms)`)}`);
   }
 
   private onTestFail(data: { suite: string; test: string; duration: number; error: Error }): void {
     this.failed++;
+    // eslint-disable-next-line no-console
     console.log(`  ${pc.red('✗')} ${data.test}`);
+    // eslint-disable-next-line no-console
     console.log(`    ${pc.red(data.error.message)}`);
     if (data.error.stack) {
+      // eslint-disable-next-line no-console
       console.log(pc.dim(data.error.stack.split('\n').slice(1).join('\n')));
     }
   }
@@ -173,15 +180,21 @@ export class ConsoleReporter {
   private onSuiteComplete(data: { name: string; passed: boolean; duration: number }): void {
     this.totalDuration += data.duration;
     const icon = data.passed ? pc.green('✓') : pc.red('✗');
+    // eslint-disable-next-line no-console
     console.log(`\n${icon} ${pc.bold(data.name)} ${pc.dim(`(${data.duration.toFixed(2)}ms)`)}\n`);
   }
 
+  // eslint-disable-next-line no-unused-vars
   async report(_results: SuiteResult[]): Promise<void> {
+    // eslint-disable-next-line no-console
     console.log('\n' + pc.bold('Test Results:'));
+    // eslint-disable-next-line no-console
     console.log(`  ${pc.green(`${this.passed} passed`)}`);
     if (this.failed > 0) {
+      // eslint-disable-next-line no-console
       console.log(`  ${pc.red(`${this.failed} failed`)}`);
     }
+    // eslint-disable-next-line no-console
     console.log(`  Duration: ${this.totalDuration.toFixed(2)}ms\n`);
 
     if (this.failed > 0) {
@@ -193,6 +206,7 @@ export class ConsoleReporter {
 // Run tests
 export async function runTests(): Promise<void> {
   const reporter = new ConsoleReporter(registry);
+  // eslint-disable-next-line no-console
   console.log(pc.bold(pc.cyan('\n⚡ Solidum Test Runner\n')));
 
   const results = await registry.run();

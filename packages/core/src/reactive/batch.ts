@@ -54,6 +54,7 @@ export function batch<T>(fn: () => T): T {
           try {
             notify();
           } catch (error) {
+            // eslint-disable-next-line no-console
             console.error('Error in batched notification:', error);
           }
         }

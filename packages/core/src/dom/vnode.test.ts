@@ -115,7 +115,10 @@ describe('createElement()', () => {
   });
 
   test('should preserve function props (event handlers)', () => {
-    const onClick = () => console.log('clicked');
+    const onClick = () => {
+      // eslint-disable-next-line no-console
+      console.log('clicked');
+    };
     const vnode = createElement('button', { onClick });
 
     expect(vnode.props.onClick).toBe(onClick);
@@ -149,4 +152,7 @@ describe('createElement()', () => {
 });
 
 // Run tests
-runTests().catch(console.error);
+runTests().catch(error => {
+  // eslint-disable-next-line no-console
+  console.error(error);
+});

@@ -25,7 +25,7 @@ interface ContextEntry {
   value: unknown;
 }
 
-let contextStack: ContextEntry[] = [];
+const contextStack: ContextEntry[] = [];
 
 /**
  * Create a new context

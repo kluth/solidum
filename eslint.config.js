@@ -84,7 +84,6 @@ export default [
       // General rules
       'no-console': 'warn',
       'no-debugger': 'error',
-      'prefer-const': 'error',
       'no-var': 'error',
       'no-undef': 'off', // TypeScript handles this
     },

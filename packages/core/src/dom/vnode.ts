@@ -4,7 +4,8 @@
  * Provides JSX-compatible virtual node creation.
  */
 
-export type ComponentFunction<P = Record<string, unknown>> = (props: P) => VNode | null;
+// eslint-disable-next-line no-unused-vars
+export type ComponentFunction<P = Record<string, unknown>> = (_props: P) => VNode | null;
 
 export interface VNode {
   type: string | ComponentFunction | typeof Fragment;

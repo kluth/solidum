@@ -5,9 +5,9 @@ export interface CardProps {
   padding?: 'none' | 'sm' | 'md' | 'lg';
   bordered?: boolean;
   hoverable?: boolean;
-  children?: any;
+  children?: unknown;
   className?: string;
-  [key: string]: any;
+  [key: string]: unknown;
 }
 
 export function Card(props: CardProps) {

@@ -19,5 +19,11 @@
   "env": {
     "node": true,
     "es2022": true
-  }
+  },
+  "ignorePatterns": [
+    "docs/dist_backup/**/*",
+    "docs/dist/**/*",
+    "**/dist/**/*",
+    "**/node_modules/**/*"
+  ]
 }

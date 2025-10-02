@@ -5,10 +5,11 @@ export interface ButtonProps {
   variant?: 'primary' | 'secondary' | 'outline' | 'ghost';
   size?: 'sm' | 'md' | 'lg';
   disabled?: boolean;
-  children?: any;
+  children?: unknown;
   className?: string;
+  // eslint-disable-next-line no-unused-vars
   onClick?: (e: Event) => void;
-  [key: string]: any;
+  [key: string]: unknown;
 }
 
 export function Button(props: ButtonProps) {

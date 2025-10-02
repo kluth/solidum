@@ -29,22 +29,26 @@ export function createDOMEnvironment(): DOMTestEnvironment {
   const document = window.document;
 
   // Setup global references
-  (global as any).window = window;
-  (global as any).document = document;
-  (global as any).HTMLElement = (window as any).HTMLElement;
-  (global as any).Element = (window as any).Element;
-  (global as any).Node = (window as any).Node;
+  (global as Record<string, unknown>).window = window;
+  (global as Record<string, unknown>).document = document;
+  (global as Record<string, unknown>).HTMLElement = (
+    window as unknown as Record<string, unknown>
+  ).HTMLElement;
+  (global as Record<string, unknown>).Element = (
+    window as unknown as Record<string, unknown>
+  ).Element;
+  (global as Record<string, unknown>).Node = (window as unknown as Record<string, unknown>).Node;
 
   return {
     window,
     document,
     cleanup: () => {
       jsdom.window.close();
-      delete (global as any).window;
-      delete (global as any).document;
-      delete (global as any).HTMLElement;
-      delete (global as any).Element;
-      delete (global as any).Node;
+      delete (global as Record<string, unknown>).window;
+      delete (global as Record<string, unknown>).document;
+      delete (global as Record<string, unknown>).HTMLElement;
+      delete (global as Record<string, unknown>).Element;
+      delete (global as Record<string, unknown>).Node;
     },
   };
 }
@@ -61,6 +65,7 @@ export interface QueryOptions {
  * Query utilities for finding elements
  */
 export class DOMQueries {
+  // eslint-disable-next-line no-unused-vars
   constructor(private container: Element | Document = document) {}
 
   /**
@@ -506,14 +511,18 @@ export class DOMAssertions {
 export interface RenderResult {
   container: HTMLElement;
   queries: DOMQueries;
-  rerender: (component: () => any) => void;
+  // eslint-disable-next-line no-unused-vars
+  rerender: (component: () => unknown) => void;
   unmount: () => void;
 }
 
 /**
  * Render a component for testing
  */
-export function render(component: () => any, options: { document?: Document } = {}): RenderResult {
+export function render(
+  component: () => unknown,
+  options: { document?: Document } = {}
+): RenderResult {
   const doc = options.document || document;
   const container = doc.createElement('div');
   doc.body.appendChild(container);
@@ -521,7 +530,8 @@ export function render(component: () => any, options: { document?: Document } = 
   // We'll need to import mount from core, but for now let's assume it's available
   let dispose: (() => void) | undefined;
 
-  const renderComponent = (_comp: () => any) => {
+  // eslint-disable-next-line no-unused-vars
+  const renderComponent = (_comp: () => unknown) => {
     if (dispose) {
       dispose();
     }
@@ -646,6 +656,7 @@ export class Screen extends DOMQueries {
    */
   debug(element?: Element): void {
     const el = element || document.body;
+    // eslint-disable-next-line no-console
     console.log(el.innerHTML);
   }
 
@@ -653,7 +664,9 @@ export class Screen extends DOMQueries {
    * Log all text content
    */
   logTestingPlaygroundURL(): void {
+    // eslint-disable-next-line no-console
     console.log('DOM Testing Environment');
+    // eslint-disable-next-line no-console
     console.log(document.body.innerHTML);
   }
 }

@@ -1,16 +1,17 @@
 import { createElement, useState } from '@solidum/core';
 import { cn } from '@solidum/utils';
 
-export interface DataTableColumn<T = any> {
+export interface DataTableColumn<T = unknown> {
   key: string;
   header: string;
   sortable?: boolean;
   draggable?: boolean;
-  render?: (value: any, row: T) => any;
+  // eslint-disable-next-line no-unused-vars
+  render?: (_value: unknown, _row: T) => unknown;
   width?: string;
 }
 
-export interface DataTableProps<T = any> {
+export interface DataTableProps<T = unknown> {
   columns: DataTableColumn<T>[];
   data: T[];
   draggableRows?: boolean;
@@ -22,11 +23,13 @@ export interface DataTableProps<T = any> {
   stickyHeader?: boolean;
   animated?: boolean;
   className?: string;
-  onSort?: (key: string, direction: 'asc' | 'desc') => void;
-  onRowDrag?: (fromIndex: number, toIndex: number) => void;
+  // eslint-disable-next-line no-unused-vars
+  onSort?: (_key: string, _direction: 'asc' | 'desc') => void;
+  // eslint-disable-next-line no-unused-vars
+  onRowDrag?: (_fromIndex: number, _toIndex: number) => void;
 }
 
-export function DataTable<T = any>(props: DataTableProps<T>) {
+export function DataTable<T = unknown>(props: DataTableProps<T>) {
   const {
     columns,
     data,
@@ -146,7 +149,7 @@ export function DataTable<T = any>(props: DataTableProps<T>) {
             draggableRows &&
               createElement('td', { className: 'solidum-datatable-drag-handle' }, '⋮⋮'),
             ...columns.map(col => {
-              const value = (row as any)[col.key];
+              const value = (row as Record<string, unknown>)[col.key];
               const rendered = col.render ? col.render(value, row) : value;
               return createElement('td', { className: 'solidum-datatable-cell' }, rendered);
             })

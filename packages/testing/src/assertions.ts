@@ -5,7 +5,9 @@
 export class AssertionError extends Error {
   constructor(
     message: string,
+    // eslint-disable-next-line no-unused-vars
     public actual: unknown,
+    // eslint-disable-next-line no-unused-vars
     public expected: unknown
   ) {
     super(message);
@@ -14,23 +16,32 @@ export class AssertionError extends Error {
 }
 
 export interface Matchers<T> {
-  toBe(expected: T): void;
-  toEqual(expected: T): void;
+  // eslint-disable-next-line no-unused-vars
+  toBe(_expected: T): void;
+  // eslint-disable-next-line no-unused-vars
+  toEqual(_expected: T): void;
   toBeNull(): void;
   toBeUndefined(): void;
   toBeDefined(): void;
   toBeTruthy(): void;
   toBeFalsy(): void;
-  toBeGreaterThan(expected: number): void;
-  toBeLessThan(expected: number): void;
-  toContain(expected: unknown): void;
-  toHaveLength(expected: number): void;
-  toThrow(expected?: string | RegExp): void;
+  // eslint-disable-next-line no-unused-vars
+  toBeGreaterThan(_expected: number): void;
+  // eslint-disable-next-line no-unused-vars
+  toBeLessThan(_expected: number): void;
+  // eslint-disable-next-line no-unused-vars
+  toContain(_expected: unknown): void;
+  // eslint-disable-next-line no-unused-vars
+  toHaveLength(_expected: number): void;
+  // eslint-disable-next-line no-unused-vars
+  toThrow(_expected?: string | RegExp): void;
 }
 
 export interface NotMatchers<T> {
-  toBe(expected: T): void;
-  toEqual(expected: T): void;
+  // eslint-disable-next-line no-unused-vars
+  toBe(_expected: T): void;
+  // eslint-disable-next-line no-unused-vars
+  toEqual(_expected: T): void;
   toBeNull(): void;
   toBeUndefined(): void;
 }
@@ -52,7 +63,8 @@ function deepEqual(a: unknown, b: unknown): boolean {
 
   for (const key of aKeys) {
     if (!bKeys.includes(key)) return false;
-    if (!deepEqual((a as any)[key], (b as any)[key])) return false;
+    if (!deepEqual((a as Record<string, unknown>)[key], (b as Record<string, unknown>)[key]))
+      return false;
   }
 
   return true;
@@ -136,7 +148,7 @@ export function expect<T>(actual: T): Expectation<T> {
 
     toContain(expected: unknown): void {
       if (Array.isArray(actual)) {
-        if (!actual.includes(expected as any)) {
+        if (!actual.includes(expected as unknown)) {
           throw new AssertionError(
             `Expected array to contain ${JSON.stringify(expected)}`,
             actual,
@@ -157,7 +169,7 @@ export function expect<T>(actual: T): Expectation<T> {
     },
 
     toHaveLength(expected: number): void {
-      const length = (actual as any)?.length;
+      const length = (actual as { length?: number })?.length;
       if (length !== expected) {
         throw new AssertionError(
           `Expected length to be ${expected}, got ${length}`,
@@ -173,7 +185,7 @@ export function expect<T>(actual: T): Expectation<T> {
       }
 
       try {
-        (actual as any)();
+        (actual as () => void)();
         throw new AssertionError('Expected function to throw', undefined, 'error');
       } catch (error) {
         if (expected) {

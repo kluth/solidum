@@ -4,11 +4,10 @@
  * Tests written FIRST before implementation!
  */
 
+import { atom, createElement, mount } from '@solidum/core';
 import { describe, test, expect, runTests } from '@solidum/testing';
-import { atom } from '@solidum/core';
+
 import { createContext, useContext } from './context.js';
-import { createElement } from '@solidum/core';
-import { mount, onMount } from '@solidum/core';
 
 // Mock container
 function createContainer() {
@@ -29,8 +28,8 @@ function createMockDoc() {
     createElement: (tag: string) => ({
       tagName: tag.toUpperCase(),
       children: [] as unknown[],
-      attributes: {} as Record<string, any>,
-      style: {} as Record<string, any>,
+      attributes: {} as Record<string, unknown>,
+      style: {} as Record<string, unknown>,
       appendChild: function (child: unknown) {
         this.children.push(child);
       },
@@ -166,7 +165,8 @@ describe('createContext()', () => {
       return createElement('div', null, String(count()));
     }
 
-    let updateCount: ((value?: number) => number) | undefined;
+    // eslint-disable-next-line no-unused-vars
+    let updateCount: ((_value?: number) => number) | undefined;
 
     function Provider() {
       const count = atom(0);
@@ -238,4 +238,7 @@ describe('createContext()', () => {
 });
 
 // Run tests
-runTests().catch(console.error);
+runTests().catch(error => {
+  // eslint-disable-next-line no-console
+  console.error(error);
+});

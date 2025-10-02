@@ -1,5 +1,6 @@
 import { createElement, useState, type ComponentFunction } from '@solidum/core';
 import { cn } from '@solidum/utils';
+
 import { Stack } from './Stack.js';
 
 export interface SidebarItem {

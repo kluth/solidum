@@ -7,9 +7,9 @@ export interface StackProps {
   align?: 'start' | 'center' | 'end' | 'stretch';
   justify?: 'start' | 'center' | 'end' | 'between' | 'around';
   wrap?: boolean;
-  children?: any;
+  children?: unknown;
   className?: string;
-  [key: string]: any;
+  [key: string]: unknown;
 }
 
 export function Stack(props: StackProps) {

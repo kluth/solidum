@@ -173,4 +173,7 @@ describe('computed()', () => {
 });
 
 // Run tests
-runTests().catch(console.error);
+runTests().catch(error => {
+  // eslint-disable-next-line no-console
+  console.error(error);
+});

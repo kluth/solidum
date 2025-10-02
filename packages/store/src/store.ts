@@ -4,6 +4,7 @@
  * Centralized state management for complex applications
  */
 
+/* eslint-disable no-unused-vars */
 import { atom } from '@solidum/core';
 import { computed } from '@solidum/core';
 import { batch as batchFn } from '@solidum/core';
@@ -24,44 +25,53 @@ export interface StoreConfig<State, Actions, Getters, Effects> {
  * Action function type
  */
 export type Action<State, Payload = void> = Payload extends void
-  ? (state: State) => State
-  : (state: State, payload: Payload) => State;
+  ? // eslint-disable-next-line no-unused-vars
+    (_state: State) => State
+  : // eslint-disable-next-line no-unused-vars
+    (_state: State, _payload: Payload) => State;
 
 /**
  * Effect context
  */
 export interface EffectContext<State> {
-  dispatch: <K extends string>(action: K, ...args: unknown[]) => void;
+  // eslint-disable-next-line no-unused-vars
+  dispatch: <K extends string>(_action: K, ..._args: unknown[]) => void;
   getState: () => State;
 }
 
 /**
  * Middleware function type
  */
-export type Middleware<State> = (store: {
-  getState: () => State;
-}) => (
-  next: (action: string, payload?: unknown) => void
-) => (action: string, payload?: unknown) => void;
+export type Middleware<State> = // eslint-disable-next-line no-unused-vars
+  (_store: { getState: () => State }) => (
+    // eslint-disable-next-line no-unused-vars
+    _next: (_action: string, _payload?: unknown) => void
+  ) => // eslint-disable-next-line no-unused-vars
+  (_action: string, _payload?: unknown) => void;
 
 /**
  * Store interface
  */
 export interface Store<State, Actions, Getters, Effects> {
   getState: () => State;
-  select: <Result>(selector: (state: State) => Result) => Computed<Result>;
+  // eslint-disable-next-line no-unused-vars
+  select: <Result>(_selector: (_state: State) => Result) => Computed<Result>;
   dispatch: <K extends keyof Actions>(
-    action: K,
+    // eslint-disable-next-line no-unused-vars
+    _action: K,
+    // eslint-disable-next-line no-unused-vars
     ...args: Actions[K] extends Action<State, infer P> ? (P extends void ? [] : [P]) : never
   ) => void;
+  // eslint-disable-next-line no-unused-vars
   batch: (fn: () => void) => void;
   getters: {
-    [K in keyof Getters]: Getters[K] extends (state: State) => infer R
-      ? (state: State) => R
+    [K in keyof Getters]: Getters[K] extends (_state: State) => infer R // eslint-disable-next-line no-unused-vars
+      ? // eslint-disable-next-line no-unused-vars
+        (_state: State) => R
       : never;
   };
   effects: {
-    [K in keyof Effects]: Effects[K] extends (ctx: EffectContext<State>) => infer R
+    [K in keyof Effects]: Effects[K] extends (_ctx: EffectContext<State>) => infer R // eslint-disable-next-line no-unused-vars
       ? () => R
       : never;
   };
@@ -146,8 +156,9 @@ export function createStore<State, Actions = {}, Getters = {}, Effects = {}>(
   /**
    * Select a reactive slice of state
    */
-  function select<Result>(selector: (state: State) => Result): Computed<Result> {
-    return computed(() => selector(stateAtom()));
+  // eslint-disable-next-line no-unused-vars
+  function select<Result>(_selector: (_state: State) => Result): Computed<Result> {
+    return computed(() => _selector(stateAtom()));
   }
 
   /**
@@ -161,7 +172,7 @@ export function createStore<State, Actions = {}, Getters = {}, Effects = {}>(
    * Build effects object
    */
   const effects = {} as {
-    [K in keyof Effects]: Effects[K] extends (ctx: EffectContext<State>) => infer R
+    [K in keyof Effects]: Effects[K] extends (_ctx: EffectContext<State>) => infer R // eslint-disable-next-line no-unused-vars
       ? () => R
       : never;
   };
@@ -182,13 +193,16 @@ export function createStore<State, Actions = {}, Getters = {}, Effects = {}>(
     getState,
     select,
     dispatch: dispatch as <K extends keyof Actions>(
-      action: K,
-      ...args: Actions[K] extends Action<State, infer P> ? (P extends void ? [] : [P]) : never
+      // eslint-disable-next-line no-unused-vars
+      _action: K,
+      // eslint-disable-next-line no-unused-vars
+      ..._args: Actions[K] extends Action<State, infer P> ? (P extends void ? [] : [P]) : never
     ) => void,
     batch,
     getters: (config.getters || {}) as {
-      [K in keyof Getters]: Getters[K] extends (state: State) => infer R
-        ? (state: State) => R
+      [K in keyof Getters]: Getters[K] extends (_state: State) => infer R // eslint-disable-next-line no-unused-vars
+        ? // eslint-disable-next-line no-unused-vars
+          (_state: State) => R
         : never;
     },
     effects,

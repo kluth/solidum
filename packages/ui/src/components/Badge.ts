@@ -7,9 +7,9 @@ export interface BadgeProps {
   dot?: boolean;
   pulse?: boolean;
   glow?: boolean;
-  children?: any;
+  children?: unknown;
   className?: string;
-  [key: string]: any;
+  [key: string]: unknown;
 }
 
 export function Badge(props: BadgeProps) {

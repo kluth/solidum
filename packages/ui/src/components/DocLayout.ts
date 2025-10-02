@@ -1,4 +1,5 @@
 import { createElement, type ComponentFunction } from '@solidum/core';
+
 import { Navigation } from './Navigation.js';
 import type { NavigationProps } from './Navigation.js';
 import { Sidebar } from './Sidebar.js';
@@ -7,7 +8,7 @@ import type { SidebarProps } from './Sidebar.js';
 export interface DocLayoutProps {
   navigation: NavigationProps;
   sidebar?: SidebarProps;
-  children?: any;
+  children?: unknown;
 }
 
 export function DocLayout(props: DocLayoutProps) {

@@ -93,6 +93,7 @@ export function _clearComponentId(): void {
 export function useState<T>(initialValue: T | (() => T)): Atom<T> {
   if (!currentComponentId) {
     // Fallback: create a new atom (won't persist, but won't crash)
+    // eslint-disable-next-line no-console
     console.warn('useState called outside component context - state will not persist');
     return atom(typeof initialValue === 'function' ? (initialValue as () => T)() : initialValue);
   }

@@ -11,7 +11,7 @@ export interface AvatarProps {
   bordered?: boolean;
   glow?: boolean;
   className?: string;
-  [key: string]: any;
+  [key: string]: unknown;
 }
 
 export function Avatar(props: AvatarProps) {

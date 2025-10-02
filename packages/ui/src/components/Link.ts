@@ -6,9 +6,9 @@ export interface LinkProps {
   external?: boolean;
   underline?: boolean;
   variant?: 'default' | 'primary' | 'muted';
-  children?: any;
+  children?: unknown;
   className?: string;
-  [key: string]: any;
+  [key: string]: unknown;
 }
 
 export function Link(props: LinkProps) {

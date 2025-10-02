@@ -1,5 +1,6 @@
 import { createElement, useState } from '@solidum/core';
 import { cn } from '@solidum/utils';
+
 import { Stack } from './Stack.js';
 
 export interface NavItem {

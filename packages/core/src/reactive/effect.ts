@@ -38,7 +38,8 @@
 import type { Unsubscribe } from './atom.js';
 import { setEffectTracking, type TrackingContext } from './tracking.js';
 
-export type EffectFn = (onCleanup: (cleanup: () => void) => void) => void;
+// eslint-disable-next-line no-unused-vars
+export type EffectFn = (_onCleanup: (_cleanup: () => void) => void) => void;
 export type Dispose = () => void;
 
 /**
@@ -67,6 +68,7 @@ export function effect(fn: EffectFn): Dispose {
 
     // Prevent infinite loops
     if (isRunning) {
+      // eslint-disable-next-line no-console
       console.error('Effect is already running, skipping rerun');
       return;
     }
@@ -79,6 +81,7 @@ export function effect(fn: EffectFn): Dispose {
         try {
           userCleanup();
         } catch (error) {
+          // eslint-disable-next-line no-console
           console.error('Error in effect cleanup:', error);
         }
         userCleanup = null;
@@ -106,6 +109,7 @@ export function effect(fn: EffectFn): Dispose {
           userCleanup = cleanup;
         });
       } catch (error) {
+        // eslint-disable-next-line no-console
         console.error('Error in effect:', error);
       } finally {
         // Clear effect tracking
@@ -130,6 +134,7 @@ export function effect(fn: EffectFn): Dispose {
       try {
         userCleanup();
       } catch (error) {
+        // eslint-disable-next-line no-console
         console.error('Error in effect cleanup:', error);
       }
     }

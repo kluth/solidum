@@ -9,6 +9,7 @@ import type { Unsubscribe } from './atom.js';
 
 // Tracking context for computed
 export interface TrackingContext {
+  // eslint-disable-next-line no-unused-vars
   onDependency: (_unsubscribe: Unsubscribe) => void;
 }
 

@@ -34,14 +34,18 @@ import {
   registerEffectDependency,
 } from './tracking.js';
 
-export type Subscriber<T> = (value: T) => void;
-export type Setter<T> = T | ((prev: T) => T);
+// eslint-disable-next-line no-unused-vars
+export type Subscriber<T> = (_value: T) => void;
+// eslint-disable-next-line no-unused-vars
+export type Setter<T> = T | ((_prev: T) => T);
 export type Unsubscribe = () => void;
 
 export interface Atom<T> {
   (): T;
+  // eslint-disable-next-line no-unused-vars
   (value: Setter<T>): void;
-  subscribe(_subscriber: Subscriber<T>): Unsubscribe;
+  // eslint-disable-next-line no-unused-vars
+  subscribe(subscriber: Subscriber<T>): Unsubscribe;
 }
 
 /**
@@ -67,13 +71,16 @@ export function atom<T>(initialValue: T): Atom<T> {
         subscriber(value);
       } catch (error) {
         // Log error but don't break other subscribers
+        // eslint-disable-next-line no-console
         console.error('Error in atom subscriber:', error);
       }
     }
   }
 
   function atomFn(): T;
+  // eslint-disable-next-line no-redeclare, no-unused-vars
   function atomFn(newValue: Setter<T>): void;
+  // eslint-disable-next-line no-redeclare
   function atomFn(newValue?: Setter<T>): T | void {
     // Read
     if (arguments.length === 0) {
@@ -96,7 +103,7 @@ export function atom<T>(initialValue: T): Atom<T> {
 
     // Write
     const nextValue =
-      typeof newValue === 'function' ? (newValue as (prev: T) => T)(value) : newValue;
+      typeof newValue === 'function' ? (newValue as (_prev: T) => T)(value) : newValue; // eslint-disable-line no-unused-vars
 
     // Skip notification if value hasn't changed
     if (Object.is(nextValue, value)) {

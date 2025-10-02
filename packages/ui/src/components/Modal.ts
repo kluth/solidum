@@ -1,5 +1,6 @@
 import { createElement } from '@solidum/core';
 import { cn } from '@solidum/utils';
+
 import { Button } from './Button.js';
 
 export interface ModalProps {
@@ -9,10 +10,10 @@ export interface ModalProps {
   showClose?: boolean;
   backdrop?: boolean;
   animated?: boolean;
-  children?: any;
+  children?: unknown;
   className?: string;
   onClose?: () => void;
-  [key: string]: any;
+  [key: string]: unknown;
 }
 
 export function Modal(props: ModalProps) {

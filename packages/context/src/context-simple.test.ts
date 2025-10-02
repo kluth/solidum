@@ -5,7 +5,8 @@
  */
 
 import { describe, test, expect, runTests } from '@solidum/testing';
-import { createContext, useContext } from './context.js';
+
+import { createContext } from './context.js';
 
 describe('createContext() - Simple Tests', () => {
   test('should create a context with default value', () => {
@@ -61,4 +62,7 @@ describe('useContext() - Simple Tests', () => {
 });
 
 // Run tests
-runTests().catch(console.error);
+runTests().catch(error => {
+  // eslint-disable-next-line no-console
+  console.error(error);
+});

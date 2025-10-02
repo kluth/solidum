@@ -12,8 +12,9 @@ export interface InputProps {
   rightIcon?: string;
   animated?: boolean;
   className?: string;
+  // eslint-disable-next-line no-unused-vars
   onInput?: (value: string) => void;
-  [key: string]: any;
+  [key: string]: unknown;
 }
 
 export function Input(props: InputProps) {
@@ -68,7 +69,7 @@ export function Input(props: InputProps) {
         }),
         onFocus: () => focused(true),
         onBlur: () => focused(false),
-        onInput: (e: any) => onInput?.(e.target.value),
+        onInput: (e: Event) => onInput?.((e.target as HTMLInputElement).value),
         ...rest,
       }),
       rightIcon &&

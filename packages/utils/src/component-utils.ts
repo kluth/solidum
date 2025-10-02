@@ -7,14 +7,14 @@
 /**
  * Props type
  */
-export type Props = Record<string, any>;
+export type Props = Record<string, unknown>;
 
 /**
  * Class value type for cn() function
  */
 export type ClassValue = string | number | boolean | null | undefined | ClassArray | ClassObject;
 type ClassArray = ClassValue[];
-type ClassObject = Record<string, any>;
+type ClassObject = Record<string, unknown>;
 
 /**
  * Merge multiple props objects intelligently
@@ -57,7 +57,7 @@ export function mergeProps(...sources: Props[]): Props {
       else if (key.startsWith('on') && typeof value === 'function') {
         if (typeof result[key] === 'function') {
           const existingHandler = result[key];
-          result[key] = (...args: any[]) => {
+          result[key] = (...args: unknown[]) => {
             existingHandler(...args);
             value(...args);
           };

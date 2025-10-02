@@ -5,6 +5,7 @@
  */
 
 import { describe, test, expect, runTests } from '@solidum/testing';
+
 import { createStore } from './store.js';
 
 describe('createStore()', () => {
@@ -115,15 +116,15 @@ describe('createStore()', () => {
   });
 
   test('should support async effects', async () => {
-    let loadedData: any = null;
+    let loadedData: unknown = null;
 
     const store = createStore({
       state: {
-        data: null as any,
+        data: null as unknown,
         loading: false,
       },
       actions: {
-        setData(state, data: any) {
+        setData(state, data: unknown) {
           return { ...state, data, loading: false };
         },
         setLoading(state, loading: boolean) {
@@ -219,7 +220,8 @@ describe('createStore()', () => {
           return { ...state, count: state.count + 1 };
         },
       },
-      middleware: store => next => (action, payload) => {
+      // eslint-disable-next-line no-unused-vars
+      middleware: _store => next => (action, payload) => {
         actions.push(action);
         return next(action, payload);
       },
@@ -244,7 +246,7 @@ describe('createStore()', () => {
 
     let error: Error | null = null;
     try {
-      (store as any).dispatch('unknownAction');
+      (store as unknown as Record<string, unknown>).dispatch('unknownAction');
     } catch (e) {
       error = e as Error;
     }
@@ -264,9 +266,9 @@ describe('createStore()', () => {
     });
 
     const todoStore = createStore({
-      state: { todos: [] as any[] },
+      state: { todos: [] as Array<{ id: number; text: string; completed: boolean }> },
       actions: {
-        addTodo(state, todo: any) {
+        addTodo(state, todo: { id: number; text: string; completed: boolean }) {
           return { ...state, todos: [...state.todos, todo] };
         },
       },
@@ -281,4 +283,7 @@ describe('createStore()', () => {
 });
 
 // Run tests
-runTests().catch(console.error);
+runTests().catch(error => {
+  // eslint-disable-next-line no-console
+  console.error(error);
+});

@@ -4,7 +4,7 @@ import { cn } from '@solidum/utils';
 export interface Tab {
   id: string;
   label: string;
-  content: any;
+  content: unknown;
   disabled?: boolean;
   icon?: string;
 }
@@ -15,6 +15,7 @@ export interface TabsProps {
   variant?: 'line' | 'enclosed' | 'pills';
   animated?: boolean;
   className?: string;
+  // eslint-disable-next-line no-unused-vars
   onChange?: (tabId: string) => void;
 }
 

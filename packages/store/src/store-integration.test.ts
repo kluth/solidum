@@ -4,10 +4,10 @@
  * Real-world scenarios and integration tests for the store pattern
  */
 
-import { describe, test, expect, runTests } from '@solidum/testing';
-import { createStore } from './store.js';
-import { atom } from '@solidum/core';
 import { effect } from '@solidum/core';
+import { describe, test, expect, runTests } from '@solidum/testing';
+
+import { createStore } from './store.js';
 
 describe('Store - Real World Scenarios', () => {
   test('should handle todo list application', () => {
@@ -474,4 +474,7 @@ describe('Store - Real World Scenarios', () => {
 });
 
 // Run tests
-runTests().catch(console.error);
+runTests().catch(error => {
+  // eslint-disable-next-line no-console
+  console.error(error);
+});

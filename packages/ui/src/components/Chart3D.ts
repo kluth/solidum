@@ -88,12 +88,12 @@ export function Chart3D(props: Chart3DProps) {
     const radY = (rot.y * Math.PI) / 180;
 
     // Rotate around Y axis
-    let x1 = nx * Math.cos(radY) - nz * Math.sin(radY);
-    let z1 = nx * Math.sin(radY) + nz * Math.cos(radY);
+    const x1 = nx * Math.cos(radY) - nz * Math.sin(radY);
+    const z1 = nx * Math.sin(radY) + nz * Math.cos(radY);
 
     // Rotate around X axis
-    let y1 = ny * Math.cos(radX) - z1 * Math.sin(radX);
-    let z2 = ny * Math.sin(radX) + z1 * Math.cos(radX);
+    const y1 = ny * Math.cos(radX) - z1 * Math.sin(radX);
+    const z2 = ny * Math.sin(radX) + z1 * Math.cos(radX);
 
     // Apply perspective
     const perspectiveFactor = perspective / (perspective + z2);

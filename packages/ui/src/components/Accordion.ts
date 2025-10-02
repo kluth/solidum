@@ -1,10 +1,10 @@
-import { createElement, useState } from '@solidum/core';
+import { createElement, useState, type ComponentFunction } from '@solidum/core';
 import { cn } from '@solidum/utils';
 
 export interface AccordionItem {
   id: string;
   title: string;
-  content: any;
+  content: unknown;
   defaultOpen?: boolean;
 }
 
@@ -15,7 +15,14 @@ export interface AccordionProps {
   className?: string;
 }
 
-function AccordionItemComponent({ item, isOpen, toggle, animated }: any) {
+interface AccordionItemComponentProps {
+  item: AccordionItem;
+  isOpen: () => boolean;
+  toggle: () => void;
+  animated?: boolean;
+}
+
+function AccordionItemComponent({ item, isOpen, toggle, animated }: AccordionItemComponentProps) {
   return createElement(
     'div',
     { className: cn('solidum-accordion-item', { 'solidum-accordion-item--open': isOpen() }) },
@@ -69,7 +76,7 @@ export function Accordion(props: AccordionProps) {
     'div',
     { className: cn('solidum-accordion', className) },
     ...items.map(item =>
-      createElement(AccordionItemComponent, {
+      createElement(AccordionItemComponent as unknown as ComponentFunction, {
         item,
         isOpen: () => openItems().has(item.id),
         toggle: () => toggle(item.id),
