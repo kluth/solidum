@@ -3,6 +3,7 @@ import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
 import { renderToString } from './renderer.js';
 import { HomePage } from './pages/index.js';
+import * as esbuild from 'esbuild';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const distDir = join(__dirname, 'dist');
@@ -18,6 +19,20 @@ cpSync(
   join(__dirname, '../packages/ui/dist/styles.css'),
   join(distDir, 'styles.css')
 );
+
+// Bundle client-side JavaScript
+console.log('Bundling client-side JavaScript...');
+await esbuild.build({
+  entryPoints: [join(__dirname, 'client.js')],
+  bundle: true,
+  format: 'esm',
+  outfile: join(distDir, 'app.js'),
+  platform: 'browser',
+  target: 'es2020',
+  sourcemap: true,
+  minify: true,
+  external: [], // Bundle everything
+});
 
 // Generate HTML wrapper
 function htmlTemplate(content, title = 'Solidum - Fine-Grained Reactive Framework') {
@@ -42,13 +57,14 @@ function htmlTemplate(content, title = 'Solidum - Fine-Grained Reactive Framewor
   </style>
 </head>
 <body>
-  ${content}
+  <div id="app">${content}</div>
+  <script type="module" src="/solidum/app.js"></script>
 </body>
 </html>`;
 }
 
 // Build pages
-console.log('Building documentation site with Solidum...');
+console.log('Rendering pages to HTML...');
 
 // Home page
 const homeHtml = renderToString(HomePage());
@@ -56,3 +72,6 @@ writeFileSync(join(distDir, 'index.html'), htmlTemplate(homeHtml));
 
 console.log('✓ Documentation site built successfully!');
 console.log(`  Output: ${distDir}`);
+console.log('  ✓ SSR HTML rendered');
+console.log('  ✓ Client-side JS bundled');
+console.log('  ✓ Styles copied');
