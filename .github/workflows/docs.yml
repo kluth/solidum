@@ -45,7 +45,7 @@ jobs:
         run: pnpm build
 
       - name: Build docs site (built with Solidum!)
-        run: pnpm --filter @solidum/docs build
+        run: pnpm --filter @sldm/docs build
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
