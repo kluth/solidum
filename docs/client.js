@@ -1,6 +1,8 @@
 import { mount } from '@solidum/core';
 import { HomePage } from './pages/index.js';
 
+console.log('🚀 Solidum client.js loaded!', 'readyState:', document.readyState);
+
 // Mount the app when DOM is ready
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', () => {
