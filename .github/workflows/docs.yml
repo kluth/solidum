@@ -44,6 +44,11 @@ jobs:
       - name: Build docs
         run: pnpm --filter @solidum/docs build
 
+      - name: Verify build output
+        run: |
+          echo "Checking build output..."
+          ls -la docs/.vitepress/dist/ || echo "Build output not found!"
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
