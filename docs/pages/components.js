@@ -1,6 +1,6 @@
-/* eslint-env browser */
 import { createElement } from '@solidum/core';
 import { Container, Card, Button, Badge } from '@solidum/ui';
+import { navigate } from '@solidum/router';
 export function ComponentsPage() {
     return createElement('div', { className: 'components-page' }, 
     // Hero Section
@@ -27,7 +27,7 @@ export function ComponentsPage() {
     }, '20+ production-ready components with wild interactive features'), createElement(Button, {
         variant: 'secondary',
         size: 'lg',
-        onClick: () => window.history.back(),
+        onClick: () => navigate('/'),
     }, '← Back to Home'))), 
     // Components Grid
     createElement('section', {

@@ -5,6 +5,7 @@
  */
 
 import { _getOrCreateComponentId, _setComponentId, _clearComponentId } from '../reactive/state.js';
+import { effect } from '../reactive/effect.js';
 
 import type { VNode, ComponentFunction } from './vnode.js';
 import { Fragment } from './vnode.js';
@@ -145,31 +146,71 @@ export function render(
   if (typeof vnode.type === 'function') {
     // Render tracking moved to @solidum/context package
 
-    // Set component ID for useState hooks
     const componentId = _getOrCreateComponentId(vnode.type, vnode.props);
-    _setComponentId(componentId);
 
-    try {
-      // Merge children into props for component access
-      const propsWithChildren = {
-        ...vnode.props,
-        children:
-          vnode.children.length === 1
-            ? vnode.children[0]
-            : vnode.children.length > 0
-              ? vnode.children
-              : undefined,
-      };
+    // Check if we're in browser (not SSR)
+    if (typeof window !== 'undefined') {
+      // Client-side: Make component reactive with an effect
+      const container = document.createElement('span');
+      container.style.display = 'contents'; // Don't affect layout
 
-      const componentVNode = (vnode.type as ComponentFunction)(propsWithChildren);
-      if (componentVNode) {
-        return render(componentVNode, document);
+      let currentNode: Node | null = null;
+
+      effect(() => {
+        _setComponentId(componentId);
+
+        try {
+          const propsWithChildren = {
+            ...vnode.props,
+            children:
+              vnode.children.length === 1
+                ? vnode.children[0]
+                : vnode.children.length > 0
+                  ? vnode.children
+                  : undefined,
+          };
+
+          const componentVNode = (vnode.type as ComponentFunction)(propsWithChildren);
+          if (componentVNode) {
+            const newNode = render(componentVNode, document);
+
+            if (currentNode) {
+              container.replaceChild(newNode, currentNode);
+            } else {
+              container.appendChild(newNode);
+            }
+            currentNode = newNode;
+          }
+        } finally {
+          _clearComponentId();
+        }
+      });
+
+      return container;
+    } else {
+      // SSR: Render once without reactivity
+      _setComponentId(componentId);
+
+      try {
+        const propsWithChildren = {
+          ...vnode.props,
+          children:
+            vnode.children.length === 1
+              ? vnode.children[0]
+              : vnode.children.length > 0
+                ? vnode.children
+                : undefined,
+        };
+
+        const componentVNode = (vnode.type as ComponentFunction)(propsWithChildren);
+        if (componentVNode) {
+          return render(componentVNode, document);
+        }
+        return document.createTextNode('');
+      } finally {
+        _clearComponentId();
+        // Render cleanup moved to @solidum/context package
       }
-      // Component returned null
-      return document.createTextNode('');
-    } finally {
-      _clearComponentId();
-      // Render cleanup moved to @solidum/context package
     }
   }
 
