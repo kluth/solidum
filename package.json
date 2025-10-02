@@ -5,7 +5,7 @@
   "description": "Modern full-stack TypeScript framework built from the ground up",
   "type": "module",
   "scripts": {
-    "build": "pnpm -r build",
+    "build": "pnpm --filter @solidum/core build && pnpm --filter @solidum/utils build && pnpm --filter @solidum/ui build && pnpm --filter @solidum/router build && pnpm --filter @solidum/store build && pnpm --filter @solidum/context build && pnpm --filter @solidum/ssr build && pnpm --filter @solidum/testing build",
     "test": "pnpm -r test",
     "test:watch": "pnpm -r test:watch",
     "dev": "pnpm -r --parallel dev",
