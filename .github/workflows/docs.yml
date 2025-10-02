@@ -41,11 +41,8 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Build core package
-        run: pnpm --filter @solidum/core build
-
-      - name: Build UI library
-        run: pnpm --filter @solidum/ui build
+      - name: Build all packages
+        run: pnpm build
 
       - name: Build docs site (built with Solidum!)
         run: pnpm --filter @solidum/docs build
