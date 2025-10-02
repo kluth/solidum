@@ -1,4 +1,5 @@
-import { createElement, cn, useState } from '@solidum/core';
+import { createElement, useState } from '@solidum/core';
+import { cn } from '@solidum/utils';
 
 export interface DataTableColumn<T = any> {
   key: string;

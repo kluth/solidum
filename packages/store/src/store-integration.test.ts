@@ -6,8 +6,8 @@
 
 import { describe, test, expect, runTests } from '@solidum/testing';
 import { createStore } from './store.js';
-import { atom } from '../reactive/atom.js';
-import { effect } from '../reactive/effect.js';
+import { atom } from '@solidum/core';
+import { effect } from '@solidum/core';
 
 describe('Store - Real World Scenarios', () => {
   test('should handle todo list application', () => {

@@ -5,8 +5,8 @@
  * without having to pass props down manually at every level.
  */
 
-import type { ComponentFunction } from '../dom/vnode.js';
-import { createElement, Fragment } from '../dom/vnode.js';
+import type { ComponentFunction } from '@solidum/core';
+import { createElement, Fragment } from '@solidum/core';
 
 /**
  * Context object
@@ -46,7 +46,7 @@ let contextStack: ContextEntry[] = [];
 export function createContext<T>(defaultValue?: T): Context<T> {
   const id = Symbol('context');
 
-  const Provider: ComponentFunction<{ value: T; children?: any }> = (props) => {
+  const Provider: ComponentFunction<{ value: T; children?: unknown }> = (props) => {
     // Render children
     const children = Array.isArray(props.children)
       ? props.children

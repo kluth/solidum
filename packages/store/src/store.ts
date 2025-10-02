@@ -4,10 +4,10 @@
  * Centralized state management for complex applications
  */
 
-import { atom } from '../reactive/atom.js';
-import { computed } from '../reactive/computed.js';
-import { batch as batchFn } from '../reactive/batch.js';
-import type { Computed } from '../reactive/computed.js';
+import { atom } from '@solidum/core';
+import { computed } from '@solidum/core';
+import { batch as batchFn } from '@solidum/core';
+import type { Computed } from '@solidum/core';
 
 /**
  * Store configuration
@@ -31,7 +31,7 @@ export type Action<State, Payload = void> = Payload extends void
  * Effect context
  */
 export interface EffectContext<State> {
-  dispatch: <K extends string>(action: K, ...args: any[]) => void;
+  dispatch: <K extends string>(action: K, ...args: unknown[]) => void;
   getState: () => State;
 }
 
@@ -41,8 +41,8 @@ export interface EffectContext<State> {
 export type Middleware<State> = (
   store: { getState: () => State }
 ) => (
-  next: (action: string, payload?: any) => void
-) => (action: string, payload?: any) => void;
+  next: (action: string, payload?: unknown) => void
+) => (action: string, payload?: unknown) => void;
 
 /**
  * Store interface
@@ -93,7 +93,7 @@ export function createStore<State, Actions = {}, Getters = {}, Effects = {}>(
   const stateAtom = atom<State>(config.state);
 
   // Build middleware chain
-  let dispatchFn = (action: string, payload?: any) => {
+  let dispatchFn = (action: string, payload?: unknown) => {
     executeAction(action, payload);
   };
 
@@ -115,8 +115,8 @@ export function createStore<State, Actions = {}, Getters = {}, Effects = {}>(
   /**
    * Execute an action
    */
-  function executeAction(action: string, payload?: any): void {
-    const actions = config.actions as any;
+  function executeAction(action: string, payload?: unknown): void {
+    const actions = config.actions as Record<string, Function>;
 
     if (!actions || !(action in actions)) {
       throw new Error(`Unknown action: ${action}`);
@@ -134,7 +134,7 @@ export function createStore<State, Actions = {}, Getters = {}, Effects = {}>(
   /**
    * Dispatch an action
    */
-  function dispatch(action: string, payload?: any): void {
+  function dispatch(action: string, payload?: unknown): void {
     dispatchFn(action, payload);
   }
 
@@ -155,11 +155,13 @@ export function createStore<State, Actions = {}, Getters = {}, Effects = {}>(
   /**
    * Build effects object
    */
-  const effects = {} as any;
+  const effects = {} as {
+    [K in keyof Effects]: Effects[K] extends (ctx: EffectContext<State>) => infer R ? () => R : never;
+  };
   if (config.effects) {
-    const effectsConfig = config.effects as any;
+    const effectsConfig = config.effects as Record<string, Function>;
     for (const key in effectsConfig) {
-      effects[key] = (...args: any[]) => {
+      (effects as Record<string, Function>)[key] = (...args: unknown[]) => {
         const ctx: EffectContext<State> = {
           dispatch,
           getState
@@ -172,9 +174,14 @@ export function createStore<State, Actions = {}, Getters = {}, Effects = {}>(
   return {
     getState,
     select,
-    dispatch: dispatch as any,
+    dispatch: dispatch as <K extends keyof Actions>(
+      action: K,
+      ...args: Actions[K] extends Action<State, infer P> ? (P extends void ? [] : [P]) : never
+    ) => void,
     batch,
-    getters: (config.getters || {}) as any,
+    getters: (config.getters || {}) as {
+      [K in keyof Getters]: Getters[K] extends (state: State) => infer R ? (state: State) => R : never;
+    },
     effects
   };
 }

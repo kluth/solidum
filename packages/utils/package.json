@@ -1,0 +1,32 @@
+{
+  "name": "@solidum/utils",
+  "version": "0.1.0",
+  "description": "Utility functions for Solidum applications",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "test": "tsx src/component-utils.test.ts",
+    "test:watch": "tsx --watch src/component-utils.test.ts",
+    "clean": "rm -rf dist",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@solidum/testing": "workspace:*",
+    "@types/node": "^20.11.0",
+    "tsx": "^4.7.0",
+    "typescript": "^5.3.0"
+  },
+  "files": [
+    "dist"
+  ]
+}

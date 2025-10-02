@@ -14,6 +14,7 @@ import {
   Tabs,
   Switch
 } from '@solidum/ui';
+import { navigate } from '@solidum/router';
 
 export function HomePage() {
   // Sample data for Chart3D
@@ -276,7 +277,13 @@ export function HomePage() {
           // Feature 1 - Enhanced with badge
           createElement(
             Card,
-            { padding: 'lg', hoverable: true, bordered: true },
+            { 
+              padding: 'lg', 
+              hoverable: true, 
+              bordered: true,
+              onClick: () => navigate('/reactivity'),
+              style: { cursor: 'pointer' }
+            },
             createElement('div', {
               style: { display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '1rem' }
             },
@@ -378,7 +385,13 @@ export function HomePage() {
           // NEW Feature 7 - UI Library
           createElement(
             Card,
-            { padding: 'lg', hoverable: true, bordered: true },
+            { 
+              padding: 'lg', 
+              hoverable: true, 
+              bordered: true,
+              onClick: () => navigate('/components'),
+              style: { cursor: 'pointer' }
+            },
             createElement('div', {
               style: { display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '1rem' }
             },

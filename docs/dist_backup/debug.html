@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Debug - Solidum Docs</title>
+</head>
+<body>
+  <h1>Solidum Docs Debug</h1>
+  <div id="debug-info">
+    <p>Loading JavaScript...</p>
+  </div>
+  
+  <script>
+    console.log('Debug script loaded');
+    
+    // Test if we can load the main app.js
+    const script = document.createElement('script');
+    script.src = './app.js';
+    script.onload = function() {
+      document.getElementById('debug-info').innerHTML = '<p style="color: green;">✅ app.js loaded successfully!</p>';
+      console.log('app.js loaded successfully');
+    };
+    script.onerror = function() {
+      document.getElementById('debug-info').innerHTML = '<p style="color: red;">❌ Failed to load app.js</p>';
+      console.error('Failed to load app.js');
+    };
+    document.head.appendChild(script);
+    
+    // Test if we can load styles.css
+    const link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = './styles.css';
+    link.onload = function() {
+      console.log('styles.css loaded successfully');
+    };
+    link.onerror = function() {
+      console.error('Failed to load styles.css');
+    };
+    document.head.appendChild(link);
+  </script>
+</body>
+</html>

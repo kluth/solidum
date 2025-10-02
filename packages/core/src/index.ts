@@ -20,17 +20,7 @@ export { createElement, Fragment, render, mount, onMount, onCleanup } from './do
 
 export type { VNode, ComponentFunction, JSX } from './dom/index.js';
 
-// Context API
-export { createContext, useContext } from './context/index.js';
-
-export type { Context } from './context/index.js';
-
-// Store Pattern
-export { createStore } from './store/index.js';
-
-export type { Store, StoreConfig, Action, EffectContext, Middleware } from './store/index.js';
-
-// Component Utilities
-export { mergeProps, cn } from './utils/index.js';
-
-export type { Props, ClassValue } from './utils/index.js';
+// Note: Context, Store, and Utils have been moved to separate packages:
+// - @solidum/context for Context API
+// - @solidum/store for Store Pattern  
+// - @solidum/utils for Component Utilities

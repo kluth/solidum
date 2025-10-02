@@ -1,4 +1,5 @@
-import { createElement, mergeProps, cn } from '@solidum/core';
+import { createElement } from '@solidum/core';
+import { mergeProps, cn } from '@solidum/utils';
 
 export interface ButtonProps {
   variant?: 'primary' | 'secondary' | 'outline' | 'ghost';

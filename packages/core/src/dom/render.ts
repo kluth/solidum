@@ -6,7 +6,7 @@
 
 import type { VNode, ComponentFunction } from './vnode.js';
 import { Fragment } from './vnode.js';
-import { pushContext, popContext, enterRender, exitRender } from '../context/context.js';
+// Context functions moved to @solidum/context package
 import { _getOrCreateComponentId, _setComponentId, _clearComponentId } from '../reactive/state.js';
 
 /**
@@ -52,7 +52,7 @@ export function render(
 
     if (hasContext) {
       // Push context before rendering children
-      pushContext((vnode as any).__contextId, (vnode as any).__contextValue);
+      // Context handling moved to @solidum/context package
     }
 
     try {
@@ -64,14 +64,14 @@ export function render(
     } finally {
       if (hasContext) {
         // Pop context after rendering children
-        popContext();
+        // Context cleanup moved to @solidum/context package
       }
     }
   }
 
   // Handle component functions
   if (typeof vnode.type === 'function') {
-    enterRender();
+    // Render tracking moved to @solidum/context package
 
     // Set component ID for useState hooks
     const componentId = _getOrCreateComponentId(vnode.type, vnode.props);
@@ -92,7 +92,7 @@ export function render(
       return document.createTextNode('');
     } finally {
       _clearComponentId();
-      exitRender();
+      // Render cleanup moved to @solidum/context package
     }
   }
 
@@ -153,7 +153,7 @@ function setStyle(element: HTMLElement, styles: Record<string, string>): void {
   for (const [property, value] of Object.entries(styles)) {
     if (value != null) {
       // Direct assignment for compatibility with both real and mock DOM
-      (element.style as any)[property] = value;
+      (element.style as unknown as Record<string, string>)[property] = value;
     }
   }
 }

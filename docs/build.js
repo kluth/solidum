@@ -2,7 +2,7 @@ import { mkdirSync, writeFileSync, cpSync, existsSync } from 'fs';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
 import { renderToString } from './renderer.js';
-import { HomePage } from './pages/index.js';
+import { HomePage } from './pages/index.ts';
 import * as esbuild from 'esbuild';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -23,7 +23,7 @@ cpSync(
 // Bundle client-side JavaScript
 console.log('Bundling client-side JavaScript...');
 await esbuild.build({
-  entryPoints: [join(__dirname, 'client.js')],
+  entryPoints: [join(__dirname, 'client.ts')],
   bundle: true,
   format: 'iife',
   outfile: join(distDir, 'app.js'),

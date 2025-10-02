@@ -5,18 +5,18 @@
  */
 
 import { describe, test, expect, runTests } from '@solidum/testing';
-import { atom } from '../reactive/atom.js';
+import { atom } from '@solidum/core';
 import { createContext, useContext } from './context.js';
-import { createElement } from '../dom/vnode.js';
-import { mount, onMount } from '../dom/mount.js';
+import { createElement } from '@solidum/core';
+import { mount, onMount } from '@solidum/core';
 
 // Mock container
 function createContainer() {
-  const children: any[] = [];
+  const children: unknown[] = [];
   return {
     children,
-    appendChild: (child: any) => children.push(child),
-    removeChild: (child: any) => {
+    appendChild: (child: unknown) => children.push(child),
+    removeChild: (child: unknown) => {
       const index = children.indexOf(child);
       if (index > -1) children.splice(index, 1);
     },
@@ -28,10 +28,10 @@ function createMockDoc() {
   return {
     createElement: (tag: string) => ({
       tagName: tag.toUpperCase(),
-      children: [] as any[],
+      children: [] as unknown[],
       attributes: {} as Record<string, any>,
       style: {} as Record<string, any>,
-      appendChild: function (child: any) {
+      appendChild: function (child: unknown) {
         this.children.push(child);
       },
       setAttribute: function () {},
@@ -39,8 +39,8 @@ function createMockDoc() {
     }),
     createTextNode: (text: string) => ({ textContent: text }),
     createDocumentFragment: () => ({
-      children: [] as any[],
-      appendChild: function (child: any) {
+      children: [] as unknown[],
+      appendChild: function (child: unknown) {
         this.children.push(child);
       },
     }),
@@ -73,7 +73,7 @@ describe('createContext()', () => {
     }
 
     const container = createContainer();
-    mount(container as any, () => createElement(Provider, null), createMockDoc() as any);
+    mount(container as unknown as Element, () => createElement(Provider, null), createMockDoc() as unknown as Document);
 
     expect(consumedValue).toBe('dark');
   });
@@ -88,14 +88,14 @@ describe('createContext()', () => {
     }
 
     const container = createContainer();
-    mount(container as any, () => createElement(Consumer, null), createMockDoc() as any);
+    mount(container as unknown as Element, () => createElement(Consumer, null), createMockDoc() as unknown as Document);
 
     expect(consumedValue).toBe('light');
   });
 
   test('should support reactive context values', () => {
-    const CountContext = createContext<any>();
-    let consumedCount: any;
+    const CountContext = createContext<() => number>();
+    let consumedCount: (() => number) | undefined;
 
     function Consumer() {
       consumedCount = useContext(CountContext);
@@ -113,16 +113,16 @@ describe('createContext()', () => {
     }
 
     const container = createContainer();
-    mount(container as any, () => createElement(Provider, null), createMockDoc() as any);
+    mount(container as unknown as Element, () => createElement(Provider, null), createMockDoc() as unknown as Document);
 
-    expect(consumedCount()).toBe(5);
+    expect(consumedCount?.()).toBe(5);
   });
 
   test('should support nested providers', () => {
     const ThemeContext = createContext<string>();
     const values: string[] = [];
 
-    function Consumer({ label }: any) {
+    function Consumer({ label }: { label: string }) {
       const theme = useContext(ThemeContext);
       values.push(`${label}:${theme}`);
       return createElement('div', null);
@@ -143,13 +143,13 @@ describe('createContext()', () => {
     }
 
     const container = createContainer();
-    mount(container as any, () => createElement(App, null), createMockDoc() as any);
+    mount(container as unknown as Element, () => createElement(App, null), createMockDoc() as unknown as Document);
 
     expect(values).toEqual(['outer:dark', 'inner:light', 'outer2:dark']);
   });
 
   test('should update consumers when context value changes', () => {
-    const CountContext = createContext<any>();
+    const CountContext = createContext<() => number>();
     const values: number[] = [];
 
     function Consumer() {
@@ -158,7 +158,7 @@ describe('createContext()', () => {
       return createElement('div', null, String(count()));
     }
 
-    let updateCount: any;
+    let updateCount: ((value?: number) => number) | undefined;
 
     function Provider() {
       const count = atom(0);
@@ -172,12 +172,12 @@ describe('createContext()', () => {
     }
 
     const container = createContainer();
-    mount(container as any, () => createElement(Provider, null), createMockDoc() as any);
+    mount(container as unknown as Element, () => createElement(Provider, null), createMockDoc() as unknown as Document);
 
     expect(values[0]).toBe(0);
 
     // Update context value
-    updateCount(1);
+    updateCount?.(1);
 
     // Consumer should re-render with new value
     expect(container.children.length).toBe(1);
@@ -222,7 +222,7 @@ describe('createContext()', () => {
     }
 
     const container = createContainer();
-    mount(container as any, () => createElement(App, null), createMockDoc() as any);
+    mount(container as unknown as Element, () => createElement(App, null), createMockDoc() as unknown as Document);
 
     expect(theme).toBe('dark');
     expect(user).toBe('Alice');

@@ -1,4 +1,5 @@
-import { createElement, cn } from '@solidum/core';
+import { createElement } from '@solidum/core';
+import { cn } from '@solidum/utils';
 
 export interface ProgressProps {
   value: number;
