@@ -37,11 +37,11 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/kluth/solidum.git"
+    "url": "git+https://github.com/kluth/solidum-router.git"
   },
-  "homepage": "https://kluth.github.io/solidum",
+  "homepage": "https://github.com/kluth/solidum-router#readme",
   "bugs": {
-    "url": "https://github.com/kluth/solidum/issues"
+    "url": "https://github.com/kluth/solidum-router/issues"
   },
   "publishConfig": {
     "access": "public"

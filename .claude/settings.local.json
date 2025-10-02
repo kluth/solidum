@@ -54,7 +54,15 @@
       "Bash(./solidum.exe --version)",
       "Bash(./solidum.exe --help)",
       "Bash(./solidum.exe new:*)",
-      "Bash(./solidum.exe generate:*)"
+      "Bash(./solidum.exe generate:*)",
+      "Bash(\"C:\\Program Files\\GitHub CLI\\gh.exe\" repo create kluth/solidum-core --public --description \"Reactive primitives and core runtime for Solidum framework\")",
+      "Bash(\"C:\\Program Files\\GitHub CLI\\gh.exe\" repo create kluth/solidum-ui --public --description \"Production-ready UI component library for Solidum\")",
+      "Bash(\"C:\\Program Files\\GitHub CLI\\gh.exe\" repo create kluth/solidum-router --public --description \"Simple SPA router for Solidum applications\")",
+      "Bash(\"C:\\Program Files\\GitHub CLI\\gh.exe\" repo create kluth/solidum-store --public --description \"Global state management for Solidum applications\")",
+      "Bash(\"C:\\Program Files\\GitHub CLI\\gh.exe\" repo create kluth/solidum-context --public --description \"Context and dependency injection for Solidum\")",
+      "Bash(\"C:\\Program Files\\GitHub CLI\\gh.exe\" repo create kluth/solidum-ssr --public --description \"Server-side rendering for Solidum applications\")",
+      "Bash(\"C:\\Program Files\\GitHub CLI\\gh.exe\" repo create kluth/solidum-testing --public --description \"Testing utilities and test runner for Solidum\")",
+      "Bash(\"C:\\Program Files\\GitHub CLI\\gh.exe\" repo create kluth/solidum-utils --public --description \"Utility functions for Solidum framework\")"
     ],
     "deny": [],
     "ask": []

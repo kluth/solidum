@@ -40,11 +40,11 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/kluth/solidum.git"
+    "url": "git+https://github.com/kluth/solidum-store.git"
   },
-  "homepage": "https://kluth.github.io/solidum",
+  "homepage": "https://github.com/kluth/solidum-store#readme",
   "bugs": {
-    "url": "https://github.com/kluth/solidum/issues"
+    "url": "https://github.com/kluth/solidum-store/issues"
   },
   "publishConfig": {
     "access": "public"
