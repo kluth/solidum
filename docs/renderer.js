@@ -3,6 +3,8 @@
  * Renders VNodes to HTML strings
  */
 
+import { _getOrCreateComponentId, _setComponentId, _clearComponentId } from '@solidum/core';
+
 const voidElements = new Set([
   'area', 'base', 'br', 'col', 'embed', 'hr', 'img', 'input',
   'link', 'meta', 'param', 'source', 'track', 'wbr'
@@ -69,13 +71,21 @@ export function renderToString(vnode) {
 
   // Handle component functions
   if (typeof vnode.type === 'function') {
-    // Pass children as part of props
-    const propsWithChildren = {
-      ...(vnode.props || {}),
-      children: vnode.children
-    };
-    const result = vnode.type(propsWithChildren);
-    return renderToString(result);
+    // Set up component context for useState hooks
+    const componentId = _getOrCreateComponentId(vnode.type, vnode.props);
+    _setComponentId(componentId);
+    
+    try {
+      // Pass children as part of props
+      const propsWithChildren = {
+        ...(vnode.props || {}),
+        children: vnode.children
+      };
+      const result = vnode.type(propsWithChildren);
+      return renderToString(result);
+    } finally {
+      _clearComponentId();
+    }
   }
 
   // Handle fragments
