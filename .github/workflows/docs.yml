@@ -42,10 +42,7 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Build docs
-        run: |
-          cd docs
-          pnpm install
-          pnpm build
+        run: pnpm --filter @solidum/docs build
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
