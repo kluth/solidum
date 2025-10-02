@@ -42,12 +42,15 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Build docs
-        run: pnpm --filter @solidum/docs build
-
-      - name: Verify build output
         run: |
-          echo "Checking build output..."
-          ls -la docs/.vitepress/dist/ || echo "Build output not found!"
+          echo "Current directory: $(pwd)"
+          echo "Contents of docs/:"
+          ls -la docs/
+          echo "Running build..."
+          pnpm --filter @solidum/docs build
+          echo "Build completed. Checking for output..."
+          find docs -name "dist" -type d || echo "No dist directory found"
+          ls -la docs/.vitepress/ || echo "No .vitepress directory"
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
