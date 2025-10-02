@@ -20,6 +20,7 @@ Solidum is a lightweight, performant framework that combines fine-grained reacti
 📚 **[View the full documentation](https://kluth.github.io/solidum/)**
 
 The comprehensive documentation includes:
+
 - Detailed guides and tutorials
 - Complete API reference
 - Interactive examples
@@ -66,11 +67,17 @@ count(5); // Console: Count: 5, Doubled: 10
 function Counter() {
   const count = atom(0);
 
-  return createElement('div', null,
+  return createElement(
+    'div',
+    null,
     createElement('h1', null, 'Count: ', String(count())),
-    createElement('button', {
-      onClick: () => count(count() + 1)
-    }, 'Increment')
+    createElement(
+      'button',
+      {
+        onClick: () => count(count() + 1),
+      },
+      'Increment'
+    )
   );
 }
 
@@ -97,7 +104,7 @@ console.log(count()); // 0
 count(5);
 
 // Subscribe to changes
-const unsubscribe = count.subscribe((newValue) => {
+const unsubscribe = count.subscribe(newValue => {
   console.log('Count changed:', newValue);
 });
 
@@ -169,20 +176,20 @@ const ThemeContext = createContext();
 function App() {
   const theme = atom({ mode: 'dark', primary: '#667eea' });
 
-  return createElement(
-    ThemeContext.Provider,
-    { value: theme },
-    createElement(Button)
-  );
+  return createElement(ThemeContext.Provider, { value: theme }, createElement(Button));
 }
 
 // Consume value
 function Button() {
   const theme = useContext(ThemeContext);
 
-  return createElement('button', {
-    style: { color: theme().primary }
-  }, 'Click me');
+  return createElement(
+    'button',
+    {
+      style: { color: theme().primary },
+    },
+    'Click me'
+  );
 }
 ```
 
@@ -197,7 +204,7 @@ const todoStore = createStore({
   // Initial state
   state: {
     todos: [],
-    filter: 'all'
+    filter: 'all',
   },
 
   // Derived state
@@ -208,7 +215,7 @@ const todoStore = createStore({
         if (state.filter === 'completed') return todo.completed;
         return true;
       });
-    }
+    },
   },
 
   // State updates (pure functions)
@@ -216,7 +223,7 @@ const todoStore = createStore({
     addTodo(state, text) {
       return {
         ...state,
-        todos: [...state.todos, { id: Date.now(), text, completed: false }]
+        todos: [...state.todos, { id: Date.now(), text, completed: false }],
       };
     },
     toggleTodo(state, id) {
@@ -224,9 +231,9 @@ const todoStore = createStore({
         ...state,
         todos: state.todos.map(todo =>
           todo.id === id ? { ...todo, completed: !todo.completed } : todo
-        )
+        ),
       };
-    }
+    },
   },
 
   // Async operations
@@ -234,8 +241,8 @@ const todoStore = createStore({
     async loadTodos({ dispatch }) {
       const todos = await api.getTodos();
       todos.forEach(todo => dispatch('addTodo', todo.text));
-    }
-  }
+    },
+  },
 });
 
 // Dispatch actions
@@ -262,7 +269,7 @@ const classes = cn(
   'btn-primary',
   {
     'btn-active': isActive,
-    'btn-disabled': isDisabled
+    'btn-disabled': isDisabled,
   },
   ['extra-class-1', 'extra-class-2']
 );
@@ -289,14 +296,24 @@ import { createElement, atom } from '@solidum/core';
 function Counter() {
   const count = atom(0);
 
-  return createElement('div', { className: 'counter' },
+  return createElement(
+    'div',
+    { className: 'counter' },
     createElement('h1', null, 'Count: ', String(count())),
-    createElement('button', {
-      onClick: () => count(count() + 1)
-    }, 'Increment'),
-    createElement('button', {
-      onClick: () => count(count() - 1)
-    }, 'Decrement')
+    createElement(
+      'button',
+      {
+        onClick: () => count(count() + 1),
+      },
+      'Increment'
+    ),
+    createElement(
+      'button',
+      {
+        onClick: () => count(count() - 1),
+      },
+      'Decrement'
+    )
   );
 }
 ```
@@ -305,7 +322,9 @@ function Counter() {
 
 ```typescript
 function Greeting({ name, age }) {
-  return createElement('div', null,
+  return createElement(
+    'div',
+    null,
     createElement('h1', null, `Hello, ${name}!`),
     createElement('p', null, `You are ${age} years old.`)
   );
@@ -342,6 +361,7 @@ function Timer() {
 ### Todo App
 
 See [examples/todo-app](./examples/todo-app) for a comprehensive example showcasing:
+
 - Reactive primitives (atom, computed, effect)
 - Store pattern for state management
 - Context API for theme management
@@ -350,6 +370,7 @@ See [examples/todo-app](./examples/todo-app) for a comprehensive example showcas
 - LocalStorage persistence
 
 Run it:
+
 ```bash
 cd examples/todo-app
 python -m http.server 8080
@@ -440,17 +461,15 @@ import { cn, mergeProps, useContext } from '@solidum/core';
 export function Button({ variant = 'primary', size = 'md', ...props }) {
   const theme = useContext(ThemeContext);
 
-  return createElement('button', mergeProps(
-    {
-      className: cn(
-        'btn',
-        `btn-${variant}`,
-        `btn-${size}`,
-        props.className
-      )
-    },
-    props
-  ));
+  return createElement(
+    'button',
+    mergeProps(
+      {
+        className: cn('btn', `btn-${variant}`, `btn-${size}`, props.className),
+      },
+      props
+    )
+  );
 }
 ```
 
@@ -468,7 +487,7 @@ export function createGlobalStore(config) {
     Provider: ({ children }) => {
       return createElement(StoreContext.Provider, { value: store }, children);
     },
-    useStore: () => useContext(StoreContext)
+    useStore: () => useContext(StoreContext),
   };
 }
 ```
@@ -501,6 +520,7 @@ export function useForm(config) {
 ## Browser Support
 
 Works in all modern browsers supporting:
+
 - ES6 modules
 - Proxy
 - Symbol
@@ -517,6 +537,7 @@ MIT
 ## Acknowledgments
 
 Inspired by:
+
 - [SolidJS](https://www.solidjs.com/) - Fine-grained reactivity
 - [React](https://react.dev/) - Component model
 - [Vue](https://vuejs.org/) - Reactivity system

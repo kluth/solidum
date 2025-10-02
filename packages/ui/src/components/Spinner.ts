@@ -10,13 +10,7 @@ export interface SpinnerProps {
 }
 
 export function Spinner(props: SpinnerProps) {
-  const {
-    size = 'md',
-    variant = 'default',
-    color = 'primary',
-    label,
-    className,
-  } = props;
+  const { size = 'md', variant = 'default', color = 'primary', label, className } = props;
 
   return createElement(
     'div',

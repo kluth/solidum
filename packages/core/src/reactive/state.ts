@@ -11,7 +11,7 @@ import { atom, Atom } from './atom.js';
  * Key: unique component instance ID
  * Value: array of state atoms for that component
  */
-const stateCache = new Map<string, Atom<any>[]>();
+const stateCache = new Map<string, unknown[]>();
 
 // Counter for generating unique component IDs
 let componentIdCounter = 0;
@@ -27,7 +27,7 @@ let currentStateIndex = 0;
  * Get or create a unique ID for a component instance
  * @internal
  */
-export function _getOrCreateComponentId(componentFn: Function, props: any): string {
+export function _getOrCreateComponentId(componentFn: Function, props: unknown): string {
   // Try to find a stable ID based on component function and props
   // For now, use a simple counter-based approach
   let instances = componentInstanceMap.get(componentFn);
@@ -40,7 +40,7 @@ export function _getOrCreateComponentId(componentFn: Function, props: any): stri
   // Use a hash of props as instance key (simplified)
   const propsKey = JSON.stringify(props || {});
   const hash = propsKey.split('').reduce((acc, char) => {
-    return ((acc << 5) - acc) + char.charCodeAt(0) | 0;
+    return ((acc << 5) - acc + char.charCodeAt(0)) | 0;
   }, 0);
 
   let id = instances.get(hash);
@@ -112,5 +112,5 @@ export function useState<T>(initialValue: T | (() => T)): Atom<T> {
     states.push(atom(value));
   }
 
-  return states[index];
+  return states[index] as Atom<T>;
 }

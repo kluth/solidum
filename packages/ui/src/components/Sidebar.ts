@@ -1,4 +1,4 @@
-import { createElement, useState } from '@solidum/core';
+import { createElement, useState, type ComponentFunction } from '@solidum/core';
 import { cn } from '@solidum/utils';
 import { Stack } from './Stack.js';
 
@@ -54,7 +54,10 @@ function SidebarGroup({ section, currentPath }: { section: SidebarSection; curre
         Stack,
         { spacing: 'xs', className: 'solidum-sidebar-group-items' },
         ...(section.items || []).map((item: SidebarItem) =>
-          createElement(SidebarLink, { item, currentPath })
+          createElement(
+            SidebarLink as unknown as ComponentFunction,
+            { item, currentPath } as unknown as Record<string, unknown>
+          )
         )
       )
   );
@@ -70,7 +73,10 @@ export function Sidebar(props: SidebarProps) {
       Stack,
       { spacing: 'lg' },
       ...sections.map((section: SidebarSection) =>
-        createElement(SidebarGroup, { section, currentPath })
+        createElement(
+          SidebarGroup as unknown as ComponentFunction,
+          { section, currentPath } as unknown as Record<string, unknown>
+        )
       )
     )
   );

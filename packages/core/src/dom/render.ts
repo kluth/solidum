@@ -4,31 +4,103 @@
  * Convert VNodes to real DOM elements
  */
 
+import { _getOrCreateComponentId, _setComponentId, _clearComponentId } from '../reactive/state.js';
+
 import type { VNode, ComponentFunction } from './vnode.js';
 import { Fragment } from './vnode.js';
 // Context functions moved to @solidum/context package
-import { _getOrCreateComponentId, _setComponentId, _clearComponentId } from '../reactive/state.js';
 
 /**
  * Check if an element name is an SVG element
  */
 function isSVGElement(elementName: string): boolean {
   const svgElements = [
-    'svg', 'rect', 'circle', 'ellipse', 'line', 'polyline', 'polygon', 'path',
-    'text', 'tspan', 'textPath', 'g', 'defs', 'clipPath', 'mask', 'pattern',
-    'linearGradient', 'radialGradient', 'stop', 'image', 'use', 'symbol',
-    'marker', 'foreignObject', 'switch', 'foreignObject', 'animate',
-    'animateTransform', 'set', 'animateMotion', 'mpath', 'script', 'style',
-    'title', 'desc', 'metadata', 'a', 'altGlyph', 'altGlyphDef', 'altGlyphItem',
-    'glyph', 'glyphRef', 'hkern', 'vkern', 'font', 'font-face', 'font-face-format',
-    'font-face-name', 'font-face-src', 'font-face-uri', 'missing-glyph',
-    'feBlend', 'feColorMatrix', 'feComponentTransfer', 'feComposite',
-    'feConvolveMatrix', 'feDiffuseLighting', 'feDisplacementMap', 'feDistantLight',
-    'feDropShadow', 'feFlood', 'feFuncA', 'feFuncB', 'feFuncG', 'feFuncR',
-    'feGaussianBlur', 'feImage', 'feMerge', 'feMergeNode', 'feMorphology',
-    'feOffset', 'fePointLight', 'feSpecularLighting', 'feSpotLight', 'feTile',
-    'feTurbulence', 'filter', 'hatch', 'hatchpath', 'mesh', 'meshgradient',
-    'meshpatch', 'meshrow', 'radialGradient', 'solidcolor', 'view'
+    'svg',
+    'rect',
+    'circle',
+    'ellipse',
+    'line',
+    'polyline',
+    'polygon',
+    'path',
+    'text',
+    'tspan',
+    'textPath',
+    'g',
+    'defs',
+    'clipPath',
+    'mask',
+    'pattern',
+    'linearGradient',
+    'radialGradient',
+    'stop',
+    'image',
+    'use',
+    'symbol',
+    'marker',
+    'foreignObject',
+    'switch',
+    'foreignObject',
+    'animate',
+    'animateTransform',
+    'set',
+    'animateMotion',
+    'mpath',
+    'script',
+    'style',
+    'title',
+    'desc',
+    'metadata',
+    'a',
+    'altGlyph',
+    'altGlyphDef',
+    'altGlyphItem',
+    'glyph',
+    'glyphRef',
+    'hkern',
+    'vkern',
+    'font',
+    'font-face',
+    'font-face-format',
+    'font-face-name',
+    'font-face-src',
+    'font-face-uri',
+    'missing-glyph',
+    'feBlend',
+    'feColorMatrix',
+    'feComponentTransfer',
+    'feComposite',
+    'feConvolveMatrix',
+    'feDiffuseLighting',
+    'feDisplacementMap',
+    'feDistantLight',
+    'feDropShadow',
+    'feFlood',
+    'feFuncA',
+    'feFuncB',
+    'feFuncG',
+    'feFuncR',
+    'feGaussianBlur',
+    'feImage',
+    'feMerge',
+    'feMergeNode',
+    'feMorphology',
+    'feOffset',
+    'fePointLight',
+    'feSpecularLighting',
+    'feSpotLight',
+    'feTile',
+    'feTurbulence',
+    'filter',
+    'hatch',
+    'hatchpath',
+    'mesh',
+    'meshgradient',
+    'meshpatch',
+    'meshrow',
+    'radialGradient',
+    'solidcolor',
+    'view',
   ];
   return svgElements.includes(elementName.toLowerCase());
 }
@@ -81,7 +153,12 @@ export function render(
       // Merge children into props for component access
       const propsWithChildren = {
         ...vnode.props,
-        children: vnode.children.length === 1 ? vnode.children[0] : vnode.children.length > 0 ? vnode.children : undefined,
+        children:
+          vnode.children.length === 1
+            ? vnode.children[0]
+            : vnode.children.length > 0
+              ? vnode.children
+              : undefined,
       };
 
       const componentVNode = (vnode.type as ComponentFunction)(propsWithChildren);
@@ -98,7 +175,7 @@ export function render(
 
   // Handle regular elements
   const elementName = vnode.type as string;
-  const element = isSVGElement(elementName) 
+  const element = isSVGElement(elementName)
     ? document.createElementNS('http://www.w3.org/2000/svg', elementName)
     : document.createElement(elementName);
 
@@ -116,7 +193,7 @@ export function render(
 /**
  * Set properties and attributes on a DOM element
  */
-function setProps(element: Element, props: Record<string, any>): void {
+function setProps(element: Element, props: Record<string, unknown>): void {
   for (const [key, value] of Object.entries(props)) {
     if (value == null) continue; // Skip null/undefined
 
@@ -126,10 +203,10 @@ function setProps(element: Element, props: Record<string, any>): void {
       continue;
     } else if (key === 'className') {
       // className -> class
-      element.setAttribute('class', value);
+      element.setAttribute('class', String(value));
     } else if (key === 'style' && typeof value === 'object') {
       // Style object
-      setStyle(element as HTMLElement, value);
+      setStyle(element as HTMLElement, value as Record<string, string>);
     } else if (key.startsWith('on') && typeof value === 'function') {
       // Event handlers (onClick -> click)
       const eventName = key.substring(2).toLowerCase();

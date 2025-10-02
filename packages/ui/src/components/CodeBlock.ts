@@ -43,12 +43,13 @@ export function CodeBlock(props: CodeBlockProps) {
     // Code
     createElement(
       'pre',
-      { className: cn('solidum-code-block-pre', showLineNumbers && 'solidum-code-block-pre--line-numbers') },
-      createElement(
-        'code',
-        { className: `language-${language}` },
-        code
-      )
+      {
+        className: cn(
+          'solidum-code-block-pre',
+          showLineNumbers && 'solidum-code-block-pre--line-numbers'
+        ),
+      },
+      createElement('code', { className: `language-${language}` }, code)
     )
   );
 }

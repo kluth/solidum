@@ -5,10 +5,11 @@
  */
 
 import { describe, test, expect, runTests } from '@solidum/testing';
+
 import { atom } from './atom.js';
+import { batch } from './batch.js';
 import { computed } from './computed.js';
 import { effect } from './effect.js';
-import { batch } from './batch.js';
 
 describe('batch()', () => {
   test('should batch multiple atom updates', () => {
@@ -85,7 +86,7 @@ describe('batch()', () => {
     const count = atom(0);
     const values: number[] = [];
 
-    count.subscribe((value) => {
+    count.subscribe(value => {
       values.push(value);
     });
 
@@ -151,7 +152,7 @@ describe('batch()', () => {
         count(1);
         throw new Error('Test error');
       });
-    } catch (error) {
+    } catch {
       // Error should be thrown
     }
 
@@ -177,7 +178,7 @@ describe('batch()', () => {
   test('should not trigger effects during batch', () => {
     const count = atom(0);
     let runCount = 0;
-    let valuesDuringBatch: number[] = [];
+    const valuesDuringBatch: number[] = [];
 
     effect(() => {
       const val = count();

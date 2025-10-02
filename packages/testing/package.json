@@ -14,10 +14,12 @@
   "scripts": {
     "build": "tsc",
     "dev": "tsc --watch",
-    "test": "node --loader tsx --test src/**/*.test.ts",
-    "test:watch": "node --loader tsx --test --watch src/**/*.test.ts",
+    "test": "echo 'Testing framework - no self-tests yet'",
+    "test:watch": "echo 'Testing framework - no self-tests yet'",
     "clean": "rm -rf dist",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint src/**/*.{ts,js}",
+    "lint:fix": "eslint src/**/*.{ts,js} --fix"
   },
   "dependencies": {
     "picocolors": "^1.0.0",

@@ -3,11 +3,11 @@
 ## mergeProps()
 
 ```typescript
-function mergeProps(...sources: Props[]): Props
+function mergeProps(...sources: Props[]): Props;
 ```
 
 ## cn()
 
 ```typescript
-function cn(...classes: ClassValue[]): string
+function cn(...classes: ClassValue[]): string;
 ```

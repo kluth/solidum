@@ -4,13 +4,25 @@
  * Tests the DOM rendering and component system using lightweight DOM testing utilities
  */
 
-import { describe, test, expect, runTests, createDOMEnvironment, DOMEvents, DOMAssertions, UserInteraction, DOMWait } from '@solidum/testing';
+import {
+  describe,
+  test,
+  expect,
+  runTests,
+  createDOMEnvironment,
+  DOMEvents,
+  DOMAssertions,
+  UserInteraction,
+  DOMWait,
+} from '@solidum/testing';
+
 import { atom } from '../reactive/atom.js';
 import { computed } from '../reactive/computed.js';
 import { effect } from '../reactive/effect.js';
-import { createElement } from './vnode.js';
-import { render } from './render.js';
+
 import { mount, onMount, onCleanup } from './mount.js';
+import { render } from './render.js';
+import { createElement } from './vnode.js';
 
 describe('DOM Rendering', () => {
   test('should render simple element', () => {
@@ -75,11 +87,7 @@ describe('DOM Rendering', () => {
     const env = createDOMEnvironment();
 
     try {
-      const vnode = createElement(
-        'div',
-        { style: { color: 'red', fontSize: '16px' } },
-        'Styled'
-      );
+      const vnode = createElement('div', { style: { color: 'red', fontSize: '16px' } }, 'Styled');
       const element = render(vnode, env.document) as HTMLElement;
 
       expect(element.style.color).toBe('red');
@@ -151,7 +159,7 @@ describe('Component System', () => {
     const env = createDOMEnvironment();
 
     try {
-      function Container({ children }: { children?: any }) {
+      function Container({ children }: { children?: unknown }) {
         return createElement('div', { className: 'container' }, children);
       }
 
@@ -182,14 +190,12 @@ describe('Reactive DOM Updates', () => {
       env.document.body.appendChild(container);
 
       let renderCount = 0;
-      let dispose: (() => void) | undefined;
-
       function Counter() {
         renderCount++;
         return createElement('div', null, `Count: ${count()}`);
       }
 
-      dispose = mount(container, () => createElement(Counter, null), env.document);
+      const dispose = mount(container, () => createElement(Counter, null), env.document);
 
       expect(container.textContent).toBe('Count: 0');
       expect(renderCount).toBe(1);
@@ -264,7 +270,7 @@ describe('Reactive DOM Updates', () => {
             type: 'text',
             'data-testid': 'input',
             value: text(),
-            onInput: (e: any) => text(e.target.value),
+            onInput: (e: Event) => text((e.target as HTMLInputElement).value),
           }),
           createElement('div', { 'data-testid': 'display' }, text())
         );

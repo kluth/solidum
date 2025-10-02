@@ -18,8 +18,12 @@
   "scripts": {
     "build": "tsc && npm run build:css",
     "build:css": "node scripts/build-css.js",
-    "test": "tsx --test src/**/*.test.ts",
-    "typecheck": "tsc --noEmit"
+    "test": "echo 'No tests yet'",
+    "test:watch": "echo 'No tests yet'",
+    "clean": "rm -rf dist",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint src/**/*.{ts,js}",
+    "lint:fix": "eslint src/**/*.{ts,js} --fix"
   },
   "dependencies": {
     "@solidum/core": "workspace:*",

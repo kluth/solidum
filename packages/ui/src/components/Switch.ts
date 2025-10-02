@@ -41,14 +41,10 @@ export function Switch(props: SwitchProps) {
         type: 'button',
         role: 'switch',
         'aria-checked': isChecked(),
-        className: cn(
-          'solidum-switch',
-          `solidum-switch--${size}`,
-          {
-            'solidum-switch--checked': isChecked(),
-            'solidum-switch--disabled': disabled,
-          }
-        ),
+        className: cn('solidum-switch', `solidum-switch--${size}`, {
+          'solidum-switch--checked': isChecked(),
+          'solidum-switch--disabled': disabled,
+        }),
         disabled,
         onClick: handleToggle,
         ...rest,

@@ -52,8 +52,9 @@ export function Avatar(props: AvatarProps) {
           className: 'solidum-avatar-image',
         })
       : createElement('span', { className: 'solidum-avatar-fallback' }, initials),
-    status && createElement('span', {
-      className: cn('solidum-avatar-status', `solidum-avatar-status--${status}`),
-    })
+    status &&
+      createElement('span', {
+        className: cn('solidum-avatar-status', `solidum-avatar-status--${status}`),
+      })
   );
 }

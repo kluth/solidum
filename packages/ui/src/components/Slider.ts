@@ -69,18 +69,20 @@ export function Slider(props: SliderProps) {
         },
         ...rest,
       }),
-      showTicks && createElement(
-        'div',
-        { className: 'solidum-slider-ticks' },
-        ...Array.from({ length: Math.floor((max - min) / step) + 1 }, () =>
-          createElement('div', { className: 'solidum-slider-tick' })
+      showTicks &&
+        createElement(
+          'div',
+          { className: 'solidum-slider-ticks' },
+          ...Array.from({ length: Math.floor((max - min) / step) + 1 }, () =>
+            createElement('div', { className: 'solidum-slider-tick' })
+          )
         )
-      )
     ),
-    showValue && createElement(
-      'div',
-      { className: 'solidum-slider-value' },
-      currentValue().toFixed(step < 1 ? 1 : 0)
-    )
+    showValue &&
+      createElement(
+        'div',
+        { className: 'solidum-slider-value' },
+        currentValue().toFixed(step < 1 ? 1 : 0)
+      )
   );
 }

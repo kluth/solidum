@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "dev": "node build.js && python -m http.server 8080 --directory dist",
-        "build": "pnpm --filter @solidum/core build && pnpm --filter @solidum/utils build && pnpm --filter @solidum/ui build && pnpm --filter @solidum/router build && pnpm --filter @solidum/store build && pnpm --filter @solidum/context build && pnpm --filter @solidum/ssr build && tsc && node build.js"
+    "build": "pnpm --filter @solidum/core build && pnpm --filter @solidum/utils build && pnpm --filter @solidum/ui build && pnpm --filter @solidum/router build && pnpm --filter @solidum/store build && pnpm --filter @solidum/context build && pnpm --filter @solidum/ssr build && tsc && node build.js"
   },
   "dependencies": {
     "@solidum/core": "workspace:*",

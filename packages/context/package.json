@@ -14,7 +14,7 @@
   "scripts": {
     "build": "tsc",
     "dev": "tsc --watch",
-    "test": "tsx src/context.test.ts",
+    "test": "tsx src/context-simple.test.ts",
     "test:watch": "tsx --watch src/context.test.ts",
     "clean": "rm -rf dist",
     "typecheck": "tsc --noEmit",

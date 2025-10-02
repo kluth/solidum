@@ -86,7 +86,7 @@ export class DOMQueries {
    */
   getByText(text: string | RegExp): Element {
     const elements = Array.from(this.container.querySelectorAll('*'));
-    const element = elements.find((el) => {
+    const element = elements.find(el => {
       const textContent = el.textContent || '';
       if (typeof text === 'string') {
         return textContent.includes(text);
@@ -106,7 +106,7 @@ export class DOMQueries {
   queryByText(text: string | RegExp): Element | null {
     const elements = Array.from(this.container.querySelectorAll('*'));
     return (
-      elements.find((el) => {
+      elements.find(el => {
         const textContent = el.textContent || '';
         if (typeof text === 'string') {
           return textContent.includes(text);
@@ -167,7 +167,7 @@ export class DOMQueries {
    * Get all elements by text content
    */
   getAllByText(text: string | RegExp): Element[] {
-    const elements = Array.from(this.container.querySelectorAll('*')).filter((el) => {
+    const elements = Array.from(this.container.querySelectorAll('*')).filter(el => {
       const textContent = el.textContent || '';
       if (typeof text === 'string') {
         return textContent.includes(text);
@@ -257,7 +257,11 @@ export class DOMEvents {
   /**
    * Fire a keyboard event
    */
-  static keyboard(element: Element, key: string, eventType: 'keydown' | 'keyup' | 'keypress' = 'keydown'): void {
+  static keyboard(
+    element: Element,
+    key: string,
+    eventType: 'keydown' | 'keyup' | 'keypress' = 'keydown'
+  ): void {
     const event = new KeyboardEvent(eventType, {
       key,
       bubbles: true,
@@ -307,7 +311,7 @@ export class DOMWait {
         throw new Error(`Timeout waiting for condition after ${timeout}ms`);
       }
 
-      await new Promise((resolve) => setTimeout(resolve, interval));
+      await new Promise(resolve => setTimeout(resolve, interval));
     }
   }
 
@@ -390,7 +394,7 @@ export class DOMWait {
    * Wait for a specific amount of time
    */
   static async wait(ms: number): Promise<void> {
-    return new Promise((resolve) => setTimeout(resolve, ms));
+    return new Promise(resolve => setTimeout(resolve, ms));
   }
 }
 
@@ -413,11 +417,7 @@ export class DOMAssertions {
 
     // Check computed styles
     const style = window.getComputedStyle(element);
-    if (
-      style.display === 'none' ||
-      style.visibility === 'hidden' ||
-      style.opacity === '0'
-    ) {
+    if (style.display === 'none' || style.visibility === 'hidden' || style.opacity === '0') {
       return false;
     }
 
@@ -569,7 +569,11 @@ export class UserInteraction {
   /**
    * Simulate user typing into an input
    */
-  static async type(element: Element, text: string, options: { delay?: number } = {}): Promise<void> {
+  static async type(
+    element: Element,
+    text: string,
+    options: { delay?: number } = {}
+  ): Promise<void> {
     const { delay = 0 } = options;
 
     if (!(element instanceof HTMLInputElement || element instanceof HTMLTextAreaElement)) {

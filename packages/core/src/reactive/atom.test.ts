@@ -5,6 +5,7 @@
  */
 
 import { describe, test, expect, runTests } from '@solidum/testing';
+
 import { atom } from './atom.js';
 
 describe('atom()', () => {
@@ -24,7 +25,7 @@ describe('atom()', () => {
     let notified = false;
     let receivedValue = 0;
 
-    count.subscribe((value) => {
+    count.subscribe(value => {
       notified = true;
       receivedValue = value;
     });
@@ -49,7 +50,7 @@ describe('atom()', () => {
 
   test('should support functional updates', () => {
     const count = atom(0);
-    count((prev) => prev + 1);
+    count(prev => prev + 1);
     expect(count()).toBe(1);
   });
 
@@ -73,8 +74,8 @@ describe('atom()', () => {
     const count = atom(0);
     const values: number[] = [];
 
-    count.subscribe((v) => values.push(v * 1));
-    count.subscribe((v) => values.push(v * 2));
+    count.subscribe(v => values.push(v * 1));
+    count.subscribe(v => values.push(v * 2));
 
     count(5);
 

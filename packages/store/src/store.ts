@@ -38,9 +38,9 @@ export interface EffectContext<State> {
 /**
  * Middleware function type
  */
-export type Middleware<State> = (
-  store: { getState: () => State }
-) => (
+export type Middleware<State> = (store: {
+  getState: () => State;
+}) => (
   next: (action: string, payload?: unknown) => void
 ) => (action: string, payload?: unknown) => void;
 
@@ -56,10 +56,14 @@ export interface Store<State, Actions, Getters, Effects> {
   ) => void;
   batch: (fn: () => void) => void;
   getters: {
-    [K in keyof Getters]: Getters[K] extends (state: State) => infer R ? (state: State) => R : never;
+    [K in keyof Getters]: Getters[K] extends (state: State) => infer R
+      ? (state: State) => R
+      : never;
   };
   effects: {
-    [K in keyof Effects]: Effects[K] extends (ctx: EffectContext<State>) => infer R ? () => R : never;
+    [K in keyof Effects]: Effects[K] extends (ctx: EffectContext<State>) => infer R
+      ? () => R
+      : never;
   };
 }
 
@@ -126,7 +130,8 @@ export function createStore<State, Actions = {}, Getters = {}, Effects = {}>(
     const currentState = getState();
 
     // Call action and update state
-    const newState = payload === undefined ? actionFn(currentState) : actionFn(currentState, payload);
+    const newState =
+      payload === undefined ? actionFn(currentState) : actionFn(currentState, payload);
 
     stateAtom(newState);
   }
@@ -156,7 +161,9 @@ export function createStore<State, Actions = {}, Getters = {}, Effects = {}>(
    * Build effects object
    */
   const effects = {} as {
-    [K in keyof Effects]: Effects[K] extends (ctx: EffectContext<State>) => infer R ? () => R : never;
+    [K in keyof Effects]: Effects[K] extends (ctx: EffectContext<State>) => infer R
+      ? () => R
+      : never;
   };
   if (config.effects) {
     const effectsConfig = config.effects as Record<string, Function>;
@@ -164,7 +171,7 @@ export function createStore<State, Actions = {}, Getters = {}, Effects = {}>(
       (effects as Record<string, Function>)[key] = (...args: unknown[]) => {
         const ctx: EffectContext<State> = {
           dispatch,
-          getState
+          getState,
         };
         return effectsConfig[key](ctx, ...args);
       };
@@ -180,8 +187,10 @@ export function createStore<State, Actions = {}, Getters = {}, Effects = {}>(
     ) => void,
     batch,
     getters: (config.getters || {}) as {
-      [K in keyof Getters]: Getters[K] extends (state: State) => infer R ? (state: State) => R : never;
+      [K in keyof Getters]: Getters[K] extends (state: State) => infer R
+        ? (state: State) => R
+        : never;
     },
-    effects
+    effects,
   };
 }

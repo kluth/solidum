@@ -20,7 +20,7 @@ describe('Store - Real World Scenarios', () => {
 
       getters: {
         filteredTodos(state) {
-          return state.todos.filter((todo) => {
+          return state.todos.filter(todo => {
             if (state.filter === 'active') return !todo.completed;
             if (state.filter === 'completed') return todo.completed;
             return true;
@@ -29,8 +29,8 @@ describe('Store - Real World Scenarios', () => {
         stats(state) {
           return {
             total: state.todos.length,
-            active: state.todos.filter((t) => !t.completed).length,
-            completed: state.todos.filter((t) => t.completed).length,
+            active: state.todos.filter(t => !t.completed).length,
+            completed: state.todos.filter(t => t.completed).length,
           };
         },
       },
@@ -46,7 +46,7 @@ describe('Store - Real World Scenarios', () => {
         toggleTodo(state, id: number) {
           return {
             ...state,
-            todos: state.todos.map((todo) =>
+            todos: state.todos.map(todo =>
               todo.id === id ? { ...todo, completed: !todo.completed } : todo
             ),
           };
@@ -64,7 +64,7 @@ describe('Store - Real World Scenarios', () => {
 
     expect(todoStore.getState().todos.length).toBe(3);
 
-    const stats = todoStore.select((state) => todoStore.getters.stats(state));
+    const stats = todoStore.select(state => todoStore.getters.stats(state));
     expect(stats().total).toBe(3);
     expect(stats().active).toBe(3);
     expect(stats().completed).toBe(0);
@@ -76,7 +76,7 @@ describe('Store - Real World Scenarios', () => {
 
     // Filter todos
     todoStore.dispatch('setFilter', 'active');
-    const filtered = todoStore.select((state) => todoStore.getters.filteredTodos(state));
+    const filtered = todoStore.select(state => todoStore.getters.filteredTodos(state));
     expect(filtered().length).toBe(2);
 
     todoStore.dispatch('setFilter', 'completed');
@@ -123,7 +123,7 @@ describe('Store - Real World Scenarios', () => {
           dispatch('setLoading', true);
 
           // Simulate API call
-          await new Promise((resolve) => setTimeout(resolve, 10));
+          await new Promise(resolve => setTimeout(resolve, 10));
 
           if (credentials.password === 'correct') {
             const user: User = { id: 1, email: credentials.email, name: 'Test User' };
@@ -187,11 +187,11 @@ describe('Store - Real World Scenarios', () => {
 
       actions: {
         addItem(state, item: CartItem) {
-          const existing = state.items.find((i) => i.id === item.id);
+          const existing = state.items.find(i => i.id === item.id);
           if (existing) {
             return {
               ...state,
-              items: state.items.map((i) =>
+              items: state.items.map(i =>
                 i.id === item.id ? { ...i, quantity: i.quantity + item.quantity } : i
               ),
             };
@@ -199,12 +199,12 @@ describe('Store - Real World Scenarios', () => {
           return { ...state, items: [...state.items, item] };
         },
         removeItem(state, id: number) {
-          return { ...state, items: state.items.filter((item) => item.id !== id) };
+          return { ...state, items: state.items.filter(item => item.id !== id) };
         },
         updateQuantity(state, payload: { id: number; quantity: number }) {
           return {
             ...state,
-            items: state.items.map((item) =>
+            items: state.items.map(item =>
               item.id === payload.id ? { ...item, quantity: payload.quantity } : item
             ),
           };
@@ -261,14 +261,13 @@ describe('Store - Real World Scenarios', () => {
 
       getters: {
         unreadCount(state) {
-          return state.notifications.filter((n) => !n.read).length;
+          return state.notifications.filter(n => !n.read).length;
         },
         unreadNotifications(state) {
-          return state.notifications.filter((n) => !n.read);
+          return state.notifications.filter(n => !n.read);
         },
         byType(state) {
-          return (type: Notification['type']) =>
-            state.notifications.filter((n) => n.type === type);
+          return (type: Notification['type']) => state.notifications.filter(n => n.type === type);
         },
       },
 
@@ -291,21 +290,19 @@ describe('Store - Real World Scenarios', () => {
         markAsRead(state, id: number) {
           return {
             ...state,
-            notifications: state.notifications.map((n) =>
-              n.id === id ? { ...n, read: true } : n
-            ),
+            notifications: state.notifications.map(n => (n.id === id ? { ...n, read: true } : n)),
           };
         },
         markAllAsRead(state) {
           return {
             ...state,
-            notifications: state.notifications.map((n) => ({ ...n, read: true })),
+            notifications: state.notifications.map(n => ({ ...n, read: true })),
           };
         },
         remove(state, id: number) {
           return {
             ...state,
-            notifications: state.notifications.filter((n) => n.id !== id),
+            notifications: state.notifications.filter(n => n.id !== id),
           };
         },
         clear(state) {
@@ -346,7 +343,7 @@ describe('Store - Real World Scenarios', () => {
       },
     });
 
-    const count = counterStore.select((state) => state.count);
+    const count = counterStore.select(state => state.count);
     const values: number[] = [];
 
     // Effect reacts to store changes
@@ -382,16 +379,16 @@ describe('Store - Real World Scenarios', () => {
           if (state.selectedTags.length === 0) {
             return state.tasks;
           }
-          return state.tasks.filter((task) =>
-            task.tags.some((tag) => state.selectedTags.includes(tag))
+          return state.tasks.filter(task =>
+            task.tags.some(tag => state.selectedTags.includes(tag))
           );
         },
         byPriority(state) {
           return (priority: Task['priority']) =>
-            state.tasks.filter((task) => task.priority === priority);
+            state.tasks.filter(task => task.priority === priority);
         },
         completedCount(state) {
-          return state.tasks.filter((t) => t.completed).length;
+          return state.tasks.filter(t => t.completed).length;
         },
       },
 
@@ -406,7 +403,7 @@ describe('Store - Real World Scenarios', () => {
         toggleTask(state, id: number) {
           return {
             ...state,
-            tasks: state.tasks.map((task) =>
+            tasks: state.tasks.map(task =>
               task.id === id ? { ...task, completed: !task.completed } : task
             ),
           };
@@ -414,7 +411,7 @@ describe('Store - Real World Scenarios', () => {
         setPriority(state, payload: { id: number; priority: Task['priority'] }) {
           return {
             ...state,
-            tasks: state.tasks.map((task) =>
+            tasks: state.tasks.map(task =>
               task.id === payload.id ? { ...task, priority: payload.priority } : task
             ),
           };
@@ -422,7 +419,7 @@ describe('Store - Real World Scenarios', () => {
         addTag(state, payload: { id: number; tag: string }) {
           return {
             ...state,
-            tasks: state.tasks.map((task) =>
+            tasks: state.tasks.map(task =>
               task.id === payload.id && !task.tags.includes(payload.tag)
                 ? { ...task, tags: [...task.tags, payload.tag] }
                 : task
@@ -431,7 +428,7 @@ describe('Store - Real World Scenarios', () => {
         },
         filterByTag(state, tag: string) {
           const selected = state.selectedTags.includes(tag)
-            ? state.selectedTags.filter((t) => t !== tag)
+            ? state.selectedTags.filter(t => t !== tag)
             : [...state.selectedTags, tag];
           return { ...state, selectedTags: selected };
         },

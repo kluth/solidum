@@ -10,13 +10,7 @@ export interface ContainerProps {
 }
 
 export function Container(props: ContainerProps) {
-  const {
-    maxWidth = 'lg',
-    padding = true,
-    children,
-    className,
-    ...rest
-  } = props;
+  const { maxWidth = 'lg', padding = true, children, className, ...rest } = props;
 
   const classes = cn(
     'solidum-container',

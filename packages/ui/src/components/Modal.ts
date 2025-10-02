@@ -54,21 +54,23 @@ export function Modal(props: ModalProps) {
         ...rest,
       },
       // Header
-      (title || showClose) && createElement(
-        'div',
-        { className: 'solidum-modal-header' },
-        title && createElement('h3', { className: 'solidum-modal-title' }, title),
-        showClose && createElement(
-          Button,
-          {
-            variant: 'ghost',
-            size: 'sm',
-            className: 'solidum-modal-close',
-            onClick: onClose,
-          },
-          '✕'
-        )
-      ),
+      (title || showClose) &&
+        createElement(
+          'div',
+          { className: 'solidum-modal-header' },
+          title && createElement('h3', { className: 'solidum-modal-title' }, title),
+          showClose &&
+            createElement(
+              Button,
+              {
+                variant: 'ghost',
+                size: 'sm',
+                className: 'solidum-modal-close',
+                onClick: onClose,
+              },
+              '✕'
+            )
+        ),
       // Body
       createElement('div', { className: 'solidum-modal-body' }, children)
     )

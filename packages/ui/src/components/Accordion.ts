@@ -43,12 +43,7 @@ function AccordionItemComponent({ item, isOpen, toggle, animated }: any) {
 }
 
 export function Accordion(props: AccordionProps) {
-  const {
-    items,
-    allowMultiple = false,
-    animated = true,
-    className,
-  } = props;
+  const { items, allowMultiple = false, animated = true, className } = props;
 
   const openItems = useState<Set<string>>(
     new Set(items.filter(item => item.defaultOpen).map(item => item.id))

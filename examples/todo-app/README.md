@@ -5,40 +5,49 @@ A comprehensive example application showcasing all features of the Solidum frame
 ## Features Demonstrated
 
 ### 1. **Reactive Primitives**
+
 - `atom()` - For local component state (input value, theme)
 - `computed()` - For derived values
 - `effect()` - For side effects (auto-save to localStorage)
 - `batch()` - For batching multiple updates
 
 ### 2. **Store Pattern**
+
 Centralized state management with:
+
 - **State**: Todo list, filter, next ID
 - **Getters**: Filtered todos, statistics
 - **Actions**: Add, toggle, delete todos, change filter
 - **Effects**: Load/save from localStorage
 
 ### 3. **Context API**
+
 Theme management using dependency injection:
+
 - ThemeContext provides theme state to all components
 - useContext() accesses theme in child components
 - No prop drilling required
 
 ### 4. **Component Utilities**
+
 - `cn()` - Conditional class names
 - `mergeProps()` - Intelligent props merging (demonstrated in components)
 
 ### 5. **Component System**
+
 - `createElement()` - JSX alternative
 - `Fragment` - Group elements without wrapper
 - Component composition and reusability
 
 ### 6. **Lifecycle Hooks**
+
 - `onMount()` - Load data when component mounts
 - `onCleanup()` - Cleanup on unmount (not shown but available)
 
 ## Running the Example
 
 ### Option 1: HTTP Server
+
 ```bash
 # Install a simple HTTP server (if you don't have one)
 npm install -g http-server
@@ -53,11 +62,13 @@ http-server -p 8080
 ```
 
 ### Option 2: VS Code Live Server
+
 1. Install the "Live Server" extension in VS Code
 2. Right-click on `index.html`
 3. Select "Open with Live Server"
 
 ### Option 3: Python HTTP Server
+
 ```bash
 # Navigate to the example directory
 cd examples/todo-app
@@ -88,13 +99,13 @@ const todoStore = createStore({
   actions: {
     addTodo(state, text) {
       return { ...state, todos: [...state.todos, { text }] };
-    }
+    },
   },
   getters: {
     activeTodos(state) {
       return state.todos.filter(t => !t.completed);
-    }
-  }
+    },
+  },
 });
 
 // Dispatch actions
@@ -114,18 +125,14 @@ const ThemeContext = createContext();
 // Provide value
 function ThemeProvider({ children }) {
   const theme = atom({ mode: 'light' });
-  return createElement(
-    ThemeContext.Provider,
-    { value: { theme } },
-    children
-  );
+  return createElement(ThemeContext.Provider, { value: { theme } }, children);
 }
 
 // Consume value
 function Button() {
   const { theme } = useContext(ThemeContext);
   return createElement('button', {
-    style: { color: theme().mode === 'dark' ? 'white' : 'black' }
+    style: { color: theme().mode === 'dark' ? 'white' : 'black' },
   });
 }
 ```
@@ -134,11 +141,7 @@ function Button() {
 
 ```javascript
 // Conditional class names
-const classes = cn(
-  'btn',
-  'btn-primary',
-  { active: isActive, disabled: isDisabled }
-);
+const classes = cn('btn', 'btn-primary', { active: isActive, disabled: isDisabled });
 
 // Merge props
 const merged = mergeProps(
@@ -178,6 +181,7 @@ Ideas for further exploration:
 ## Browser Support
 
 Works in all modern browsers that support:
+
 - ES6 modules
 - Proxy
 - Symbol

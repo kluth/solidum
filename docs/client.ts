@@ -10,7 +10,7 @@ console.log('🚀 Solidum client.js loaded!', 'readyState:', document.readyState
 const pageComponents = {
   HomePage,
   ReactivityPage,
-  ComponentsPage
+  ComponentsPage,
 };
 
 // Initialize router
@@ -18,8 +18,8 @@ const router = createRouter({
   routes: {
     '/': 'HomePage',
     '/reactivity': 'ReactivityPage',
-    '/components': 'ComponentsPage'
-  }
+    '/components': 'ComponentsPage',
+  },
 });
 
 // Mount the app when DOM is ready
@@ -35,7 +35,7 @@ if (document.readyState === 'loading') {
 }
 
 // Listen for route changes
-window.addEventListener('routechange', (event) => {
+window.addEventListener('routechange', event => {
   const customEvent = event as CustomEvent<{ path: string; component: string }>;
   console.log('🔄 Route changed to:', customEvent.detail.path);
   mountApp();
@@ -52,7 +52,7 @@ function mountApp() {
       const currentPage = router.getCurrentPage();
       const PageComponent = pageComponents[currentPage as keyof typeof pageComponents] || HomePage;
       console.log('📄 Mounting page:', currentPage);
-      
+
       mount(root, PageComponent);
       console.log('✨ Mount completed!');
     } catch (e) {

@@ -7,26 +7,27 @@
  */
 
 import { describe, test, expect, runTests } from '@solidum/testing';
-import { createElement } from './vnode.js';
+
 import { render } from './render.js';
+import { createElement } from './vnode.js';
 
 // Mock DOM for testing (simplified)
 function createMockDocument() {
-  const elements: any[] = [];
+  const elements: unknown[] = [];
 
   return {
     createElement: (tag: string) => {
       const el = {
         tagName: tag.toUpperCase(),
         attributes: {} as Record<string, string>,
-        children: [] as any[],
+        children: [] as unknown[],
         textContent: '',
         style: {} as Record<string, string>,
         eventListeners: {} as Record<string, Function>,
         setAttribute: function (name: string, value: string) {
           this.attributes[name] = value;
         },
-        appendChild: function (child: any) {
+        appendChild: function (child: unknown) {
           this.children.push(child);
         },
         addEventListener: function (event: string, handler: Function) {
@@ -51,7 +52,7 @@ describe('render()', () => {
   test('should render simple element', () => {
     const doc = createMockDocument();
     const vnode = createElement('div', null);
-    const dom = render(vnode, doc as any);
+    const dom = render(vnode, doc as unknown as Document);
 
     expect(dom.tagName).toBe('DIV');
   });
@@ -59,7 +60,7 @@ describe('render()', () => {
   test('should render element with attributes', () => {
     const doc = createMockDocument();
     const vnode = createElement('div', { class: 'container', id: 'app' });
-    const dom = render(vnode, doc as any) as any;
+    const dom = render(vnode, doc as unknown as Document) as unknown as HTMLElement;
 
     expect(dom.attributes.class).toBe('container');
     expect(dom.attributes.id).toBe('app');
@@ -68,7 +69,7 @@ describe('render()', () => {
   test('should render text node', () => {
     const doc = createMockDocument();
     const vnode = createElement('span', null, 'Hello World');
-    const dom = render(vnode, doc as any) as any;
+    const dom = render(vnode, doc as unknown as Document) as unknown as HTMLElement;
 
     expect(dom.tagName).toBe('SPAN');
     expect(dom.children.length).toBe(1);
@@ -83,7 +84,7 @@ describe('render()', () => {
       createElement('span', null, 'Child 1'),
       createElement('span', null, 'Child 2')
     );
-    const dom = render(vnode, doc as any) as any;
+    const dom = render(vnode, doc as unknown as Document) as unknown as HTMLElement;
 
     expect(dom.tagName).toBe('DIV');
     expect(dom.children.length).toBe(2);
@@ -96,7 +97,7 @@ describe('render()', () => {
     const vnode = createElement('div', {
       style: { color: 'red', fontSize: '16px' },
     });
-    const dom = render(vnode, doc as any) as any;
+    const dom = render(vnode, doc as unknown as Document) as unknown as HTMLElement;
 
     expect(dom.style.color).toBe('red');
     expect(dom.style.fontSize).toBe('16px');
@@ -104,13 +105,12 @@ describe('render()', () => {
 
   test('should bind event handlers', () => {
     const doc = createMockDocument();
-    let clicked = false;
     const onClick = () => {
-      clicked = true;
+      // Event handler
     };
 
     const vnode = createElement('button', { onClick });
-    const dom = render(vnode, doc as any) as any;
+    const dom = render(vnode, doc as unknown as Document) as unknown as HTMLElement;
 
     expect(dom.eventListeners.click).toBe(onClick);
   });
@@ -118,7 +118,7 @@ describe('render()', () => {
   test('should handle className prop', () => {
     const doc = createMockDocument();
     const vnode = createElement('div', { className: 'test-class' });
-    const dom = render(vnode, doc as any) as any;
+    const dom = render(vnode, doc as unknown as Document) as unknown as HTMLElement;
 
     expect(dom.attributes.class).toBe('test-class');
   });
@@ -126,7 +126,7 @@ describe('render()', () => {
   test('should handle boolean attributes', () => {
     const doc = createMockDocument();
     const vnode = createElement('input', { disabled: true, checked: false });
-    const dom = render(vnode, doc as any) as any;
+    const dom = render(vnode, doc as unknown as Document) as unknown as HTMLElement;
 
     expect(dom.attributes.disabled).toBe('true');
   });
@@ -138,7 +138,7 @@ describe('render()', () => {
       title: null,
       'data-value': undefined,
     });
-    const dom = render(vnode, doc as any) as any;
+    const dom = render(vnode, doc as unknown as Document) as unknown as HTMLElement;
 
     expect(dom.attributes.id).toBe('test');
     expect(dom.attributes.title).toBe(undefined);
@@ -154,7 +154,7 @@ describe('render()', () => {
       createElement('span', null, 'In span'),
       'Text after'
     );
-    const dom = render(vnode, doc as any) as any;
+    const dom = render(vnode, doc as unknown as Document) as unknown as HTMLElement;
 
     expect(dom.children.length).toBe(3);
     expect(dom.children[0].textContent).toBe('Text before');

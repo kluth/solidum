@@ -5,17 +5,19 @@
  */
 
 import { describe, test, expect, runTests } from '@solidum/testing';
+
 import { atom } from '../reactive/atom.js';
-import { createElement } from './vnode.js';
+
 import { mount, onMount, onCleanup } from './mount.js';
+import { createElement } from './vnode.js';
 
 // Simple mock container
 function createContainer() {
-  const children: any[] = [];
+  const children: unknown[] = [];
   return {
     children,
-    appendChild: (child: any) => children.push(child),
-    removeChild: (child: any) => {
+    appendChild: (child: unknown) => children.push(child),
+    removeChild: (child: unknown) => {
       const index = children.indexOf(child);
       if (index > -1) children.splice(index, 1);
     },
@@ -28,21 +30,21 @@ function createMockDoc() {
   return {
     createElement: (tag: string) => ({
       tagName: tag.toUpperCase(),
-      children: [] as any[],
-      attributes: {} as Record<string, any>,
-      style: {} as Record<string, any>,
-      appendChild: function (child: any) {
+      children: [] as unknown[],
+      attributes: {} as Record<string, unknown>,
+      style: {} as Record<string, unknown>,
+      appendChild: function (child: unknown) {
         this.children.push(child);
       },
-      setAttribute: function (name: string, value: any) {
+      setAttribute: function (name: string, value: unknown) {
         this.attributes[name] = value;
       },
       addEventListener: function () {},
     }),
     createTextNode: (text: string) => ({ textContent: text }),
     createDocumentFragment: () => ({
-      children: [] as any[],
-      appendChild: function (child: any) {
+      children: [] as unknown[],
+      appendChild: function (child: unknown) {
         this.children.push(child);
       },
     }),
@@ -54,7 +56,7 @@ describe('mount()', () => {
     const container = createContainer();
     const vnode = () => createElement('div', null, 'Hello');
 
-    mount(container as any, vnode, createMockDoc() as any);
+    mount(container as unknown as Element, vnode, createMockDoc() as unknown as Document);
 
     expect(container.children.length).toBe(1);
     expect(container.children[0].tagName).toBe('DIV');
@@ -65,9 +67,9 @@ describe('mount()', () => {
     const count = atom(0);
 
     mount(
-      container as any,
+      container as unknown as Element,
       () => createElement('div', null, `Count: ${count()}`),
-      createMockDoc() as any
+      createMockDoc() as unknown as Document
     );
 
     // Initial render
@@ -92,7 +94,11 @@ describe('mount()', () => {
       return createElement('div', null, 'Test');
     }
 
-    mount(container as any, () => createElement(TestComponent, null), createMockDoc() as any);
+    mount(
+      container as unknown as Element,
+      () => createElement(TestComponent, null),
+      createMockDoc() as unknown as Document
+    );
 
     expect(mounted).toBe(true);
   });
@@ -110,9 +116,9 @@ describe('mount()', () => {
     }
 
     const dispose = mount(
-      container as any,
+      container as unknown as Element,
       () => createElement(TestComponent, null),
-      createMockDoc() as any
+      createMockDoc() as unknown as Document
     );
 
     expect(cleaned).toBe(false);
@@ -134,7 +140,11 @@ describe('mount()', () => {
       return createElement('div', null);
     }
 
-    mount(container as any, () => createElement(TestComponent, null), createMockDoc() as any);
+    mount(
+      container as unknown as Element,
+      () => createElement(TestComponent, null),
+      createMockDoc() as unknown as Document
+    );
 
     expect(calls).toEqual([1, 2, 3]);
   });
@@ -152,9 +162,9 @@ describe('mount()', () => {
     }
 
     const dispose = mount(
-      container as any,
+      container as unknown as Element,
       () => createElement(TestComponent, null),
-      createMockDoc() as any
+      createMockDoc() as unknown as Document
     );
 
     dispose();
@@ -180,9 +190,9 @@ describe('mount()', () => {
     }
 
     const dispose = mount(
-      container as any,
+      container as unknown as Element,
       () => createElement(Parent, null),
-      createMockDoc() as any
+      createMockDoc() as unknown as Document
     );
 
     expect(mountCalls).toEqual(['parent', 'child']);

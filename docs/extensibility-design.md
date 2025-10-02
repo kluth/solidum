@@ -1,11 +1,13 @@
 # Solidum Extensibility Architecture
 
 ## Overview
+
 Design patterns and APIs that enable building rich library ecosystems like Angular Material, NgRx, etc.
 
 ## Core Extensibility Features
 
 ### 1. Context API (Dependency Injection)
+
 Provides a way to pass data through component trees without prop drilling.
 
 ```typescript
@@ -33,6 +35,7 @@ function Button() {
 ```
 
 ### 2. Store Pattern (State Management)
+
 Centralized state management for complex applications.
 
 ```typescript
@@ -71,6 +74,7 @@ function TodoList() {
 ```
 
 ### 3. Directives/Composables
+
 Reusable behavior patterns.
 
 ```typescript
@@ -100,6 +104,7 @@ function Dropdown() {
 ```
 
 ### 4. Component Utilities
+
 Helpers for building component libraries.
 
 ```typescript
@@ -117,6 +122,7 @@ function createPolymorphic<T>(defaultAs: string): PolymorphicComponent<T>;
 ```
 
 ### 5. Animation System
+
 Declarative animations for UI libraries.
 
 ```typescript
@@ -144,6 +150,7 @@ const { play, pause, reset } = useAnimation(element, {
 ## Example Libraries
 
 ### Material-Style UI Library
+
 ```typescript
 // @solidum/material
 export function Button({ variant = 'contained', color = 'primary', ...props }) {
@@ -180,43 +187,45 @@ export function Dialog({ open, onClose, children }) {
 ```
 
 ### State Management Library
+
 ```typescript
 // @solidum/store
 export const todoStore = createStore({
   state: {
     todos: [],
-    filter: 'all'
+    filter: 'all',
   },
 
   getters: {
-    filteredTodos: (state) => {
+    filteredTodos: state => {
       return state.todos.filter(todo => {
         if (state.filter === 'active') return !todo.done;
         if (state.filter === 'completed') return todo.done;
         return true;
       });
-    }
+    },
   },
 
   actions: {
     addTodo(state, text: string) {
       return {
         ...state,
-        todos: [...state.todos, { id: Date.now(), text, done: false }]
+        todos: [...state.todos, { id: Date.now(), text, done: false }],
       };
-    }
+    },
   },
 
   effects: {
     async loadTodos({ setState }) {
       const todos = await api.getTodos();
       setState(state => ({ ...state, todos }));
-    }
-  }
+    },
+  },
 });
 ```
 
 ### Form Library
+
 ```typescript
 // @solidum/forms
 export function useForm<T>(config: FormConfig<T>) {
@@ -247,8 +256,8 @@ export function useForm<T>(config: FormConfig<T>) {
       onChange: (e: Event) => {
         values(v => ({ ...v, [name]: e.target.value }));
         touched(t => ({ ...t, [name]: true }));
-      }
-    })
+      },
+    }),
   };
 }
 ```

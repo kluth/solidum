@@ -14,7 +14,7 @@ import { createElement, Fragment } from '@solidum/core';
 export interface Context<T> {
   id: symbol;
   defaultValue: T | undefined;
-  Provider: ComponentFunction<{ value: T; children?: any }>;
+  Provider: ComponentFunction<{ value: T; children?: unknown }>;
 }
 
 /**
@@ -22,7 +22,7 @@ export interface Context<T> {
  */
 interface ContextEntry {
   id: symbol;
-  value: any;
+  value: unknown;
 }
 
 let contextStack: ContextEntry[] = [];
@@ -46,19 +46,19 @@ let contextStack: ContextEntry[] = [];
 export function createContext<T>(defaultValue?: T): Context<T> {
   const id = Symbol('context');
 
-  const Provider: ComponentFunction<{ value: T; children?: unknown }> = (props) => {
+  const Provider: ComponentFunction<{ value: T; children?: unknown }> = props => {
     // Render children
     const children = Array.isArray(props.children)
       ? props.children
       : props.children
-      ? [props.children]
-      : [];
+        ? [props.children]
+        : [];
 
     // Return fragment with children and context metadata
     const vnode = createElement(Fragment, null, ...children);
     // Attach context info to vnode for render phase
-    (vnode as any).__contextId = id;
-    (vnode as any).__contextValue = props.value;
+    (vnode as unknown as Record<string, unknown>).__contextId = id;
+    (vnode as unknown as Record<string, unknown>).__contextValue = props.value;
 
     return vnode;
   };
@@ -111,7 +111,7 @@ export function useContext<T>(context: Context<T>): T {
   // Search for context value in stack (from top to bottom)
   for (let i = contextStack.length - 1; i >= 0; i--) {
     if (contextStack[i].id === context.id) {
-      return contextStack[i].value;
+      return contextStack[i].value as T;
     }
   }
 
@@ -127,7 +127,7 @@ export function useContext<T>(context: Context<T>): T {
  * Push context value onto stack
  * @internal
  */
-export function pushContext(id: symbol, value: any): void {
+export function pushContext(id: symbol, value: unknown): void {
   contextStack.push({ id, value });
 }
 

@@ -1,4 +1,4 @@
-import { createElement } from '@solidum/core';
+import { createElement, type ComponentFunction } from '@solidum/core';
 import { Navigation } from './Navigation.js';
 import type { NavigationProps } from './Navigation.js';
 import { Sidebar } from './Sidebar.js';
@@ -17,7 +17,10 @@ export function DocLayout(props: DocLayoutProps) {
     'div',
     { className: 'solidum-doc-layout' },
     // Top navigation
-    createElement(Navigation, navigation),
+    createElement(
+      Navigation as unknown as ComponentFunction,
+      navigation as unknown as Record<string, unknown>
+    ),
 
     // Main content area
     createElement(
@@ -28,15 +31,14 @@ export function DocLayout(props: DocLayoutProps) {
         createElement(
           'div',
           { className: 'solidum-doc-layout-sidebar' },
-          createElement(Sidebar, sidebar)
+          createElement(
+            Sidebar as unknown as ComponentFunction,
+            sidebar as unknown as Record<string, unknown>
+          )
         ),
 
       // Content
-      createElement(
-        'main',
-        { className: 'solidum-doc-layout-content' },
-        children
-      )
+      createElement('main', { className: 'solidum-doc-layout-content' }, children)
     )
   );
 }

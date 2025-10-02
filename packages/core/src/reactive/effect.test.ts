@@ -5,6 +5,7 @@
  */
 
 import { describe, test, expect, runTests } from '@solidum/testing';
+
 import { atom } from './atom.js';
 import { computed } from './computed.js';
 import { effect } from './effect.js';
@@ -123,7 +124,7 @@ describe('effect()', () => {
     const count = atom(0);
     let cleanupCount = 0;
 
-    effect((onCleanup) => {
+    effect(onCleanup => {
       count(); // Track dependency
 
       onCleanup(() => {

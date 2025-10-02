@@ -1,6 +1,6 @@
 /**
  * @solidum/ssr - Server-Side Rendering Utilities
- * 
+ *
  * Provides utilities for rendering Solidum components to HTML strings
  * on the server side.
  */
@@ -24,9 +24,9 @@ export function escapeHtml(text: string | number): string {
     '<': '&lt;',
     '>': '&gt;',
     '"': '&quot;',
-    "'": '&#039;'
+    "'": '&#039;',
   };
-  return String(text).replace(/[&<>"']/g, (m) => map[m]);
+  return String(text).replace(/[&<>"']/g, m => map[m]);
 }
 
 /**
@@ -60,14 +60,28 @@ export function renderAttributes(props: Record<string, unknown> | undefined): st
  * Void elements that don't need closing tags
  */
 const voidElements = new Set([
-  'area', 'base', 'br', 'col', 'embed', 'hr', 'img', 'input',
-  'link', 'meta', 'param', 'source', 'track', 'wbr'
+  'area',
+  'base',
+  'br',
+  'col',
+  'embed',
+  'hr',
+  'img',
+  'input',
+  'link',
+  'meta',
+  'param',
+  'source',
+  'track',
+  'wbr',
 ]);
 
 /**
  * Render a VNode to HTML string
  */
-export function renderToString(vnode: VNode | VNode[] | string | number | null | undefined | boolean): string {
+export function renderToString(
+  vnode: VNode | VNode[] | string | number | null | undefined | boolean
+): string {
   // Handle null/undefined/false
   if (vnode == null || vnode === false) {
     return '';
@@ -96,12 +110,12 @@ export function renderToString(vnode: VNode | VNode[] | string | number | null |
     // Set up component context for useState hooks
     const componentId = _getOrCreateComponentId(node.type, node.props);
     _setComponentId(componentId);
-    
+
     try {
       // Pass children as part of props
       const propsWithChildren = {
         ...(node.props || {}),
-        children: node.children
+        children: node.children,
       };
       const result = node.type(propsWithChildren);
       return renderToString(result);
@@ -136,7 +150,7 @@ export function renderToString(vnode: VNode | VNode[] | string | number | null |
  * Create HTML template with content
  */
 export function createHtmlTemplate(
-  content: string, 
+  content: string,
   title: string = 'Solidum App',
   styles?: string,
   scripts?: string

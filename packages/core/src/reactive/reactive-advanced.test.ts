@@ -5,10 +5,11 @@
  */
 
 import { describe, test, expect, runTests } from '@solidum/testing';
+
 import { atom } from './atom.js';
+import { batch } from './batch.js';
 import { computed } from './computed.js';
 import { effect } from './effect.js';
-import { batch } from './batch.js';
 
 describe('atom() - Advanced', () => {
   test('should handle object updates', () => {
@@ -62,7 +63,7 @@ describe('atom() - Advanced', () => {
     const count = atom(0);
     const values: number[] = [];
 
-    count.subscribe((val) => values.push(val));
+    count.subscribe(val => values.push(val));
 
     for (let i = 1; i <= 100; i++) {
       count(i);
@@ -76,11 +77,11 @@ describe('atom() - Advanced', () => {
   test('should handle update function with previous value', () => {
     const count = atom(5);
 
-    count((prev) => prev + 10);
+    count(prev => prev + 10);
 
     expect(count()).toBe(15);
 
-    count((prev) => prev * 2);
+    count(prev => prev * 2);
 
     expect(count()).toBe(30);
   });
@@ -90,12 +91,12 @@ describe('atom() - Advanced', () => {
     const subscriber1Values: number[] = [];
     const subscriber2Values: number[] = [];
 
-    const unsub1 = data.subscribe((val) => subscriber1Values.push(val));
+    const unsub1 = data.subscribe(val => subscriber1Values.push(val));
 
     data(1);
     data(2);
 
-    const unsub2 = data.subscribe((val) => subscriber2Values.push(val));
+    const unsub2 = data.subscribe(val => subscriber2Values.push(val));
 
     data(3);
     data(4);
@@ -118,7 +119,7 @@ describe('computed() - Advanced', () => {
     const c = atom(4);
 
     const result = computed(() => {
-      return (a() * b()) + c();
+      return a() * b() + c();
     });
 
     expect(result()).toBe(10); // (2 * 3) + 4
@@ -327,15 +328,15 @@ describe('effect() - Advanced', () => {
       }
     });
 
-    await new Promise((resolve) => setTimeout(resolve, 10));
+    await new Promise(resolve => setTimeout(resolve, 10));
 
     data(5);
-    await new Promise((resolve) => setTimeout(resolve, 10));
+    await new Promise(resolve => setTimeout(resolve, 10));
 
     expect(loadCount).toBe(1);
 
     data(10);
-    await new Promise((resolve) => setTimeout(resolve, 10));
+    await new Promise(resolve => setTimeout(resolve, 10));
 
     expect(loadCount).toBe(2);
   });
@@ -425,6 +426,7 @@ describe('batch() - Advanced', () => {
       batch(() => {
         a(10);
         throw new Error('Test error');
+        // eslint-disable-next-line no-unreachable
         b(20); // Should not execute
       });
     } catch (e) {
@@ -462,9 +464,7 @@ describe('Integration - Complex Scenarios', () => {
     expect(total()).toBe(44);
 
     // Update quantity
-    items(
-      items().map((item) => (item.id === 1 ? { ...item, quantity: 3 } : item))
-    );
+    items(items().map(item => (item.id === 1 ? { ...item, quantity: 3 } : item)));
 
     expect(subtotal()).toBe(50);
     expect(total()).toBe(55);

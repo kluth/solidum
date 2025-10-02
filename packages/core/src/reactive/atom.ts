@@ -26,13 +26,13 @@
  * ```
  */
 
+import { scheduleNotification, shouldNotifySubscriber } from './batch.js';
 import {
   getComputedCallback,
   registerComputedDependency,
   getEffectCallback,
   registerEffectDependency,
 } from './tracking.js';
-import { scheduleNotification, shouldNotifySubscriber } from './batch.js';
 
 export type Subscriber<T> = (value: T) => void;
 export type Setter<T> = T | ((prev: T) => T);
@@ -41,7 +41,7 @@ export type Unsubscribe = () => void;
 export interface Atom<T> {
   (): T;
   (value: Setter<T>): void;
-  subscribe(subscriber: Subscriber<T>): Unsubscribe;
+  subscribe(_subscriber: Subscriber<T>): Unsubscribe;
 }
 
 /**

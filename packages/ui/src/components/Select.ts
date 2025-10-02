@@ -53,29 +53,30 @@ export function Select(props: SelectProps) {
       createElement('span', {}, selectedOption?.label || placeholder),
       createElement('span', { className: 'solidum-select-arrow' }, isOpen() ? '▲' : '▼')
     ),
-    isOpen() && createElement(
-      'div',
-      { className: 'solidum-select-dropdown' },
-      ...options.map(option =>
-        createElement(
-          'button',
-          {
-            type: 'button',
-            className: cn('solidum-select-option', {
-              'solidum-select-option--selected': option.value === value,
-              'solidum-select-option--disabled': option.disabled,
-            }),
-            disabled: option.disabled,
-            onClick: () => {
-              if (!option.disabled) {
-                onChange?.(option.value);
-                isOpen(false);
-              }
+    isOpen() &&
+      createElement(
+        'div',
+        { className: 'solidum-select-dropdown' },
+        ...options.map(option =>
+          createElement(
+            'button',
+            {
+              type: 'button',
+              className: cn('solidum-select-option', {
+                'solidum-select-option--selected': option.value === value,
+                'solidum-select-option--disabled': option.disabled,
+              }),
+              disabled: option.disabled,
+              onClick: () => {
+                if (!option.disabled) {
+                  onChange?.(option.value);
+                  isOpen(false);
+                }
+              },
             },
-          },
-          option.label
+            option.label
+          )
         )
       )
-    )
   );
 }

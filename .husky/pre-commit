@@ -1,0 +1,10 @@
+# Run lint-staged to check and fix code quality
+pnpm pre-commit
+
+# Run tests to ensure nothing is broken
+pnpm test
+
+# Run type checking
+pnpm typecheck:ci
+
+echo "✅ Pre-commit checks passed!"

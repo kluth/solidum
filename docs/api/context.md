@@ -5,7 +5,7 @@
 Creates a new context.
 
 ```typescript
-function createContext<T>(defaultValue?: T): Context<T>
+function createContext<T>(defaultValue?: T): Context<T>;
 ```
 
 ## useContext()
@@ -13,5 +13,5 @@ function createContext<T>(defaultValue?: T): Context<T>
 Consumes a context value.
 
 ```typescript
-function useContext<T>(context: Context<T>): T
+function useContext<T>(context: Context<T>): T;
 ```

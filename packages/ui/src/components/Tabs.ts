@@ -19,14 +19,7 @@ export interface TabsProps {
 }
 
 export function Tabs(props: TabsProps) {
-  const {
-    tabs,
-    defaultTab,
-    variant = 'line',
-    animated = true,
-    className,
-    onChange,
-  } = props;
+  const { tabs, defaultTab, variant = 'line', animated = true, className, onChange } = props;
 
   const activeTab = useState(defaultTab || tabs[0]?.id);
 

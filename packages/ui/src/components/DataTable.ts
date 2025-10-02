@@ -51,8 +51,7 @@ export function DataTable<T = any>(props: DataTableProps<T>) {
   const handleSort = (key: string) => {
     if (!sortable) return;
 
-    const newDirection =
-      sortKey() === key && sortDirection() === 'asc' ? 'desc' : 'asc';
+    const newDirection = sortKey() === key && sortDirection() === 'asc' ? 'desc' : 'asc';
 
     sortKey(key);
     sortDirection(newDirection);
@@ -115,8 +114,12 @@ export function DataTable<T = any>(props: DataTableProps<T>) {
                 onClick: sortable && col.sortable !== false ? () => handleSort(col.key) : undefined,
               },
               col.header,
-              sortable && col.sortable !== false && sortKey() === col.key &&
-                createElement('span', { className: 'solidum-datatable-sort-icon' },
+              sortable &&
+                col.sortable !== false &&
+                sortKey() === col.key &&
+                createElement(
+                  'span',
+                  { className: 'solidum-datatable-sort-icon' },
                   sortDirection() === 'asc' ? ' ▲' : ' ▼'
                 )
             )
@@ -140,11 +143,8 @@ export function DataTable<T = any>(props: DataTableProps<T>) {
               onDragOver: draggableRows ? handleDragOver(index) : undefined,
               onDrop: draggableRows ? handleDrop(index) : undefined,
             },
-            draggableRows && createElement(
-              'td',
-              { className: 'solidum-datatable-drag-handle' },
-              '⋮⋮'
-            ),
+            draggableRows &&
+              createElement('td', { className: 'solidum-datatable-drag-handle' }, '⋮⋮'),
             ...columns.map(col => {
               const value = (row as any)[col.key];
               const rendered = col.render ? col.render(value, row) : value;
@@ -154,10 +154,7 @@ export function DataTable<T = any>(props: DataTableProps<T>) {
         )
       )
     ),
-    draggableRows && createElement(
-      'div',
-      { className: 'solidum-datatable-hint' },
-      '↕ Drag rows to reorder'
-    )
+    draggableRows &&
+      createElement('div', { className: 'solidum-datatable-hint' }, '↕ Drag rows to reorder')
   );
 }

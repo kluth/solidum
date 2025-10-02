@@ -3,7 +3,7 @@
 ## createDOMEnvironment()
 
 ```typescript
-function createDOMEnvironment(): DOMTestEnvironment
+function createDOMEnvironment(): DOMTestEnvironment;
 ```
 
 ## DOMEvents

@@ -5,6 +5,7 @@
  */
 
 import { describe, test, expect, runTests } from '@solidum/testing';
+
 import { atom } from './atom.js';
 import { computed } from './computed.js';
 
@@ -125,7 +126,7 @@ describe('computed()', () => {
     let notified = false;
     let receivedValue = 0;
 
-    doubled.subscribe((value) => {
+    doubled.subscribe(value => {
       notified = true;
       receivedValue = value;
     });

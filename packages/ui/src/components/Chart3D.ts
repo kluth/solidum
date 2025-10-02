@@ -108,22 +108,22 @@ export function Chart3D(props: Chart3DProps) {
   return createElement(
     'div',
     { className: cn('solidum-chart3d-wrapper', className) },
-      createElement(
-        'svg',
-        {
-          className: cn('solidum-chart3d', {
-            'solidum-chart3d--animated': animated,
-            'solidum-chart3d--interactive': interactive,
-          }),
-          width,
-          height,
-          xmlns: 'http://www.w3.org/2000/svg',
-          onMouseDown: handleMouseDown,
-          onMouseMove: handleMouseMove,
-          onMouseUp: handleMouseUp,
-          onMouseLeave: handleMouseUp,
-          style: { cursor: interactive ? (isDragging() ? 'grabbing' : 'grab') : 'default' },
-        },
+    createElement(
+      'svg',
+      {
+        className: cn('solidum-chart3d', {
+          'solidum-chart3d--animated': animated,
+          'solidum-chart3d--interactive': interactive,
+        }),
+        width,
+        height,
+        xmlns: 'http://www.w3.org/2000/svg',
+        onMouseDown: handleMouseDown,
+        onMouseMove: handleMouseMove,
+        onMouseUp: handleMouseUp,
+        onMouseLeave: handleMouseUp,
+        style: { cursor: interactive ? (isDragging() ? 'grabbing' : 'grab') : 'default' },
+      },
       // Background
       createElement('rect', {
         width,
@@ -133,94 +133,107 @@ export function Chart3D(props: Chart3DProps) {
       }),
 
       // Grid
-      showGrid && createElement('g', { className: 'solidum-chart3d-grid', opacity: 0.2 },
-        ...[...Array(10)].map((_, i) => {
-          const y = (i / 10) * maxY;
-          const p1 = transform(0, y, 0);
-          const p2 = transform(maxX, y, 0);
-          return createElement('line', {
-            x1: p1.x,
-            y1: p1.y,
-            x2: p2.x,
-            y2: p2.y,
-            stroke: '#667eea',
-            strokeWidth: 1,
-          });
-        })
-      ),
+      showGrid &&
+        createElement(
+          'g',
+          { className: 'solidum-chart3d-grid', opacity: 0.2 },
+          ...[...Array(10)].map((_, i) => {
+            const y = (i / 10) * maxY;
+            const p1 = transform(0, y, 0);
+            const p2 = transform(maxX, y, 0);
+            return createElement('line', {
+              x1: p1.x,
+              y1: p1.y,
+              x2: p2.x,
+              y2: p2.y,
+              stroke: '#667eea',
+              strokeWidth: 1,
+            });
+          })
+        ),
 
       // Data points
-      type === 'bar' && createElement('g', { className: 'solidum-chart3d-bars' },
-        ...data.map((point, index) => {
-          const base = transform(point.x, 0, point.z || 0);
-          const top = transform(point.x, point.y, point.z || 0);
-          const barWidth = 20 * base.scale;
+      type === 'bar' &&
+        createElement(
+          'g',
+          { className: 'solidum-chart3d-bars' },
+          ...data.map((point, index) => {
+            const base = transform(point.x, 0, point.z || 0);
+            const top = transform(point.x, point.y, point.z || 0);
+            const barWidth = 20 * base.scale;
 
-          return createElement('g', {},
-            // Bar
-            createElement('rect', {
-              x: base.x - barWidth / 2,
-              y: top.y,
-              width: barWidth,
-              height: Math.abs(base.y - top.y),
-              fill: point.color || `hsl(${(index / data.length) * 360}, 70%, 60%)`,
-              opacity: 0.8,
-              rx: 4,
-            }),
-            // Glow effect
-            createElement('rect', {
-              x: base.x - barWidth / 2,
-              y: top.y,
-              width: barWidth,
-              height: Math.abs(base.y - top.y),
-              fill: 'url(#barGlow)',
-              opacity: 0.3,
-              rx: 4,
-            })
-          );
-        })
-      ),
+            return createElement(
+              'g',
+              {},
+              // Bar
+              createElement('rect', {
+                x: base.x - barWidth / 2,
+                y: top.y,
+                width: barWidth,
+                height: Math.abs(base.y - top.y),
+                fill: point.color || `hsl(${(index / data.length) * 360}, 70%, 60%)`,
+                opacity: 0.8,
+                rx: 4,
+              }),
+              // Glow effect
+              createElement('rect', {
+                x: base.x - barWidth / 2,
+                y: top.y,
+                width: barWidth,
+                height: Math.abs(base.y - top.y),
+                fill: 'url(#barGlow)',
+                opacity: 0.3,
+                rx: 4,
+              })
+            );
+          })
+        ),
 
       // Scatter plot
-      type === 'scatter' && createElement('g', { className: 'solidum-chart3d-scatter' },
-        ...data.map((point) => {
-          const pos = transform(point.x, point.y, point.z || 0);
-          const radius = 8 * pos.scale;
+      type === 'scatter' &&
+        createElement(
+          'g',
+          { className: 'solidum-chart3d-scatter' },
+          ...data.map(point => {
+            const pos = transform(point.x, point.y, point.z || 0);
+            const radius = 8 * pos.scale;
 
-          return createElement('g', {},
-            // Outer glow
-            createElement('circle', {
-              cx: pos.x,
-              cy: pos.y,
-              r: radius * 2,
-              fill: point.color || '#667eea',
-              opacity: 0.2,
-            }),
-            // Main circle
-            createElement('circle', {
-              cx: pos.x,
-              cy: pos.y,
-              r: radius,
-              fill: point.color || '#667eea',
-              opacity: 0.9,
-            })
-          );
-        })
-      ),
+            return createElement(
+              'g',
+              {},
+              // Outer glow
+              createElement('circle', {
+                cx: pos.x,
+                cy: pos.y,
+                r: radius * 2,
+                fill: point.color || '#667eea',
+                opacity: 0.2,
+              }),
+              // Main circle
+              createElement('circle', {
+                cx: pos.x,
+                cy: pos.y,
+                r: radius,
+                fill: point.color || '#667eea',
+                opacity: 0.9,
+              })
+            );
+          })
+        ),
 
       // Gradient definitions
-      createElement('defs', {},
-        createElement('linearGradient', { id: 'barGlow', x1: '0%', y1: '0%', x2: '0%', y2: '100%' },
+      createElement(
+        'defs',
+        {},
+        createElement(
+          'linearGradient',
+          { id: 'barGlow', x1: '0%', y1: '0%', x2: '0%', y2: '100%' },
           createElement('stop', { offset: '0%', stopColor: '#ffffff', stopOpacity: 0.8 }),
           createElement('stop', { offset: '100%', stopColor: '#ffffff', stopOpacity: 0 })
         )
       )
     ),
     // Controls hint
-    interactive && createElement(
-      'div',
-      { className: 'solidum-chart3d-hint' },
-      '🔄 Drag to rotate'
-    )
+    interactive && createElement('div', { className: 'solidum-chart3d-hint' }, '🔄 Drag to rotate')
   );
 }

@@ -65,15 +65,15 @@ describe('createContext()', () => {
     }
 
     function Provider() {
-      return createElement(
-        ThemeContext.Provider,
-        { value: 'dark' },
-        createElement(Consumer, null)
-      );
+      return createElement(ThemeContext.Provider, { value: 'dark' }, createElement(Consumer, null));
     }
 
     const container = createContainer();
-    mount(container as unknown as Element, () => createElement(Provider, null), createMockDoc() as unknown as Document);
+    mount(
+      container as unknown as Element,
+      () => createElement(Provider, null),
+      createMockDoc() as unknown as Document
+    );
 
     expect(consumedValue).toBe('dark');
   });
@@ -88,7 +88,11 @@ describe('createContext()', () => {
     }
 
     const container = createContainer();
-    mount(container as unknown as Element, () => createElement(Consumer, null), createMockDoc() as unknown as Document);
+    mount(
+      container as unknown as Element,
+      () => createElement(Consumer, null),
+      createMockDoc() as unknown as Document
+    );
 
     expect(consumedValue).toBe('light');
   });
@@ -105,15 +109,15 @@ describe('createContext()', () => {
     function Provider() {
       const count = atom(5);
 
-      return createElement(
-        CountContext.Provider,
-        { value: count },
-        createElement(Consumer, null)
-      );
+      return createElement(CountContext.Provider, { value: count }, createElement(Consumer, null));
     }
 
     const container = createContainer();
-    mount(container as unknown as Element, () => createElement(Provider, null), createMockDoc() as unknown as Document);
+    mount(
+      container as unknown as Element,
+      () => createElement(Provider, null),
+      createMockDoc() as unknown as Document
+    );
 
     expect(consumedCount?.()).toBe(5);
   });
@@ -143,7 +147,11 @@ describe('createContext()', () => {
     }
 
     const container = createContainer();
-    mount(container as unknown as Element, () => createElement(App, null), createMockDoc() as unknown as Document);
+    mount(
+      container as unknown as Element,
+      () => createElement(App, null),
+      createMockDoc() as unknown as Document
+    );
 
     expect(values).toEqual(['outer:dark', 'inner:light', 'outer2:dark']);
   });
@@ -164,15 +172,15 @@ describe('createContext()', () => {
       const count = atom(0);
       updateCount = count;
 
-      return createElement(
-        CountContext.Provider,
-        { value: count },
-        createElement(Consumer, null)
-      );
+      return createElement(CountContext.Provider, { value: count }, createElement(Consumer, null));
     }
 
     const container = createContainer();
-    mount(container as unknown as Element, () => createElement(Provider, null), createMockDoc() as unknown as Document);
+    mount(
+      container as unknown as Element,
+      () => createElement(Provider, null),
+      createMockDoc() as unknown as Document
+    );
 
     expect(values[0]).toBe(0);
 
@@ -213,16 +221,16 @@ describe('createContext()', () => {
       return createElement(
         ThemeContext.Provider,
         { value: 'dark' },
-        createElement(
-          UserContext.Provider,
-          { value: 'Alice' },
-          createElement(Consumer, null)
-        )
+        createElement(UserContext.Provider, { value: 'Alice' }, createElement(Consumer, null))
       );
     }
 
     const container = createContainer();
-    mount(container as unknown as Element, () => createElement(App, null), createMockDoc() as unknown as Document);
+    mount(
+      container as unknown as Element,
+      () => createElement(App, null),
+      createMockDoc() as unknown as Document
+    );
 
     expect(theme).toBe('dark');
     expect(user).toBe('Alice');

@@ -5,7 +5,13 @@ export interface ToastProps {
   message: string;
   type?: 'success' | 'error' | 'warning' | 'info';
   duration?: number;
-  position?: 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right' | 'top-center' | 'bottom-center';
+  position?:
+    | 'top-left'
+    | 'top-right'
+    | 'bottom-left'
+    | 'bottom-right'
+    | 'top-center'
+    | 'bottom-center';
   animated?: boolean;
   onClose?: () => void;
 }
@@ -35,15 +41,10 @@ export function Toast(props: ToastProps) {
   return createElement(
     'div',
     {
-      className: cn(
-        'solidum-toast',
-        `solidum-toast--${type}`,
-        `solidum-toast--${position}`,
-        {
-          'solidum-toast--animated': animated,
-          'solidum-toast--visible': visible(),
-        }
-      ),
+      className: cn('solidum-toast', `solidum-toast--${type}`, `solidum-toast--${position}`, {
+        'solidum-toast--animated': animated,
+        'solidum-toast--visible': visible(),
+      }),
     },
     createElement('span', { className: 'solidum-toast-icon' }, getIcon(type)),
     createElement('span', { className: 'solidum-toast-message' }, message),
@@ -63,10 +64,15 @@ export function Toast(props: ToastProps) {
 
 function getIcon(type: string): string {
   switch (type) {
-    case 'success': return '✓';
-    case 'error': return '✕';
-    case 'warning': return '⚠';
-    case 'info': return 'ℹ';
-    default: return 'ℹ';
+    case 'success':
+      return '✓';
+    case 'error':
+      return '✕';
+    case 'warning':
+      return '⚠';
+    case 'info':
+      return 'ℹ';
+    default:
+      return 'ℹ';
   }
 }

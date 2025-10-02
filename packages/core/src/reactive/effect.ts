@@ -92,7 +92,7 @@ export function effect(fn: EffectFn): Dispose {
 
       // Set up tracking context
       const context: TrackingContext = {
-        onDependency: (unsubscribe) => {
+        onDependency: unsubscribe => {
           dependencyCleanups.push(unsubscribe);
         },
       };
@@ -102,7 +102,7 @@ export function effect(fn: EffectFn): Dispose {
 
       try {
         // Run the effect (this will register dependencies)
-        fn((cleanup) => {
+        fn(cleanup => {
           userCleanup = cleanup;
         });
       } catch (error) {

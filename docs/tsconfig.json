@@ -15,15 +15,6 @@
     "resolveJsonModule": true,
     "isolatedModules": true
   },
-  "include": [
-    "pages/*.ts",
-    "client.ts"
-  ],
-  "exclude": [
-    "node_modules",
-    "dist",
-    "build.js",
-    "renderer.js",
-    "pages/components.js"
-  ]
+  "include": ["pages/*.ts", "client.ts"],
+  "exclude": ["node_modules", "dist", "build.js", "renderer.js", "pages/components.js"]
 }

@@ -5,6 +5,7 @@
  */
 
 import { describe, test, expect, runTests } from '@solidum/testing';
+
 import { createElement, Fragment } from './vnode.js';
 
 describe('createElement()', () => {
@@ -106,7 +107,7 @@ describe('createElement()', () => {
   });
 
   test('should handle component functions', () => {
-    const MyComponent = (props: any) => createElement('div', null, props.text);
+    const MyComponent = (props: { text: string }) => createElement('div', null, props.text);
     const vnode = createElement(MyComponent, { text: 'Hello' });
 
     expect(vnode.type).toBe(MyComponent);

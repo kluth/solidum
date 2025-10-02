@@ -1,6 +1,6 @@
 /**
  * @solidum/router - Simple SPA Router for Solidum Applications
- * 
+ *
  * A lightweight, reactive router that integrates seamlessly with Solidum's
  * fine-grained reactivity system.
  */
@@ -37,7 +37,7 @@ export function createRouter(options: RouterOptions): {
   getCurrentPath: () => string;
 } {
   routes = options.routes;
-  
+
   // Set initial route
   const initialPath = options.initialPath || window.location.pathname;
   if (routes[initialPath]) {
@@ -45,22 +45,24 @@ export function createRouter(options: RouterOptions): {
   }
 
   // Handle browser navigation (back/forward buttons)
-  window.addEventListener('popstate', (event) => {
+  window.addEventListener('popstate', event => {
     const path = event.state?.path || window.location.pathname;
     if (routes[path]) {
       currentRoute(path);
-      
+
       // Trigger a page re-render
-      window.dispatchEvent(new CustomEvent<RouteChangeEvent>('routechange', { 
-        detail: { path, component: routes[path] } 
-      }));
+      window.dispatchEvent(
+        new CustomEvent<RouteChangeEvent>('routechange', {
+          detail: { path, component: routes[path] },
+        })
+      );
     }
   });
 
   return {
     navigate: (path: string) => navigate(path),
     getCurrentPage: () => getCurrentPage(),
-    getCurrentPath: () => currentRoute()
+    getCurrentPath: () => currentRoute(),
   };
 }
 
@@ -72,11 +74,13 @@ export function navigate(path: string): void {
     currentRoute(path);
     // Update browser history without page reload
     window.history.pushState({ path }, '', path);
-    
+
     // Trigger a page re-render by dispatching a custom event
-    window.dispatchEvent(new CustomEvent<RouteChangeEvent>('routechange', { 
-      detail: { path, component: routes[path] } 
-    }));
+    window.dispatchEvent(
+      new CustomEvent<RouteChangeEvent>('routechange', {
+        detail: { path, component: routes[path] },
+      })
+    );
   }
 }
 

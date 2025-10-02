@@ -108,7 +108,7 @@ class TestRegistry extends EventEmitter {
       }
 
       const suiteDuration = performance.now() - suiteStart;
-      const passed = testResults.every((t) => t.passed);
+      const passed = testResults.every(t => t.passed);
 
       results.push({
         name: suiteName,
@@ -161,12 +161,7 @@ export class ConsoleReporter {
     console.log(`  ${pc.green('✓')} ${data.test} ${pc.dim(`(${data.duration.toFixed(2)}ms)`)}`);
   }
 
-  private onTestFail(data: {
-    suite: string;
-    test: string;
-    duration: number;
-    error: Error;
-  }): void {
+  private onTestFail(data: { suite: string; test: string; duration: number; error: Error }): void {
     this.failed++;
     console.log(`  ${pc.red('✗')} ${data.test}`);
     console.log(`    ${pc.red(data.error.message)}`);

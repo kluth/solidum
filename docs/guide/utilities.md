@@ -7,12 +7,12 @@ Solidum provides helpful utilities for building component libraries.
 Intelligently merge props objects:
 
 ```typescript
-import { mergeProps } from '@solidum/core'
+import { mergeProps } from '@solidum/core';
 
 const merged = mergeProps(
   { className: 'base', onClick: handler1 },
   { className: 'extra', onClick: handler2 }
-)
+);
 
 // Result:
 // {
@@ -26,10 +26,7 @@ const merged = mergeProps(
 Classes are concatenated:
 
 ```typescript
-const props = mergeProps(
-  { className: 'btn' },
-  { className: 'btn-primary' }
-)
+const props = mergeProps({ className: 'btn' }, { className: 'btn-primary' });
 // { className: 'btn btn-primary' }
 ```
 
@@ -41,7 +38,7 @@ Style objects are merged:
 const props = mergeProps(
   { style: { color: 'red', fontSize: '16px' } },
   { style: { fontSize: '18px', fontWeight: 'bold' } }
-)
+);
 // { style: { color: 'red', fontSize: '18px', fontWeight: 'bold' } }
 ```
 
@@ -50,15 +47,12 @@ const props = mergeProps(
 Event handlers are chained:
 
 ```typescript
-const handler1 = () => console.log('First')
-const handler2 = () => console.log('Second')
+const handler1 = () => console.log('First');
+const handler2 = () => console.log('Second');
 
-const props = mergeProps(
-  { onClick: handler1 },
-  { onClick: handler2 }
-)
+const props = mergeProps({ onClick: handler1 }, { onClick: handler2 });
 
-props.onClick() // Logs: "First", "Second"
+props.onClick(); // Logs: "First", "Second"
 ```
 
 ## cn()
@@ -66,46 +60,44 @@ props.onClick() // Logs: "First", "Second"
 Conditional class name builder:
 
 ```typescript
-import { cn } from '@solidum/core'
+import { cn } from '@solidum/core';
 
 // Strings
-cn('foo', 'bar') // 'foo bar'
+cn('foo', 'bar'); // 'foo bar'
 
 // Objects
 cn('btn', {
   'btn-primary': isPrimary,
-  'btn-disabled': isDisabled
-})
+  'btn-disabled': isDisabled,
+});
 
 // Arrays
-cn(['foo', 'bar'], 'baz') // 'foo bar baz'
+cn(['foo', 'bar'], 'baz'); // 'foo bar baz'
 
 // Mixed
-cn(
-  'btn',
-  isActive && 'active',
-  { disabled: isDisabled },
-  ['extra', 'classes']
-)
+cn('btn', isActive && 'active', { disabled: isDisabled }, ['extra', 'classes']);
 ```
 
 ### Real-World Example
 
 ```typescript
 function Button({ variant = 'primary', size = 'md', disabled, className, ...props }) {
-  return createElement('button', mergeProps(
-    {
-      className: cn(
-        'btn',
-        `btn-${variant}`,
-        `btn-${size}`,
-        { 'btn-disabled': disabled },
-        className
-      ),
-      disabled
-    },
-    props
-  ))
+  return createElement(
+    'button',
+    mergeProps(
+      {
+        className: cn(
+          'btn',
+          `btn-${variant}`,
+          `btn-${size}`,
+          { 'btn-disabled': disabled },
+          className
+        ),
+        disabled,
+      },
+      props
+    )
+  );
 }
 ```
 

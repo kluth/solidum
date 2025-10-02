@@ -27,8 +27,8 @@
  */
 
 let batchDepth = 0;
-let pendingNotifications = new Set<() => void>();
-let notifiedSubscribers = new Set<Function>();
+const pendingNotifications = new Set<() => void>();
+const notifiedSubscribers = new Set<Function>();
 let isFlushing = false;
 
 /**

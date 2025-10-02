@@ -12,8 +12,8 @@ describe('createStore()', () => {
     const store = createStore({
       state: {
         count: 0,
-        name: 'Test'
-      }
+        name: 'Test',
+      },
     });
 
     expect(store).not.toBeNull();
@@ -24,8 +24,8 @@ describe('createStore()', () => {
     const store = createStore({
       state: {
         count: 5,
-        name: 'Test'
-      }
+        name: 'Test',
+      },
     });
 
     const count = store.select(state => state.count);
@@ -36,7 +36,7 @@ describe('createStore()', () => {
   test('should dispatch actions to update state', () => {
     const store = createStore({
       state: {
-        count: 0
+        count: 0,
       },
       actions: {
         increment(state) {
@@ -44,8 +44,8 @@ describe('createStore()', () => {
         },
         add(state, value: number) {
           return { ...state, count: state.count + value };
-        }
-      }
+        },
+      },
     });
 
     store.dispatch('increment');
@@ -58,13 +58,13 @@ describe('createStore()', () => {
   test('should update reactive selectors when state changes', () => {
     const store = createStore({
       state: {
-        count: 0
+        count: 0,
       },
       actions: {
         increment(state) {
           return { ...state, count: state.count + 1 };
-        }
-      }
+        },
+      },
     });
 
     const count = store.select(state => state.count);
@@ -86,8 +86,8 @@ describe('createStore()', () => {
       state: {
         todos: [
           { id: 1, text: 'Task 1', done: false },
-          { id: 2, text: 'Task 2', done: true }
-        ]
+          { id: 2, text: 'Task 2', done: true },
+        ],
       },
       getters: {
         completedTodos(state) {
@@ -95,18 +95,16 @@ describe('createStore()', () => {
         },
         activeTodos(state) {
           return state.todos.filter(todo => !todo.done);
-        }
+        },
       },
       actions: {
         toggleTodo(state, id: number) {
           return {
             ...state,
-            todos: state.todos.map(todo =>
-              todo.id === id ? { ...todo, done: !todo.done } : todo
-            )
+            todos: state.todos.map(todo => (todo.id === id ? { ...todo, done: !todo.done } : todo)),
           };
-        }
-      }
+        },
+      },
     });
 
     const completed = store.select(state => store.getters.completedTodos(state));
@@ -122,7 +120,7 @@ describe('createStore()', () => {
     const store = createStore({
       state: {
         data: null as any,
-        loading: false
+        loading: false,
       },
       actions: {
         setData(state, data: any) {
@@ -130,21 +128,19 @@ describe('createStore()', () => {
         },
         setLoading(state, loading: boolean) {
           return { ...state, loading };
-        }
+        },
       },
       effects: {
         async loadData({ dispatch }) {
           dispatch('setLoading', true);
 
           // Simulate async operation
-          const data = await new Promise(resolve =>
-            setTimeout(() => resolve({ value: 42 }), 10)
-          );
+          const data = await new Promise(resolve => setTimeout(() => resolve({ value: 42 }), 10));
 
           dispatch('setData', data);
           loadedData = data;
-        }
-      }
+        },
+      },
     });
 
     expect(store.getState().loading).toBe(false);
@@ -159,12 +155,12 @@ describe('createStore()', () => {
   test('should support effects with getState access', async () => {
     const store = createStore({
       state: {
-        count: 0
+        count: 0,
       },
       actions: {
         increment(state) {
           return { ...state, count: state.count + 1 };
-        }
+        },
       },
       effects: {
         async incrementTwice({ dispatch, getState }) {
@@ -172,8 +168,8 @@ describe('createStore()', () => {
           const current = getState();
           expect(current.count).toBe(1);
           dispatch('increment');
-        }
-      }
+        },
+      },
     });
 
     await store.effects.incrementTwice();
@@ -184,7 +180,7 @@ describe('createStore()', () => {
     const store = createStore({
       state: {
         count: 0,
-        name: 'Test'
+        name: 'Test',
       },
       actions: {
         increment(state) {
@@ -192,8 +188,8 @@ describe('createStore()', () => {
         },
         setName(state, name: string) {
           return { ...state, name };
-        }
-      }
+        },
+      },
     });
 
     const updates: number[] = [];
@@ -221,12 +217,12 @@ describe('createStore()', () => {
       actions: {
         increment(state) {
           return { ...state, count: state.count + 1 };
-        }
+        },
       },
-      middleware: (store) => (next) => (action, payload) => {
+      middleware: store => next => (action, payload) => {
         actions.push(action);
         return next(action, payload);
-      }
+      },
     });
 
     store.dispatch('increment');
@@ -242,8 +238,8 @@ describe('createStore()', () => {
       actions: {
         increment(state) {
           return { ...state, count: state.count + 1 };
-        }
-      }
+        },
+      },
     });
 
     let error: Error | null = null;
@@ -263,8 +259,8 @@ describe('createStore()', () => {
       actions: {
         setName(state, name: string) {
           return { ...state, name };
-        }
-      }
+        },
+      },
     });
 
     const todoStore = createStore({
@@ -272,8 +268,8 @@ describe('createStore()', () => {
       actions: {
         addTodo(state, todo: any) {
           return { ...state, todos: [...state.todos, todo] };
-        }
-      }
+        },
+      },
     });
 
     userStore.dispatch('setName', 'Bob');

@@ -4,9 +4,10 @@
  * Integrates reactive primitives with DOM rendering
  */
 
-import type { VNode } from './vnode.js';
-import { render } from './render.js';
 import { effect } from '../reactive/effect.js';
+
+import { render } from './render.js';
+import type { VNode } from './vnode.js';
 
 /**
  * Current component context (for lifecycle hooks and context API)
@@ -42,7 +43,7 @@ export function mount(
   let currentDom: Node | null = null;
 
   // Create effect for reactive rendering
-  const dispose = effect((onCleanup) => {
+  const dispose = effect(onCleanup => {
     // Create component context
     const context: ComponentContext = {
       onMountCallbacks: [],

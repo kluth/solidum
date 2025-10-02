@@ -32,9 +32,7 @@ export function Link(props: LinkProps) {
     className
   );
 
-  const extraProps = external
-    ? { target: '_blank', rel: 'noopener noreferrer' }
-    : {};
+  const extraProps = external ? { target: '_blank', rel: 'noopener noreferrer' } : {};
 
   return createElement(
     'a',

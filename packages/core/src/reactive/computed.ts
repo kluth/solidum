@@ -22,6 +22,7 @@
  */
 
 import type { Subscriber, Unsubscribe } from './atom.js';
+import { scheduleNotification, shouldNotifySubscriber } from './batch.js';
 import {
   setComputedTracking,
   getComputedCallback,
@@ -30,7 +31,6 @@ import {
   registerEffectDependency,
   type TrackingContext,
 } from './tracking.js';
-import { scheduleNotification, shouldNotifySubscriber } from './batch.js';
 
 export interface Computed<T> {
   (): T;
@@ -111,7 +111,7 @@ export function computed<T>(fn: ComputeFn<T>): Computed<T> {
 
       // Set up tracking context
       const context: TrackingContext = {
-        onDependency: (unsubscribe) => {
+        onDependency: unsubscribe => {
           dependencyCleanups.push(unsubscribe);
         },
       };
@@ -135,7 +135,6 @@ export function computed<T>(fn: ComputeFn<T>): Computed<T> {
       isComputing = false;
     }
   }
-
 
   /**
    * The computed function - reads the current value

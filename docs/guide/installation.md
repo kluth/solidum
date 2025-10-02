@@ -5,6 +5,7 @@
 Install Solidum via your preferred package manager:
 
 ::: code-group
+
 ```bash [npm]
 npm install @solidum/core
 ```
@@ -20,6 +21,7 @@ yarn add @solidum/core
 ```bash [bun]
 bun add @solidum/core
 ```
+
 :::
 
 ## TypeScript
@@ -58,12 +60,13 @@ npm install @solidum/core
 ```
 
 **vite.config.ts:**
+
 ```typescript
-import { defineConfig } from 'vite'
+import { defineConfig } from 'vite';
 
 export default defineConfig({
   // Your Vite config
-})
+});
 ```
 
 ### Webpack
@@ -71,6 +74,7 @@ export default defineConfig({
 For Webpack projects:
 
 **webpack.config.js:**
+
 ```javascript
 module.exports = {
   entry: './src/index.ts',
@@ -90,7 +94,7 @@ module.exports = {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'dist'),
   },
-}
+};
 ```
 
 ### esbuild
@@ -108,29 +112,35 @@ For quick prototyping, you can use Solidum via CDN:
 ```html
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Solidum App</title>
-</head>
-<body>
-  <div id="app"></div>
+  <head>
+    <title>Solidum App</title>
+  </head>
+  <body>
+    <div id="app"></div>
 
-  <script type="module">
-    import { atom, createElement, mount } from 'https://esm.sh/@solidum/core'
+    <script type="module">
+      import { atom, createElement, mount } from 'https://esm.sh/@solidum/core';
 
-    const count = atom(0)
+      const count = atom(0);
 
-    function Counter() {
-      return createElement('div', null,
-        createElement('h1', null, `Count: ${count()}`),
-        createElement('button', {
-          onClick: () => count(count() + 1)
-        }, 'Increment')
-      )
-    }
+      function Counter() {
+        return createElement(
+          'div',
+          null,
+          createElement('h1', null, `Count: ${count()}`),
+          createElement(
+            'button',
+            {
+              onClick: () => count(count() + 1),
+            },
+            'Increment'
+          )
+        );
+      }
 
-    mount(document.getElementById('app'), () => createElement(Counter))
-  </script>
-</body>
+      mount(document.getElementById('app'), () => createElement(Counter));
+    </script>
+  </body>
 </html>
 ```
 

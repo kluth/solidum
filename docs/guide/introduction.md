@@ -9,14 +9,14 @@ Solidum is a fine-grained reactive JavaScript framework for building user interf
 Unlike React or Vue, Solidum uses fine-grained reactivity. This means only the specific parts of your UI that depend on changed data get updated - no virtual DOM diffing required.
 
 ```typescript
-const count = atom(0)
-const doubled = computed(() => count() * 2)
+const count = atom(0);
+const doubled = computed(() => count() * 2);
 
 effect(() => {
-  console.log(doubled()) // Only runs when count changes
-})
+  console.log(doubled()); // Only runs when count changes
+});
 
-count(5) // Console: 10
+count(5); // Console: 10
 ```
 
 ### 🎯 Four Core Primitives
@@ -52,8 +52,8 @@ Solidum is lightweight and tree-shakeable:
 Written in TypeScript with strict mode enabled. Full type inference, autocomplete, and compile-time safety.
 
 ```typescript
-const user = atom<User | null>(null)
-const name = computed(() => user()?.name ?? 'Guest')
+const user = atom<User | null>(null);
+const name = computed(() => user()?.name ?? 'Guest');
 //    ^? Computed<string>
 ```
 
@@ -83,6 +83,7 @@ const name = computed(() => user()?.name ?? 'Guest')
 ## When to Use Solidum
 
 ✅ **Good fit for:**
+
 - Performance-critical applications
 - Real-time dashboards
 - Interactive data visualizations
@@ -90,6 +91,7 @@ const name = computed(() => user()?.name ?? 'Guest')
 - Teams that value simplicity
 
 ❌ **Maybe not ideal for:**
+
 - Large teams heavily invested in React/Vue
 - Projects requiring mature ecosystem
 - SSR-heavy applications (for now)

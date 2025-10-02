@@ -51,7 +51,12 @@ export function Input(props: InputProps) {
     createElement(
       'div',
       { className: containerClasses },
-      leftIcon && createElement('span', { className: 'solidum-input-icon solidum-input-icon--left' }, leftIcon),
+      leftIcon &&
+        createElement(
+          'span',
+          { className: 'solidum-input-icon solidum-input-icon--left' },
+          leftIcon
+        ),
       createElement('input', {
         type,
         placeholder,
@@ -66,12 +71,18 @@ export function Input(props: InputProps) {
         onInput: (e: any) => onInput?.(e.target.value),
         ...rest,
       }),
-      rightIcon && createElement('span', { className: 'solidum-input-icon solidum-input-icon--right' }, rightIcon)
+      rightIcon &&
+        createElement(
+          'span',
+          { className: 'solidum-input-icon solidum-input-icon--right' },
+          rightIcon
+        )
     ),
-    helperText && createElement(
-      'span',
-      { className: cn('solidum-input-helper', { 'solidum-input-helper--error': error }) },
-      helperText
-    )
+    helperText &&
+      createElement(
+        'span',
+        { className: cn('solidum-input-helper', { 'solidum-input-helper--error': error }) },
+        helperText
+      )
   );
 }

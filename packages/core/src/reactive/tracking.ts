@@ -9,7 +9,7 @@ import type { Unsubscribe } from './atom.js';
 
 // Tracking context for computed
 export interface TrackingContext {
-  onDependency: (unsubscribe: Unsubscribe) => void;
+  onDependency: (_unsubscribe: Unsubscribe) => void;
 }
 
 let computedContext: TrackingContext | null = null;

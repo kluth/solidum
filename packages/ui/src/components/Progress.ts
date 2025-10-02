@@ -51,10 +51,7 @@ export function Progress(props: ProgressProps) {
         style: { width: `${percentage}%` },
       })
     ),
-    showLabel && createElement(
-      'span',
-      { className: 'solidum-progress-label' },
-      `${Math.round(percentage)}%`
-    )
+    showLabel &&
+      createElement('span', { className: 'solidum-progress-label' }, `${Math.round(percentage)}%`)
   );
 }

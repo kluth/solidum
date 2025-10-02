@@ -11,24 +11,24 @@ npm install -D @solidum/testing
 ## Basic Testing
 
 ```typescript
-import { describe, test, expect, runTests } from '@solidum/testing'
-import { atom, computed } from '@solidum/core'
+import { describe, test, expect, runTests } from '@solidum/testing';
+import { atom, computed } from '@solidum/core';
 
 describe('Counter', () => {
   test('should increment', () => {
-    const count = atom(0)
-    count(count() + 1)
-    expect(count()).toBe(1)
-  })
+    const count = atom(0);
+    count(count() + 1);
+    expect(count()).toBe(1);
+  });
 
   test('should compute doubled value', () => {
-    const count = atom(5)
-    const doubled = computed(() => count() * 2)
-    expect(doubled()).toBe(10)
-  })
-})
+    const count = atom(5);
+    const doubled = computed(() => count() * 2);
+    expect(doubled()).toBe(10);
+  });
+});
 
-runTests()
+runTests();
 ```
 
 ## DOM Testing
@@ -36,25 +36,27 @@ runTests()
 Test components with jsdom-based utilities:
 
 ```typescript
-import { createDOMEnvironment, DOMEvents } from '@solidum/testing'
+import { createDOMEnvironment, DOMEvents } from '@solidum/testing';
 
 describe('Button Component', () => {
   test('should handle clicks', () => {
-    const env = createDOMEnvironment()
+    const env = createDOMEnvironment();
 
     try {
-      let clicked = false
-      const button = env.document.createElement('button')
-      button.onclick = () => { clicked = true }
+      let clicked = false;
+      const button = env.document.createElement('button');
+      button.onclick = () => {
+        clicked = true;
+      };
 
-      DOMEvents.click(button)
+      DOMEvents.click(button);
 
-      expect(clicked).toBe(true)
+      expect(clicked).toBe(true);
     } finally {
-      env.cleanup()
+      env.cleanup();
     }
-  })
-})
+  });
+});
 ```
 
 ## User Interactions
@@ -62,15 +64,15 @@ describe('Button Component', () => {
 Simulate realistic user interactions:
 
 ```typescript
-import { UserInteraction, DOMWait } from '@solidum/testing'
+import { UserInteraction, DOMWait } from '@solidum/testing';
 
 test('should type into input', async () => {
-  const input = document.createElement('input')
+  const input = document.createElement('input');
 
-  await UserInteraction.type(input, 'Hello')
+  await UserInteraction.type(input, 'Hello');
 
-  expect(input.value).toBe('Hello')
-})
+  expect(input.value).toBe('Hello');
+});
 ```
 
 ## Async Testing
@@ -78,17 +80,17 @@ test('should type into input', async () => {
 Test async effects and operations:
 
 ```typescript
-import { DOMWait } from '@solidum/testing'
+import { DOMWait } from '@solidum/testing';
 
 test('should update after delay', async () => {
-  const data = atom(null)
+  const data = atom(null);
 
-  setTimeout(() => data('loaded'), 10)
+  setTimeout(() => data('loaded'), 10);
 
-  await DOMWait.wait(20)
+  await DOMWait.wait(20);
 
-  expect(data()).toBe('loaded')
-})
+  expect(data()).toBe('loaded');
+});
 ```
 
 ## Learn More

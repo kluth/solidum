@@ -4,11 +4,11 @@
  * Provides JSX-compatible virtual node creation.
  */
 
-export type ComponentFunction<P = any> = (props: P) => VNode | null;
+export type ComponentFunction<P = Record<string, unknown>> = (props: P) => VNode | null;
 
 export interface VNode {
   type: string | ComponentFunction | typeof Fragment;
-  props: Record<string, any>;
+  props: Record<string, unknown>;
   children: VNode[];
   text?: string;
 }
@@ -32,15 +32,15 @@ export const Fragment = Symbol('Fragment');
  */
 export function createElement(
   type: string | ComponentFunction | typeof Fragment,
-  props: Record<string, any> | null,
-  ...children: any[]
+  props: Record<string, unknown> | null,
+  ...children: unknown[]
 ): VNode {
   // Normalize props
   const normalizedProps = props || {};
 
   // Flatten and normalize children
   const normalizedChildren = flattenChildren(children)
-    .filter((child) => child != null && child !== false) // Remove null, undefined, false
+    .filter(child => child != null && child !== false) // Remove null, undefined, false
     .map(normalizeChild);
 
   return {
@@ -53,8 +53,8 @@ export function createElement(
 /**
  * Flatten nested arrays of children
  */
-function flattenChildren(children: any[]): any[] {
-  const result: any[] = [];
+function flattenChildren(children: unknown[]): unknown[] {
+  const result: unknown[] = [];
 
   for (const child of children) {
     if (Array.isArray(child)) {
@@ -70,7 +70,7 @@ function flattenChildren(children: any[]): any[] {
 /**
  * Normalize a child to a VNode
  */
-function normalizeChild(child: any): VNode {
+function normalizeChild(child: unknown): VNode {
   // Already a VNode
   if (isVNode(child)) {
     return child;
@@ -83,7 +83,7 @@ function normalizeChild(child: any): VNode {
 /**
  * Check if value is a VNode
  */
-function isVNode(value: any): value is VNode {
+function isVNode(value: unknown): value is VNode {
   return (
     value != null &&
     typeof value === 'object' &&
@@ -112,7 +112,7 @@ export namespace JSX {
   export interface Element extends VNode {}
 
   export interface IntrinsicElements {
-    [elemName: string]: any;
+    [elemName: string]: Record<string, unknown>;
   }
 
   export interface ElementChildrenAttribute {

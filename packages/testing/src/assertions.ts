@@ -3,7 +3,11 @@
  */
 
 export class AssertionError extends Error {
-  constructor(message: string, public actual: unknown, public expected: unknown) {
+  constructor(
+    message: string,
+    public actual: unknown,
+    public expected: unknown
+  ) {
     super(message);
     this.name = 'AssertionError';
   }
@@ -141,14 +145,14 @@ export function expect<T>(actual: T): Expectation<T> {
         }
       } else if (typeof actual === 'string' && typeof expected === 'string') {
         if (!actual.includes(expected)) {
-          throw new AssertionError(
-            `Expected string to contain "${expected}"`,
-            actual,
-            expected
-          );
+          throw new AssertionError(`Expected string to contain "${expected}"`, actual, expected);
         }
       } else {
-        throw new AssertionError('toContain() works only with arrays and strings', actual, expected);
+        throw new AssertionError(
+          'toContain() works only with arrays and strings',
+          actual,
+          expected
+        );
       }
     },
 
