@@ -25,7 +25,7 @@ console.log('Bundling client-side JavaScript...');
 await esbuild.build({
   entryPoints: [join(__dirname, 'client.js')],
   bundle: true,
-  format: 'esm',
+  format: 'iife',
   outfile: join(distDir, 'app.js'),
   platform: 'browser',
   target: 'es2020',
@@ -58,7 +58,7 @@ function htmlTemplate(content, title = 'Solidum - Fine-Grained Reactive Framewor
 </head>
 <body>
   <div id="app">${content}</div>
-  <script type="module" src="/solidum/app.js"></script>
+  <script src="/solidum/app.js"></script>
 </body>
 </html>`;
 }
