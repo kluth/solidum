@@ -15,6 +15,30 @@ Solidum is a lightweight, performant framework that combines fine-grained reacti
 - **Type-Safe**: Fully typed TypeScript with strict mode
 - **Extensible**: Easy to build libraries like Material UI, state management, forms, etc.
 
+## Documentation
+
+📚 **[View the full documentation](https://yourusername.github.io/Solidum/)**
+
+The comprehensive documentation includes:
+- Detailed guides and tutorials
+- Complete API reference
+- Interactive examples
+- Best practices
+
+The documentation is automatically deployed to GitHub Pages on every push to master.
+
+### Local Documentation
+
+To run the documentation site locally:
+
+```bash
+cd docs
+pnpm install
+pnpm dev
+```
+
+Then visit `http://localhost:5173`
+
 ## Installation
 
 ```bash
