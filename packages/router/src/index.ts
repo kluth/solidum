@@ -43,6 +43,12 @@ export function createRouter(options: RouterOptions): {
   const initialPath = options.initialPath || window.location.pathname;
   if (routes[initialPath]) {
     currentRoute(initialPath);
+    // Trigger initial route change event
+    window.dispatchEvent(
+      new CustomEvent<RouteChangeEvent>('routechange', {
+        detail: { path: initialPath, component: routes[initialPath] },
+      })
+    );
   }
 
   // Handle browser navigation (back/forward buttons)
