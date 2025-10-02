@@ -42,7 +42,7 @@ function htmlTemplate(content, title = 'Solidum - Fine-Grained Reactive Framewor
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>${title}</title>
-  <link rel="stylesheet" href="/solidum/styles.css">
+  <link rel="stylesheet" href="./styles.css">
   <style>
     * {
       margin: 0;
@@ -58,7 +58,7 @@ function htmlTemplate(content, title = 'Solidum - Fine-Grained Reactive Framewor
 </head>
 <body>
   <div id="app">${content}</div>
-  <script src="/solidum/app.js"></script>
+  <script src="./app.js"></script>
 </body>
 </html>`;
 }
