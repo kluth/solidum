@@ -10,18 +10,20 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "declaration": false,
-    "outDir": "./dist",
+    "outDir": "./",
     "rootDir": "./",
     "resolveJsonModule": true,
-    "isolatedModules": true,
-    "noEmit": true
+    "isolatedModules": true
   },
   "include": [
-    "**/*.ts",
-    "**/*.js"
+    "pages/*.ts",
+    "client.ts"
   ],
   "exclude": [
     "node_modules",
-    "dist"
+    "dist",
+    "build.js",
+    "renderer.js",
+    "pages/components.js"
   ]
 }

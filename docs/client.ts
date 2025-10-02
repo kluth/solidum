@@ -36,7 +36,8 @@ if (document.readyState === 'loading') {
 
 // Listen for route changes
 window.addEventListener('routechange', (event) => {
-  console.log('🔄 Route changed to:', event.detail.path);
+  const customEvent = event as CustomEvent<{ path: string; component: string }>;
+  console.log('🔄 Route changed to:', customEvent.detail.path);
   mountApp();
 });
 
@@ -49,7 +50,7 @@ function mountApp() {
     console.log('🎯 Calling mount...');
     try {
       const currentPage = router.getCurrentPage();
-      const PageComponent = pageComponents[currentPage] || HomePage;
+      const PageComponent = pageComponents[currentPage as keyof typeof pageComponents] || HomePage;
       console.log('📄 Mounting page:', currentPage);
       
       mount(root, PageComponent);

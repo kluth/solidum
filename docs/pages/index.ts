@@ -30,7 +30,7 @@ export function HomePage() {
   const tableColumns = [
     { key: 'name', header: 'Component', sortable: true },
     { key: 'category', header: 'Category', sortable: true },
-    { key: 'interactive', header: 'Interactive', render: (val) => val ? '✓' : '✗' }
+    { key: 'interactive', header: 'Interactive', render: (val: boolean) => val ? '✓' : '✗' }
   ];
 
   const tableData = [
