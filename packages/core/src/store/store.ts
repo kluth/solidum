@@ -160,12 +160,12 @@ export function createStore<State, Actions = {}, Getters = {}, Effects = {}>(
   if (config.effects) {
     const effectsConfig = config.effects as any;
     for (const key in effectsConfig) {
-      effects[key] = () => {
+      effects[key] = (...args: any[]) => {
         const ctx: EffectContext<State> = {
           dispatch,
           getState
         };
-        return effectsConfig[key](ctx);
+        return effectsConfig[key](ctx, ...args);
       };
     }
   }

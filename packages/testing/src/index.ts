@@ -17,3 +17,18 @@ export { describe, test, it, runTests, registry } from './test-runner.js';
 export { expect } from './assertions.js';
 export type { TestContext, TestResult, SuiteResult } from './test-runner.js';
 export type { Expectation, Matchers } from './assertions.js';
+
+// DOM Testing Utilities
+export {
+  createDOMEnvironment,
+  DOMQueries,
+  DOMEvents,
+  DOMWait,
+  DOMAssertions,
+  UserInteraction,
+  Screen,
+  screen,
+  render,
+  within,
+} from './dom-testing.js';
+export type { DOMTestEnvironment, QueryOptions, RenderResult } from './dom-testing.js';

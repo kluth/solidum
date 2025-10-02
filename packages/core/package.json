@@ -14,7 +14,8 @@
   "scripts": {
     "build": "tsc",
     "dev": "tsc --watch",
-    "test": "tsx src/reactive/atom.test.ts && tsx src/reactive/computed.test.ts && tsx src/reactive/effect.test.ts && tsx src/reactive/batch.test.ts && tsx src/context/context.test.ts && tsx src/store/store.test.ts && tsx src/utils/component-utils.test.ts",
+    "test": "tsx src/reactive/atom.test.ts && tsx src/reactive/computed.test.ts && tsx src/reactive/effect.test.ts && tsx src/reactive/batch.test.ts && tsx src/reactive/reactive-advanced.test.ts && tsx src/context/context.test.ts && tsx src/store/store.test.ts && tsx src/store/store-integration.test.ts && tsx src/utils/component-utils.test.ts",
+    "test:dom": "tsx src/dom/dom-integration.test.ts",
     "test:watch": "tsx --watch src/reactive/atom.test.ts src/reactive/computed.test.ts",
     "clean": "rm -rf dist",
     "typecheck": "tsc --noEmit"
