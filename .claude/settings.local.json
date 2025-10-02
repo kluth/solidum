@@ -42,7 +42,19 @@
       "Bash(for:*)",
       "Bash(do echo \"Processing $file...\")",
       "Bash(done)",
-      "Bash(timeout 90 bash -c 'while true; do \"\"C:\\Program Files\\GitHub CLI\\gh.exe\"\" run list --repo kluth/solidum --limit 1 | head -1; if \"\"C:\\Program Files\\GitHub CLI\\gh.exe\"\" run list --repo kluth/solidum --limit 1 | grep -q \"\"completed\"\"; then echo \"\"Deployment completed!\"\"; break; fi; sleep 5; done')"
+      "Bash(timeout 90 bash -c 'while true; do \"\"C:\\Program Files\\GitHub CLI\\gh.exe\"\" run list --repo kluth/solidum --limit 1 | head -1; if \"\"C:\\Program Files\\GitHub CLI\\gh.exe\"\" run list --repo kluth/solidum --limit 1 | grep -q \"\"completed\"\"; then echo \"\"Deployment completed!\"\"; break; fi; sleep 5; done')",
+      "Bash(git fetch:*)",
+      "Bash(git pull:*)",
+      "Bash(node:*)",
+      "Bash(git config:*)",
+      "Bash(git remote get-url:*)",
+      "Bash(go mod:*)",
+      "Bash(go build:*)",
+      "Bash(go get:*)",
+      "Bash(./solidum.exe --version)",
+      "Bash(./solidum.exe --help)",
+      "Bash(./solidum.exe new:*)",
+      "Bash(./solidum.exe generate:*)"
     ],
     "deny": [],
     "ask": []

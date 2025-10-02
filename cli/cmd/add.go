@@ -1,0 +1,58 @@
+package cmd
+
+import (
+	"fmt"
+
+	"github.com/fatih/color"
+	"github.com/kluth/solidum-cli/internal/generator"
+	"github.com/spf13/cobra"
+)
+
+var addCmd = &cobra.Command{
+	Use:   "add [package]",
+	Short: "Add a Solidum package to your project",
+	Long: `Add a Solidum package to your project and update package.json.
+
+Available packages:
+  - router    : @solidum/router (SPA routing)
+  - ui        : @solidum/ui (UI components)
+  - store     : @solidum/store (State management)
+  - context   : @solidum/context (Dependency injection)
+  - ssr       : @solidum/ssr (Server-side rendering)
+  - testing   : @solidum/testing (Test utilities)`,
+	Args: cobra.ExactArgs(1),
+	RunE: runAdd,
+}
+
+func runAdd(cmd *cobra.Command, args []string) error {
+	pkg := args[0]
+
+	cyan := color.New(color.FgCyan)
+	green := color.New(color.FgGreen, color.Bold)
+
+	cyan.Printf("\n📦 Adding package: %s\n\n", pkg)
+
+	packageMap := map[string]string{
+		"router":  "@solidum/router",
+		"ui":      "@solidum/ui",
+		"store":   "@solidum/store",
+		"context": "@solidum/context",
+		"ssr":     "@solidum/ssr",
+		"testing": "@solidum/testing",
+	}
+
+	packageName, ok := packageMap[pkg]
+	if !ok {
+		return fmt.Errorf("unknown package: %s\nRun 'solidum add --help' to see available packages", pkg)
+	}
+
+	if err := generator.AddPackage(packageName); err != nil {
+		return fmt.Errorf("failed to add package: %w", err)
+	}
+
+	green.Printf("✅ Added %s\n", packageName)
+	fmt.Println("\nRun 'pnpm install' to install the package")
+	fmt.Println()
+
+	return nil
+}

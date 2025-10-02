@@ -23,7 +23,10 @@
     "ci:test": "pnpm build && pnpm test:ci && pnpm typecheck:ci && pnpm format:check",
     "ci:local": "pnpm ci:test && echo '✅ All CI checks passed locally!'",
     "prepare": "husky install",
-    "pre-commit": "lint-staged"
+    "pre-commit": "lint-staged",
+    "publish:prepare": "node scripts/prepare-publish.js",
+    "publish:packages": "pnpm -r --filter './packages/*' publish --access public --no-git-checks",
+    "publish:all": "pnpm build && pnpm test && pnpm publish:prepare && pnpm publish:packages"
   },
   "devDependencies": {
     "@types/node": "^20.11.0",

@@ -22,7 +22,7 @@
     "lint:fix": "eslint src/**/*.{ts,js} --fix"
   },
   "dependencies": {
-    "@solidum/core": "workspace:*"
+    "@solidum/core": "^0.1.0"
   },
   "devDependencies": {
     "@solidum/testing": "workspace:*",
@@ -32,5 +32,27 @@
   },
   "files": [
     "dist"
+  ],
+  "author": {
+    "name": "Matthias Kluth",
+    "email": "matthias.kluth@prodot.de"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kluth/solidum.git"
+  },
+  "homepage": "https://kluth.github.io/solidum",
+  "bugs": {
+    "url": "https://github.com/kluth/solidum/issues"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "keywords": [
+    "solidum",
+    "state",
+    "store",
+    "state-management"
   ]
 }
