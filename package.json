@@ -6,16 +6,29 @@
   "type": "module",
   "scripts": {
     "build": "pnpm --filter @solidum/core build && pnpm --filter @solidum/utils build && pnpm --filter @solidum/ui build && pnpm --filter @solidum/router build && pnpm --filter @solidum/store build && pnpm --filter @solidum/context build && pnpm --filter @solidum/ssr build && pnpm --filter @solidum/testing build",
+    "build:docs": "pnpm --filter @solidum/docs build",
     "test": "pnpm -r test",
     "test:watch": "pnpm -r test:watch",
+    "test:ci": "pnpm -r test --reporter=verbose",
     "dev": "pnpm -r --parallel dev",
+    "dev:docs": "pnpm --filter @solidum/docs dev",
     "clean": "pnpm -r clean && rm -rf node_modules",
+    "clean:dist": "pnpm -r exec rm -rf dist",
     "typecheck": "pnpm -r typecheck",
+    "typecheck:ci": "pnpm -r typecheck --noEmit",
     "lint": "pnpm -r lint",
-    "format": "prettier --write \"**/*.{ts,tsx,md,json}\""
+    "lint:fix": "pnpm -r lint --fix",
+    "format": "prettier --write \"**/*.{ts,tsx,md,json}\"",
+    "format:check": "prettier --check \"**/*.{ts,tsx,md,json}\"",
+    "ci:test": "pnpm build && pnpm test:ci && pnpm typecheck:ci && pnpm format:check",
+    "ci:local": "pnpm ci:test && echo '✅ All CI checks passed locally!'"
   },
   "devDependencies": {
     "@types/node": "^20.11.0",
+    "@typescript-eslint/eslint-plugin": "^8.45.0",
+    "@typescript-eslint/parser": "^8.45.0",
+    "eslint": "^9.36.0",
+    "eslint-plugin-import": "^2.32.0",
     "prettier": "^3.2.0",
     "typescript": "^5.3.0"
   },

@@ -17,7 +17,9 @@
     "test": "tsx src/component-utils.test.ts",
     "test:watch": "tsx --watch src/component-utils.test.ts",
     "clean": "rm -rf dist",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint src/**/*.{ts,js}",
+    "lint:fix": "eslint src/**/*.{ts,js} --fix"
   },
   "dependencies": {},
   "devDependencies": {
