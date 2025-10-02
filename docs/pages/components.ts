@@ -1,5 +1,6 @@
 import { createElement } from '@solidum/core';
 import { Container, Card, Button, Badge } from '@solidum/ui';
+import { navigate } from '@solidum/router';
 
 export function ComponentsPage() {
   return createElement(
@@ -48,7 +49,7 @@ export function ComponentsPage() {
           {
             variant: 'secondary',
             size: 'lg',
-            onClick: () => window.history.back(),
+            onClick: () => navigate('/'),
           },
           '← Back to Home'
         )

@@ -2,7 +2,7 @@ import { mount } from '@solidum/core';
 import { HomePage } from './pages/index.js';
 import { ReactivityPage } from './pages/reactivity.js';
 import { ComponentsPage } from './pages/components.js';
-import { createRouter } from '@solidum/router';
+import { createRouter, navigate } from '@solidum/router';
 
 console.log('🚀 Solidum client.js loaded!', 'readyState:', document.readyState);
 
@@ -49,9 +49,14 @@ function mountApp() {
     root.innerHTML = '';
     console.log('🎯 Calling mount...');
     try {
+      const currentPath = router.getCurrentPath();
       const currentPage = router.getCurrentPage();
+      console.log('🛣️ Current path:', currentPath);
+      console.log('📄 Current page:', currentPage);
+      console.log('🗺️ Available routes:', Object.keys(pageComponents));
+      
       const PageComponent = pageComponents[currentPage as keyof typeof pageComponents] || HomePage;
-      console.log('📄 Mounting page:', currentPage);
+      console.log('📄 Mounting page:', currentPage, 'Component:', PageComponent.name);
 
       mount(root, PageComponent);
       console.log('✨ Mount completed!');
