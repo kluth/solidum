@@ -1,4 +1,4 @@
-import { createElement, cn, atom } from '@solidum/core';
+import { createElement, cn, useState } from '@solidum/core';
 
 export interface Tab {
   id: string;
@@ -27,7 +27,7 @@ export function Tabs(props: TabsProps) {
     onChange,
   } = props;
 
-  const activeTab = atom(defaultTab || tabs[0]?.id);
+  const activeTab = useState(defaultTab || tabs[0]?.id);
 
   const handleTabChange = (tabId: string) => {
     activeTab(tabId);

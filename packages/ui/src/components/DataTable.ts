@@ -1,4 +1,4 @@
-import { createElement, cn, atom } from '@solidum/core';
+import { createElement, cn, useState } from '@solidum/core';
 
 export interface DataTableColumn<T = any> {
   key: string;
@@ -42,10 +42,10 @@ export function DataTable<T = any>(props: DataTableProps<T>) {
     onRowDrag,
   } = props;
 
-  const sortKey = atom<string | null>(null);
-  const sortDirection = atom<'asc' | 'desc'>('asc');
-  const draggedRow = atom<number | null>(null);
-  const dragOverRow = atom<number | null>(null);
+  const sortKey = useState<string | null>(null);
+  const sortDirection = useState<'asc' | 'desc'>('asc');
+  const draggedRow = useState<number | null>(null);
+  const dragOverRow = useState<number | null>(null);
 
   const handleSort = (key: string) => {
     if (!sortable) return;

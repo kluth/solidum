@@ -1,4 +1,4 @@
-import { createElement, cn, atom } from '@solidum/core';
+import { createElement, cn, useState } from '@solidum/core';
 
 export interface AccordionItem {
   id: string;
@@ -49,7 +49,7 @@ export function Accordion(props: AccordionProps) {
     className,
   } = props;
 
-  const openItems = atom<Set<string>>(
+  const openItems = useState<Set<string>>(
     new Set(items.filter(item => item.defaultOpen).map(item => item.id))
   );
 

@@ -1,4 +1,4 @@
-import { createElement, cn, atom } from '@solidum/core';
+import { createElement, cn, useState } from '@solidum/core';
 import { Stack } from './Stack.js';
 
 export interface NavItem {
@@ -16,7 +16,7 @@ export interface NavigationProps {
 
 export function Navigation(props: NavigationProps) {
   const { logo, title, items, currentPath, className } = props;
-  const mobileMenuOpen = atom(false);
+  const mobileMenuOpen = useState(false);
 
   return createElement(
     'nav',

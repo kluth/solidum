@@ -1,4 +1,4 @@
-import { createElement, cn, atom } from '@solidum/core';
+import { createElement, cn, useState } from '@solidum/core';
 
 export interface Chart3DDataPoint {
   x: number;
@@ -36,9 +36,9 @@ export function Chart3D(props: Chart3DProps) {
     className,
   } = props;
 
-  const currentRotation = atom(rotation);
-  const isDragging = atom(false);
-  const lastMouse = atom({ x: 0, y: 0 });
+  const currentRotation = useState(rotation);
+  const isDragging = useState(false);
+  const lastMouse = useState({ x: 0, y: 0 });
 
   const handleMouseDown = (e: MouseEvent) => {
     if (interactive) {

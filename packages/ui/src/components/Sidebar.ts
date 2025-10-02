@@ -1,4 +1,4 @@
-import { createElement, cn, atom } from '@solidum/core';
+import { createElement, cn, useState } from '@solidum/core';
 import { Stack } from './Stack.js';
 
 export interface SidebarItem {
@@ -35,7 +35,7 @@ function SidebarLink({ item, currentPath }: { item: SidebarItem; currentPath: st
 }
 
 function SidebarGroup({ section, currentPath }: { section: SidebarSection; currentPath: string }) {
-  const collapsed = atom(section.collapsed ?? false);
+  const collapsed = useState(section.collapsed ?? false);
 
   return createElement(
     'div',

@@ -1,4 +1,4 @@
-import { createElement, cn, atom, effect, onCleanup } from '@solidum/core';
+import { createElement, cn, useState, effect, onCleanup } from '@solidum/core';
 
 export interface ParticleBackgroundProps {
   count?: number;
@@ -21,8 +21,8 @@ export function ParticleBackground(props: ParticleBackgroundProps) {
     className,
   } = props;
 
-  const canvasRef = atom<HTMLCanvasElement | null>(null);
-  const mousePos = atom({ x: 0, y: 0 });
+  const canvasRef = useState<HTMLCanvasElement | null>(null);
+  const mousePos = useState({ x: 0, y: 0 });
 
   interface Particle {
     x: number;

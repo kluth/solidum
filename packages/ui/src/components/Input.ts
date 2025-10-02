@@ -1,4 +1,4 @@
-import { createElement, cn, atom } from '@solidum/core';
+import { createElement, cn, useState } from '@solidum/core';
 
 export interface InputProps {
   type?: 'text' | 'email' | 'password' | 'number' | 'tel' | 'url' | 'search';
@@ -31,7 +31,7 @@ export function Input(props: InputProps) {
     ...rest
   } = props;
 
-  const focused = atom(false);
+  const focused = useState(false);
 
   const containerClasses = cn(
     'solidum-input-container',

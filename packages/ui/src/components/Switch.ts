@@ -1,4 +1,4 @@
-import { createElement, cn, atom } from '@solidum/core';
+import { createElement, cn, useState } from '@solidum/core';
 
 export interface SwitchProps {
   checked?: boolean;
@@ -21,7 +21,7 @@ export function Switch(props: SwitchProps) {
     ...rest
   } = props;
 
-  const isChecked = atom(checked);
+  const isChecked = useState(checked);
 
   const handleToggle = () => {
     if (!disabled) {

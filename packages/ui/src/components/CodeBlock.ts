@@ -1,4 +1,4 @@
-import { createElement, cn, atom } from '@solidum/core';
+import { createElement, cn, useState } from '@solidum/core';
 
 export interface CodeBlockProps {
   code: string;
@@ -10,7 +10,7 @@ export interface CodeBlockProps {
 
 export function CodeBlock(props: CodeBlockProps) {
   const { code, language = 'javascript', showLineNumbers = false, fileName, className } = props;
-  const copied = atom(false);
+  const copied = useState(false);
 
   const copyToClipboard = async () => {
     try {

@@ -7,6 +7,7 @@
 import type { VNode, ComponentFunction } from './vnode.js';
 import { Fragment } from './vnode.js';
 import { pushContext, popContext, enterRender, exitRender } from '../context/context.js';
+import { _getOrCreateComponentId, _setComponentId, _clearComponentId } from '../reactive/state.js';
 
 /**
  * Render a VNode to a DOM element
@@ -47,6 +48,11 @@ export function render(
   // Handle component functions
   if (typeof vnode.type === 'function') {
     enterRender();
+
+    // Set component ID for useState hooks
+    const componentId = _getOrCreateComponentId(vnode.type, vnode.props);
+    _setComponentId(componentId);
+
     try {
       // Merge children into props for component access
       const propsWithChildren = {
@@ -61,6 +67,7 @@ export function render(
       // Component returned null
       return document.createTextNode('');
     } finally {
+      _clearComponentId();
       exitRender();
     }
   }

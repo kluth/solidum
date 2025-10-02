@@ -1,4 +1,4 @@
-import { createElement, cn, atom } from '@solidum/core';
+import { createElement, cn, useState } from '@solidum/core';
 
 export interface SelectOption {
   value: string;
@@ -29,7 +29,7 @@ export function Select(props: SelectProps) {
     ...rest
   } = props;
 
-  const isOpen = atom(false);
+  const isOpen = useState(false);
 
   const selectedOption = options.find(opt => opt.value === value);
 

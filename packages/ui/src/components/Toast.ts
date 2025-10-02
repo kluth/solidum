@@ -1,4 +1,4 @@
-import { createElement, cn, atom } from '@solidum/core';
+import { createElement, cn, useState } from '@solidum/core';
 
 export interface ToastProps {
   message: string;
@@ -19,7 +19,7 @@ export function Toast(props: ToastProps) {
     onClose,
   } = props;
 
-  const visible = atom(true);
+  const visible = useState(true);
 
   // Auto-hide after duration
   if (duration > 0) {

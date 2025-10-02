@@ -1,4 +1,4 @@
-import { createElement, cn, atom } from '@solidum/core';
+import { createElement, cn, useState } from '@solidum/core';
 
 export interface SliderProps {
   min?: number;
@@ -31,7 +31,7 @@ export function Slider(props: SliderProps) {
     ...rest
   } = props;
 
-  const currentValue = atom(value);
+  const currentValue = useState(value);
 
   const handleInput = (e: Event) => {
     const target = e.target as HTMLInputElement;
