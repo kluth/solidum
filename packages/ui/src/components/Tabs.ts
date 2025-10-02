@@ -29,12 +29,36 @@ export function Tabs(props: TabsProps) {
 
   const activeTab = useState(defaultTab || tabs[0]?.id);
 
-  const handleTabChange = (tabId: string) => {
+  const handleTabChange = (tabId: string, event: Event) => {
     activeTab(tabId);
     onChange?.(tabId);
-  };
 
-  const activeTabContent = tabs.find(tab => tab.id === activeTab())?.content;
+    // TEMPORARY: Directly manipulate DOM until reactivity is fixed
+    const button = event.currentTarget as HTMLButtonElement;
+    const tabsContainer = button.closest('.solidum-tabs');
+    if (tabsContainer) {
+      // Update button states
+      const allButtons = tabsContainer.querySelectorAll('.solidum-tab');
+      allButtons.forEach(btn => {
+        btn.classList.remove('solidum-tab--active');
+        btn.setAttribute('aria-selected', 'false');
+      });
+      button.classList.add('solidum-tab--active');
+      button.setAttribute('aria-selected', 'true');
+
+      // Update panel visibility
+      const allPanels = tabsContainer.querySelectorAll('.solidum-tabs-content');
+      allPanels.forEach((panel, index) => {
+        if (tabs[index]?.id === tabId) {
+          (panel as HTMLElement).style.display = 'block';
+          panel.classList.add('solidum-tabs-content--active');
+        } else {
+          (panel as HTMLElement).style.display = 'none';
+          panel.classList.remove('solidum-tabs-content--active');
+        }
+      });
+    }
+  };
 
   return createElement(
     'div',
@@ -55,23 +79,33 @@ export function Tabs(props: TabsProps) {
               'solidum-tab--disabled': tab.disabled,
             }),
             disabled: tab.disabled,
-            onClick: () => !tab.disabled && handleTabChange(tab.id),
+            onClick: (e: Event) => !tab.disabled && handleTabChange(tab.id, e),
           },
           tab.icon && createElement('span', { className: 'solidum-tab-icon' }, tab.icon),
           tab.label
         )
       )
     ),
-    // Tab content
+    // Tab contents - render all, show active with CSS
     createElement(
       'div',
-      {
-        className: cn('solidum-tabs-content', {
-          'solidum-tabs-content--animated': animated,
-        }),
-        role: 'tabpanel',
-      },
-      activeTabContent
+      { className: 'solidum-tabs-panels' },
+      ...tabs.map(tab =>
+        createElement(
+          'div',
+          {
+            className: cn('solidum-tabs-content', {
+              'solidum-tabs-content--active': tab.id === activeTab(),
+              'solidum-tabs-content--animated': animated,
+            }),
+            role: 'tabpanel',
+            style: {
+              display: tab.id === activeTab() ? 'block' : 'none',
+            },
+          },
+          tab.content
+        )
+      )
     )
   );
 }

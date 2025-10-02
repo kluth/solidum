@@ -31,8 +31,15 @@ if (document.readyState === 'loading') {
     root.innerHTML = '';
     console.log('🎯 Calling mount...');
     try {
-      mount(root, HomePage);
+      const dispose = mount(root, HomePage);
       console.log('✨ Mount completed!');
+
+      // Debug: log when HomePage re-renders
+      let renderCount = 0;
+      window._debugRenderCount = () => {
+        renderCount++;
+        console.log(`🔄 HomePage render #${renderCount}`);
+      };
     } catch (e) {
       console.error('❌ Mount error:', e);
     }
