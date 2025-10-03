@@ -1,0 +1,63 @@
+{
+  "name": "@sldm/integrations",
+  "version": "0.1.0",
+  "description": "Integration adapters for feeds, APIs, MCPs, authentication, and third-party services",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "test": "tsx src/integrations.test.ts",
+    "test:watch": "tsx --watch src/integrations.test.ts",
+    "clean": "rm -rf dist",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint src/**/*.{ts,js}",
+    "lint:fix": "eslint src/**/*.{ts,js} --fix"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@sldm/testing": "workspace:*",
+    "@types/node": "^20.11.0",
+    "tsx": "^4.7.0",
+    "typescript": "^5.3.0"
+  },
+  "files": [
+    "dist"
+  ],
+  "author": {
+    "name": "Matthias Kluth",
+    "email": "matthias.kluth@prodot.de"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kluth/solidum.git"
+  },
+  "homepage": "https://kluth.github.io/solidum",
+  "bugs": {
+    "url": "https://github.com/kluth/solidum/issues"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "keywords": [
+    "solidum",
+    "integrations",
+    "mcp",
+    "feeds",
+    "rss",
+    "atom",
+    "oauth",
+    "api",
+    "rest",
+    "graphql",
+    "analytics"
+  ]
+}

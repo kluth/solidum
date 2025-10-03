@@ -168,12 +168,16 @@ export class HTMLReportGenerator {
           <div class="stat-value">${this.bundleAnalyzer.formatSize(bundle.totalGzipSize)}</div>
           <div class="stat-label">Gzipped</div>
         </div>
-        ${bundle.totalBrotliSize > 0 ? `
+        ${
+          bundle.totalBrotliSize > 0
+            ? `
         <div class="stat">
           <div class="stat-value">${this.bundleAnalyzer.formatSize(bundle.totalBrotliSize)}</div>
           <div class="stat-label">Brotli</div>
         </div>
-        ` : ''}
+        `
+            : ''
+        }
       </div>
       <table>
         <thead>
@@ -185,14 +189,18 @@ export class HTMLReportGenerator {
           </tr>
         </thead>
         <tbody>
-          ${bundle.bundles.map(b => `
+          ${bundle.bundles
+            .map(
+              b => `
             <tr>
               <td>${b.file}</td>
               <td>${this.bundleAnalyzer.formatSize(b.size)}</td>
               <td>${this.bundleAnalyzer.formatSize(b.gzipSize)}</td>
               ${b.brotliSize ? `<td>${this.bundleAnalyzer.formatSize(b.brotliSize)}</td>` : ''}
             </tr>
-          `).join('')}
+          `
+            )
+            .join('')}
         </tbody>
       </table>
     </div>`;
@@ -202,7 +210,7 @@ export class HTMLReportGenerator {
     if (!report.tests) return '';
 
     const { tests } = report;
-    const successRate = (tests.passedTests / tests.totalTests * 100).toFixed(1);
+    const successRate = ((tests.passedTests / tests.totalTests) * 100).toFixed(1);
 
     return `<div class="card">
       <h2>✅ Test Results</h2>
@@ -215,12 +223,16 @@ export class HTMLReportGenerator {
           <div class="stat-value">${tests.passedTests}</div>
           <div class="stat-label">Passed</div>
         </div>
-        ${tests.failedTests > 0 ? `
+        ${
+          tests.failedTests > 0
+            ? `
         <div class="stat" style="background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);">
           <div class="stat-value">${tests.failedTests}</div>
           <div class="stat-label">Failed</div>
         </div>
-        ` : ''}
+        `
+            : ''
+        }
         <div class="stat">
           <div class="stat-value">${tests.totalDuration.toFixed(0)}ms</div>
           <div class="stat-label">Duration</div>
@@ -261,7 +273,7 @@ export class HTMLReportGenerator {
     </div>`;
   }
 
-  private darkenColor(color: string): string {
+  private darkenColor(color: string, _percentage: number): string {
     // Simple color darkening - this is a basic implementation
     return color;
   }
