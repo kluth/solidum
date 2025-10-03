@@ -20,6 +20,7 @@ export interface RouteChangeEvent {
 export interface RouterOptions {
   routes: RouteConfig;
   initialPath?: string;
+  basePath?: string;
 }
 
 // Current route state
@@ -27,6 +28,26 @@ export const currentRoute = atom<string>('/');
 
 // Route configuration
 let routes: RouteConfig = {};
+let basePath = '';
+
+/**
+ * Strip base path from a full path
+ */
+function stripBasePath(fullPath: string): string {
+  if (!basePath) return fullPath;
+  if (fullPath.startsWith(basePath)) {
+    return fullPath.slice(basePath.length) || '/';
+  }
+  return fullPath;
+}
+
+/**
+ * Add base path to a route path
+ */
+function addBasePath(path: string): string {
+  if (!basePath) return path;
+  return basePath + path;
+}
 
 /**
  * Initialize the router with route configuration
@@ -38,22 +59,27 @@ export function createRouter(options: RouterOptions): {
   getCurrentPath: () => string;
 } {
   routes = options.routes;
+  basePath = options.basePath || '';
 
   // Set initial route
-  const initialPath = options.initialPath || window.location.pathname;
-  if (routes[initialPath]) {
-    currentRoute(initialPath);
+  const fullPath = options.initialPath || window.location.pathname;
+  const path = stripBasePath(fullPath);
+
+  if (routes[path]) {
+    currentRoute(path);
     // Trigger initial route change event
     window.dispatchEvent(
       new CustomEvent<RouteChangeEvent>('routechange', {
-        detail: { path: initialPath, component: routes[initialPath] },
+        detail: { path, component: routes[path] },
       })
     );
   }
 
   // Handle browser navigation (back/forward buttons)
   window.addEventListener('popstate', event => {
-    const path = event.state?.path || window.location.pathname;
+    const fullPath = event.state?.path || window.location.pathname;
+    const path = stripBasePath(fullPath);
+
     if (routes[path]) {
       currentRoute(path);
 
@@ -80,7 +106,8 @@ export function navigate(path: string): void {
   if (routes[path]) {
     currentRoute(path);
     // Update browser history without page reload
-    window.history.pushState({ path }, '', path);
+    const fullPath = addBasePath(path);
+    window.history.pushState({ path: fullPath }, '', fullPath);
 
     // Trigger a page re-render by dispatching a custom event
     window.dispatchEvent(

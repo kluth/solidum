@@ -13,6 +13,9 @@ const pageComponents = {
   ComponentsPage,
 };
 
+// Detect base path for GitHub Pages deployment
+const basePath = window.location.pathname.includes('/solidum') ? '/solidum' : '';
+
 // Initialize router
 const router = createRouter({
   routes: {
@@ -20,6 +23,7 @@ const router = createRouter({
     '/reactivity': 'ReactivityPage',
     '/components': 'ComponentsPage',
   },
+  basePath,
 });
 
 // Initialize theme on load
