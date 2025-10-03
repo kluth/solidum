@@ -4,15 +4,20 @@
 
 import { createElement } from '@sldm/core';
 import { Button } from '@sldm/ui';
+
 import { getTheme, setTheme } from './theme-store.js';
 
 export function ThemeSwitcher() {
-  const currentTheme = getTheme();
-
   const handleToggle = () => {
+    const currentTheme = getTheme();
     const newTheme = currentTheme === 'default' ? 'chalk' : 'default';
     setTheme(newTheme);
   };
+
+  // Access theme reactively during render
+  const currentTheme = getTheme();
+  const buttonText = currentTheme === 'chalk' ? '📐 Switch to Default' : '🎨 Switch to Chalkboard';
+  const buttonVariant = currentTheme === 'chalk' ? 'success' : 'primary';
 
   return createElement(
     'div',
@@ -25,11 +30,6 @@ export function ThemeSwitcher() {
         zIndex: '1000',
       },
     },
-    createElement(Button, {
-      variant: currentTheme === 'chalk' ? 'success' : 'primary',
-      size: 'sm',
-      onClick: handleToggle,
-      children: currentTheme === 'chalk' ? '📐 Switch to Default' : '🎨 Switch to Chalkboard',
-    })
+    createElement(Button, { variant: buttonVariant, size: 'sm', onClick: handleToggle }, buttonText)
   );
 }
