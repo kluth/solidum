@@ -1,0 +1,166 @@
+/**
+ * Chalkboard Component Styles
+ */
+
+/* Button */
+.chalk-button {
+  font-family: 'Caveat', cursive;
+  font-size: 1.2rem;
+  font-weight: 700;
+  padding: 0.75rem 1.5rem;
+  border: 2px solid currentColor;
+  border-radius: 6px;
+  background: transparent;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.2s ease;
+  box-shadow:
+    0 2px 4px rgba(0,0,0,0.2),
+    inset 0 0 0 1px rgba(255,255,255,0.1);
+}
+
+.chalk-button::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border: 2px solid currentColor;
+  border-radius: 6px;
+  opacity: 0.3;
+  transform: rotate(-0.5deg);
+  transition: transform 0.2s ease;
+}
+
+.chalk-button:hover:not(.chalk-button--disabled) {
+  transform: translateY(-2px);
+  box-shadow:
+    0 4px 8px rgba(0,0,0,0.3),
+    inset 0 0 0 1px rgba(255,255,255,0.2);
+}
+
+.chalk-button:hover:not(.chalk-button--disabled)::before {
+  transform: rotate(0.5deg);
+}
+
+.chalk-button:active:not(.chalk-button--disabled) {
+  transform: translateY(0);
+}
+
+.chalk-button--disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Button variants */
+.chalk-button--primary {
+  color: var(--chalk-yellow);
+}
+
+.chalk-button--secondary {
+  color: var(--chalk-blue);
+}
+
+.chalk-button--success {
+  color: var(--chalk-green);
+}
+
+.chalk-button--danger {
+  color: var(--chalk-red);
+}
+
+/* Button sizes */
+.chalk-button--sm {
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
+}
+
+.chalk-button--md {
+  font-size: 1.2rem;
+  padding: 0.75rem 1.5rem;
+}
+
+.chalk-button--lg {
+  font-size: 1.5rem;
+  padding: 1rem 2rem;
+}
+
+/* Card */
+.chalk-card {
+  background: rgba(42, 62, 46, 0.6);
+  backdrop-filter: blur(2px);
+  margin: 1rem 0;
+}
+
+.chalk-card--default {
+  color: var(--chalk-white);
+}
+
+.chalk-card--yellow {
+  border-color: var(--chalk-yellow);
+}
+
+.chalk-card--blue {
+  border-color: var(--chalk-blue);
+}
+
+.chalk-card--green {
+  border-color: var(--chalk-green);
+}
+
+/* Container */
+.chalk-container {
+  margin: 0 auto;
+  padding: 2rem;
+  min-height: 100vh;
+}
+
+.chalk-container--sm {
+  max-width: 640px;
+}
+
+.chalk-container--md {
+  max-width: 768px;
+}
+
+.chalk-container--lg {
+  max-width: 1024px;
+}
+
+.chalk-container--xl {
+  max-width: 1280px;
+}
+
+.chalk-container--full {
+  max-width: 100%;
+}
+
+/* Heading */
+.chalk-heading {
+  font-family: 'Architects Daughter', cursive;
+  font-weight: 700;
+  margin: 1.5rem 0 1rem;
+  line-height: 1.2;
+}
+
+.chalk-heading--1 {
+  font-size: 3rem;
+}
+
+.chalk-heading--2 {
+  font-size: 2.5rem;
+}
+
+.chalk-heading--3 {
+  font-size: 2rem;
+}
+
+.chalk-heading--4 {
+  font-size: 1.75rem;
+}
+
+.chalk-heading--5 {
+  font-size: 1.5rem;
+}
+
+.chalk-heading--6 {
+  font-size: 1.25rem;
+}

@@ -1,0 +1,60 @@
+{
+  "name": "@sldm/ui-chalk",
+  "version": "0.1.0",
+  "description": "Chalkboard-style UI component library for Solidum",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./styles.css": "./dist/styles.css"
+  },
+  "scripts": {
+    "build": "tsc && npm run build:css",
+    "build:css": "node scripts/build-css.js",
+    "dev": "tsc --watch",
+    "test": "echo 'Tests coming soon'",
+    "clean": "rm -rf dist",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint src/**/*.{ts,js}",
+    "lint:fix": "eslint src/**/*.{ts,js} --fix"
+  },
+  "dependencies": {
+    "@sldm/core": "workspace:*",
+    "@sldm/utils": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "typescript": "^5.3.0"
+  },
+  "files": [
+    "dist"
+  ],
+  "author": {
+    "name": "Matthias Kluth",
+    "email": "matthias.kluth@prodot.de"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kluth/solidum.git"
+  },
+  "homepage": "https://kluth.github.io/solidum",
+  "bugs": {
+    "url": "https://github.com/kluth/solidum/issues"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "keywords": [
+    "solidum",
+    "ui",
+    "components",
+    "chalkboard",
+    "handdrawn",
+    "chalk"
+  ]
+}
