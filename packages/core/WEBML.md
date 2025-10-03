@@ -5,10 +5,13 @@ WebML is Solid's template system that separates logic from presentation by using
 ## Philosophy
 
 **Separation of Concerns:** Logic stays in TypeScript, markup stays in WebML templates. This makes components:
+
 - Easier to maintain
 - Easier to understand
 - Easier to test
 - More reusable
+
+**Note:** Currently, WebML components work best as standalone components or when all children are also WebML components. Mixing WebML and createElement-based components requires additional integration work.
 
 ## Quick Start
 
@@ -33,7 +36,7 @@ WebML is Solid's template system that separates logic from presentation by using
 // Button.ts
 import { renderTemplate } from '@sldm/core';
 import { cn } from '@sldm/utils';
-import template from './Button.webml.js';  // Compiled template
+import template from './Button.webml.js'; // Compiled template
 
 export interface ButtonProps {
   variant?: 'primary' | 'secondary';
@@ -47,12 +50,7 @@ export function Button(props: ButtonProps) {
   const { variant = 'primary', disabled, children, className, onClick, ...rest } = props;
 
   // Logic: compute classes
-  const classes = cn(
-    'button',
-    `button--${variant}`,
-    { 'button--disabled': disabled },
-    className
-  );
+  const classes = cn('button', `button--${variant}`, { 'button--disabled': disabled }, className);
 
   // Logic: prepare attributes
   const restAttrs = Object.entries(rest)
@@ -60,13 +58,15 @@ export function Button(props: ButtonProps) {
     .join(' ');
 
   // Pass computed values to template
-  return renderTemplate(template({
-    classes,
-    disabled,
-    onClick,
-    restAttrs,
-    children
-  }));
+  return renderTemplate(
+    template({
+      classes,
+      disabled,
+      onClick,
+      restAttrs,
+      children,
+    })
+  );
 }
 ```
 
@@ -83,27 +83,27 @@ pnpm build  # Runs prebuild step that compiles .webml files
 ### Variables
 
 ```html
-<div class="{{className}}">
-  {{content}}
-</div>
+<div class="{{className}}">{{content}}</div>
 ```
 
 Compiles to:
+
 ```javascript
-webml`<div class="${props.className}">${props.content}</div>`
+webml`<div class="${props.className}">${props.content}</div>`;
 ```
 
 ### Conditionals
 
 ```html
 {{#if condition}}
-  <p>Condition is true</p>
+<p>Condition is true</p>
 {{/if}}
 ```
 
 Compiles to:
+
 ```javascript
-webml`${props.condition ? `<p>Condition is true</p>` : ''}`
+webml`${props.condition ? `<p>Condition is true</p>` : ''}`;
 ```
 
 ### Iteration
@@ -111,17 +111,19 @@ webml`${props.condition ? `<p>Condition is true</p>` : ''}`
 ```html
 <ul>
   {{#each items}}
-    <li>{{item}}</li>
+  <li>{{item}}</li>
   {{/each}}
 </ul>
 ```
 
 Compiles to:
+
 ```javascript
-webml`<ul>${props.items.map((item, index) => `<li>${item}</li>`).join('')}</ul>`
+webml`<ul>${props.items.map((item, index) => `<li>${item}</li>`).join('')}</ul>`;
 ```
 
 Available in loops:
+
 - `{{item}}` - current item
 - `{{@index}}` - current index
 
@@ -142,11 +144,13 @@ const attrs = Object.entries(rest).map(([k, v]) => `${k}="${v}"`).join(' ');
 ### 1. Keep Logic in TypeScript
 
 ❌ **Bad:**
+
 ```html
-<div class="container {{#if isPrimary}}container--primary{{/if}}">
+<div class="container {{#if isPrimary}}container--primary{{/if}}"></div>
 ```
 
 ✅ **Good:**
+
 ```typescript
 // Component.ts
 const classes = cn('container', { 'container--primary': isPrimary });
@@ -161,25 +165,25 @@ Templates should receive ready-to-render data:
 
 ```typescript
 // ❌ Bad: Complex logic in template
-template({ user, formatDate: (d) => new Date(d).toLocalString() })
+template({ user, formatDate: d => new Date(d).toLocalString() });
 
 // ✅ Good: Prepare data first
 const formattedDate = new Date(user.createdAt).toLocalString();
-template({ user, formattedDate })
+template({ user, formattedDate });
 ```
 
 ### 3. Use Type-Safe Props
 
 ```typescript
 export interface CardProps {
-  padding?: 'sm' | 'md' | 'lg';  // Type-safe
+  padding?: 'sm' | 'md' | 'lg'; // Type-safe
   children?: unknown;
 }
 
 // TypeScript ensures type safety
 const templateProps: Record<string, unknown> = {
   classes: computeClasses(props),
-  children: props.children
+  children: props.children,
 };
 ```
 
@@ -255,7 +259,7 @@ const classes = cn(
   {
     'button--disabled': disabled,
     'button--loading': loading,
-    'button--active': active
+    'button--active': active,
   },
   className
 );
@@ -290,18 +294,24 @@ export default function template(props: any) {
 ### From createElement to WebML
 
 **Before:**
+
 ```typescript
 import { createElement } from '@sldm/core';
 
 export function Button(props) {
-  return createElement('button', {
-    className: cn('button', props.className),
-    onClick: props.onClick
-  }, props.children);
+  return createElement(
+    'button',
+    {
+      className: cn('button', props.className),
+      onClick: props.onClick,
+    },
+    props.children
+  );
 }
 ```
 
 **After:**
+
 ```typescript
 // Button.ts
 import { renderTemplate } from '@sldm/core';
@@ -328,16 +338,14 @@ WebML components are fully compatible with createElement components:
 
 ```typescript
 // New WebML component
-import { Button } from './Button.js';  // Uses WebML
+import { Button } from './Button.js'; // Uses WebML
 
 // Old createElement component
-import { Card } from './Card.js';  // Uses createElement
+import { Card } from './Card.js'; // Uses createElement
 
 // They work together seamlessly
 export function App() {
-  return Card({},
-    Button({ onClick: () => {} }, 'Click me')
-  );
+  return Card({}, Button({ onClick: () => {} }, 'Click me'));
 }
 ```
 
@@ -378,7 +386,7 @@ webml`
   <div>
     ${when(isVisible, () => webml`<p>Visible!</p>`)}
   </div>
-`
+`;
 ```
 
 #### `map(array, template)`
@@ -392,7 +400,7 @@ webml`
   <ul>
     ${map(items, (item, index) => webml`<li>${item.name}</li>`)}
   </ul>
-`
+`;
 ```
 
 ## FAQ
@@ -405,6 +413,7 @@ A: Yes! WebML components are fully compatible with createElement components. You
 
 **Q: Do I need to learn a new syntax?**
 A: WebML syntax is minimal and familiar:
+
 - `{{variable}}` - variables
 - `{{#if}}...{{/if}}` - conditionals
 - `{{#each}}...{{/each}}` - loops
@@ -418,6 +427,7 @@ A: Yes! Templates are compiled at build time, and the runtime uses native templa
 ## Examples
 
 See the migrated components for examples:
+
 - `packages/ui/src/components/Button.{ts,webml}`
 - `packages/ui/src/components/Card.{ts,webml}`
 - `packages/ui/src/components/Container.{ts,webml}`

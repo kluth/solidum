@@ -1,11 +1,10 @@
-import { renderTemplate } from '@sldm/core';
+import { createElement } from '@sldm/core';
 import { cn } from '@sldm/utils';
-import template from './Card.webml.js';
 
 export interface CardProps {
-  padding?: 'none' | 'sm' | 'md' | 'lg';
   bordered?: boolean;
   hoverable?: boolean;
+  padding?: 'none' | 'sm' | 'md' | 'lg';
   children?: unknown;
   className?: string;
   [key: string]: unknown;
@@ -13,9 +12,9 @@ export interface CardProps {
 
 export function Card(props: CardProps) {
   const {
-    padding = 'md',
     bordered = true,
     hoverable = false,
+    padding = 'md',
     children,
     className,
     ...rest
@@ -23,23 +22,20 @@ export function Card(props: CardProps) {
 
   const classes = cn(
     'solidum-card',
-    `solidum-card--padding-${padding}`,
     {
       'solidum-card--bordered': bordered,
       'solidum-card--hoverable': hoverable,
+      [`solidum-card--padding-${padding}`]: padding,
     },
     className
   );
 
-  const restAttrs = Object.entries(rest)
-    .map(([key, value]) => `${key}="${value}"`)
-    .join(' ');
-
-  const templateProps = {
-    classes,
-    restAttrs,
+  return createElement(
+    'div',
+    {
+      className: classes,
+      ...rest,
+    },
     children
-  };
-
-  return renderTemplate(template(templateProps));
+  );
 }

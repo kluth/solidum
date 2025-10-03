@@ -19,11 +19,10 @@
     "clean": "rm -rf dist",
     "typecheck": "tsc --noEmit",
     "lint": "eslint src/**/*.{ts,js}",
-    "lint:fix": "eslint src/**/*.{ts,js} --fix"
+    "lint:fix": "eslint src/**/*.{ts,js} --fix",
+    "generate-all": "tsx scripts/generate-reports.ts"
   },
-  "dependencies": {
-    "picocolors": "^1.0.0"
-  },
+  "dependencies": {},
   "devDependencies": {
     "@sldm/testing": "workspace:*",
     "@types/node": "^20.11.0",

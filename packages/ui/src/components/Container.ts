@@ -1,6 +1,5 @@
-import { renderTemplate } from '@sldm/core';
+import { createElement } from '@sldm/core';
 import { cn } from '@sldm/utils';
-import template from './Container.webml.js';
 
 export interface ContainerProps {
   maxWidth?: 'sm' | 'md' | 'lg' | 'xl' | 'full';
@@ -22,15 +21,12 @@ export function Container(props: ContainerProps) {
     className
   );
 
-  const restAttrs = Object.entries(rest)
-    .map(([key, value]) => `${key}="${value}"`)
-    .join(' ');
-
-  const templateProps = {
-    classes,
-    restAttrs,
+  return createElement(
+    'div',
+    {
+      className: classes,
+      ...rest,
+    },
     children
-  };
-
-  return renderTemplate(template(templateProps));
+  );
 }

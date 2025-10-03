@@ -5,6 +5,25 @@
  * Works in both browser and SSR (Node.js) environments
  */
 
+// Lazy-loaded SSR renderToString to avoid circular dependency
+let ssrRenderToString: ((vnode: unknown) => string) | null = null;
+let ssrAttempted = false;
+
+function getSSRRenderer(): ((vnode: unknown) => string) | null {
+  if (!ssrAttempted && typeof window === 'undefined') {
+    ssrAttempted = true;
+    try {
+      // Use require for synchronous loading in Node.js
+
+      const ssr = require('@sldm/ssr');
+      ssrRenderToString = ssr.renderToString;
+    } catch {
+      // SSR package not available or in browser
+    }
+  }
+  return ssrRenderToString;
+}
+
 export interface TemplateResult {
   template: string;
   values: unknown[];
@@ -147,6 +166,15 @@ function buildHtmlString(result: TemplateResult): string {
         } else if (isBrowser() && value._element) {
           htmlString += value._element.outerHTML;
         }
+      } else if (isVNode(value)) {
+        // Regular VNode from createElement - needs SSR rendering
+        const renderer = getSSRRenderer();
+        if (!isBrowser() && renderer) {
+          htmlString += renderer(value);
+        } else if (!isBrowser()) {
+          // eslint-disable-next-line no-console
+          console.warn('WebML: VNode children require @sldm/ssr package in SSR mode');
+        }
       } else {
         // Primitive value
         htmlString += escapeHtml(String(value));
@@ -177,6 +205,13 @@ function renderValue(value: unknown): string {
       return value._element.outerHTML;
     }
     return '';
+  } else if (isVNode(value)) {
+    // Regular VNode from createElement
+    const renderer = getSSRRenderer();
+    if (!isBrowser() && renderer) {
+      return renderer(value);
+    }
+    return '';
   } else {
     return escapeHtml(String(value));
   }
@@ -197,6 +232,19 @@ function isWebMLVNode(value: unknown): value is WebMLVNode {
     value !== null &&
     '_isWebMLNode' in value &&
     (value as WebMLVNode)._isWebMLNode === true
+  );
+}
+
+/**
+ * Check if value looks like a VNode (created by createElement)
+ */
+function isVNode(value: unknown): boolean {
+  return (
+    typeof value === 'object' &&
+    value !== null &&
+    'type' in value &&
+    !isWebMLVNode(value) &&
+    !isTemplateResult(value)
   );
 }
 

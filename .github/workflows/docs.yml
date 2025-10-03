@@ -44,6 +44,12 @@ jobs:
       - name: Build all packages
         run: pnpm build
 
+      - name: Generate dev reports
+        run: |
+          pnpm --filter @sldm/dev-reports generate-all
+          mkdir -p docs/dist/reports
+          cp -r packages/dev-reports/reports/* docs/dist/reports/ 2>/dev/null || true
+
       - name: Build docs site (built with Solidum!)
         run: pnpm --filter @sldm/docs build
 

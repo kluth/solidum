@@ -22,7 +22,7 @@
     "lint:fix": "eslint src/**/*.{ts,js} --fix"
   },
   "dependencies": {
-    "picocolors": "^1.0.0",
+    "@sldm/utils": "workspace:*",
     "jsdom": "^23.0.0"
   },
   "devDependencies": {

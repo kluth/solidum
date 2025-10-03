@@ -76,7 +76,14 @@
       "Read(//c/Program Files/**)",
       "Read(//c/**)",
       "Bash(/tmp/act.exe --list)",
-      "Bash(/tmp/act.exe:*)"
+      "Bash(/tmp/act.exe:*)",
+      "Bash(\"C:\\Program Files\\GitHub CLI\\gh.exe\" run view 18223243346 --repo kluth/solidum --log)",
+      "Bash(do if [ -f \"$dir/package.json\" ])",
+      "Bash(then echo \"=== $dir ===\")",
+      "Bash(cat:*)",
+      "Bash(fi)",
+      "Bash(git filter-branch:*)",
+      "Bash(git restore:*)"
     ],
     "deny": [],
     "ask": []

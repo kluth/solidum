@@ -13,6 +13,8 @@ export interface VNode {
   props?: Record<string, unknown>;
   children?: unknown[];
   text?: string;
+  _html?: string; // For WebML SSR support
+  _isWebMLNode?: boolean; // WebML marker
 }
 
 /**
@@ -99,6 +101,11 @@ export function renderToString(
 
   // At this point, vnode should be a VNode
   const node = vnode as VNode;
+
+  // Handle WebML VNodes with pre-rendered HTML (SSR mode)
+  if (node._isWebMLNode && node._html) {
+    return node._html;
+  }
 
   // Handle TEXT_NODE type
   if (node.type === 'TEXT_NODE' && node.text) {

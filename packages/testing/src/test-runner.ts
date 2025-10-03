@@ -11,7 +11,7 @@
 
 import { EventEmitter } from 'node:events';
 
-import pc from 'picocolors';
+import { colors } from '@sldm/utils';
 
 export interface TestContext {
   skip: () => void;
@@ -32,7 +32,6 @@ export interface SuiteResult {
   duration: number;
 }
 
-// eslint-disable-next-line no-unused-vars
 type TestFn = (_ctx: TestContext) => void | Promise<void>;
 type SuiteFn = () => void | Promise<void>;
 
@@ -152,7 +151,6 @@ export class ConsoleReporter {
   private failed = 0;
   private totalDuration = 0;
 
-  // eslint-disable-next-line no-unused-vars
   constructor(private _registry: TestRegistry) {
     this._registry.on('test:pass', this.onTestPass.bind(this));
     this._registry.on('test:fail', this.onTestFail.bind(this));
@@ -162,37 +160,40 @@ export class ConsoleReporter {
   private onTestPass(data: { suite: string; test: string; duration: number }): void {
     this.passed++;
     // eslint-disable-next-line no-console
-    console.log(`  ${pc.green('✓')} ${data.test} ${pc.dim(`(${data.duration.toFixed(2)}ms)`)}`);
+    console.log(
+      `  ${colors.green('✓')} ${data.test} ${colors.dim(`(${data.duration.toFixed(2)}ms)`)}`
+    );
   }
 
   private onTestFail(data: { suite: string; test: string; duration: number; error: Error }): void {
     this.failed++;
     // eslint-disable-next-line no-console
-    console.log(`  ${pc.red('✗')} ${data.test}`);
+    console.log(`  ${colors.red('✗')} ${data.test}`);
     // eslint-disable-next-line no-console
-    console.log(`    ${pc.red(data.error.message)}`);
+    console.log(`    ${colors.red(data.error.message)}`);
     if (data.error.stack) {
       // eslint-disable-next-line no-console
-      console.log(pc.dim(data.error.stack.split('\n').slice(1).join('\n')));
+      console.log(colors.dim(data.error.stack.split('\n').slice(1).join('\n')));
     }
   }
 
   private onSuiteComplete(data: { name: string; passed: boolean; duration: number }): void {
     this.totalDuration += data.duration;
-    const icon = data.passed ? pc.green('✓') : pc.red('✗');
+    const icon = data.passed ? colors.green('✓') : colors.red('✗');
     // eslint-disable-next-line no-console
-    console.log(`\n${icon} ${pc.bold(data.name)} ${pc.dim(`(${data.duration.toFixed(2)}ms)`)}\n`);
+    console.log(
+      `\n${icon} ${colors.bold(data.name)} ${colors.dim(`(${data.duration.toFixed(2)}ms)`)}\n`
+    );
   }
 
-  // eslint-disable-next-line no-unused-vars
   async report(_results: SuiteResult[]): Promise<void> {
     // eslint-disable-next-line no-console
-    console.log('\n' + pc.bold('Test Results:'));
+    console.log('\n' + colors.bold('Test Results:'));
     // eslint-disable-next-line no-console
-    console.log(`  ${pc.green(`${this.passed} passed`)}`);
+    console.log(`  ${colors.green(`${this.passed} passed`)}`);
     if (this.failed > 0) {
       // eslint-disable-next-line no-console
-      console.log(`  ${pc.red(`${this.failed} failed`)}`);
+      console.log(`  ${colors.red(`${this.failed} failed`)}`);
     }
     // eslint-disable-next-line no-console
     console.log(`  Duration: ${this.totalDuration.toFixed(2)}ms\n`);
@@ -207,7 +208,7 @@ export class ConsoleReporter {
 export async function runTests(): Promise<void> {
   const reporter = new ConsoleReporter(registry);
   // eslint-disable-next-line no-console
-  console.log(pc.bold(pc.cyan('\n⚡ Solidum Test Runner\n')));
+  console.log(colors.bold(colors.cyan('\n⚡ Solidum Test Runner\n')));
 
   const results = await registry.run();
   await reporter.report(results);
