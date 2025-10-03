@@ -32,6 +32,13 @@ export function escapeHtml(text: string | number): string {
 }
 
 /**
+ * Convert camelCase to kebab-case for CSS properties
+ */
+function camelToKebab(str: string): string {
+  return str.replace(/[A-Z]/g, match => `-${match.toLowerCase()}`);
+}
+
+/**
  * Render attributes to HTML string
  */
 export function renderAttributes(props: Record<string, unknown> | undefined): string {
@@ -47,7 +54,7 @@ export function renderAttributes(props: Record<string, unknown> | undefined): st
       attrs.push(`class="${escapeHtml(value)}"`);
     } else if (key === 'style' && typeof value === 'object') {
       const styles = Object.entries(value)
-        .map(([k, v]) => `${k}: ${v}`)
+        .map(([k, v]) => `${camelToKebab(k)}: ${v}`)
         .join('; ');
       attrs.push(`style="${escapeHtml(styles)}"`);
     } else if (typeof value === 'string' || typeof value === 'number') {
