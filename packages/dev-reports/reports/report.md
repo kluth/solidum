@@ -2,8 +2,8 @@
 
 **Version:** 0.1.0  
 **Environment:** CI  
-**Generated:** 03/10/2025, 19:15:22  
-**Branch:** main
+**Generated:** 03/10/2025, 19:56:23  
+**Branch:** main  
 
 ---
 
@@ -15,58 +15,60 @@
 
 ## 📦 Bundle Size
 
-- **Total Size:** 143.70 KB
-- **Gzipped:** 43.09 KB
+- **Total Size:** 145.43 KB
+- **Gzipped:** 43.61 KB
 
 ### Bundle Files
 
-| File                              | Size     | Gzip    |
-| --------------------------------- | -------- | ------- |
-| context/context.js                | 2.53 KB  | 778 B   |
-| context/context.test.js           | 6.07 KB  | 1.82 KB |
-| context/index.js                  | 122 B    | 36 B    |
-| core/index.js                     | 847 B    | 254 B   |
-| dev-reports/bundle-analyzer.js    | 1.36 KB  | 417 B   |
-| dev-reports/coverage-analyzer.js  | 2.16 KB  | 664 B   |
-| dev-reports/html-generator.js     | 8.52 KB  | 2.55 KB |
-| dev-reports/index.js              | 568 B    | 170 B   |
-| dev-reports/markdown-generator.js | 4.75 KB  | 1.42 KB |
-| dev-reports/test-reporter.js      | 845 B    | 253 B   |
-| dev-reports/types.js              | 83 B     | 24 B    |
-| integrations/analytics-client.js  | 1.79 KB  | 551 B   |
-| integrations/feed-reader.js       | 5.55 KB  | 1.67 KB |
-| integrations/graphql-client.js    | 1.79 KB  | 548 B   |
-| integrations/grpc-client.js       | 2.21 KB  | 677 B   |
-| integrations/index.js             | 953 B    | 285 B   |
-| integrations/mcp-client.js        | 3.41 KB  | 1.02 KB |
-| integrations/oauth-client.js      | 3.57 KB  | 1.07 KB |
-| integrations/rest-client.js       | 3.13 KB  | 961 B   |
-| integrations/sse-client.js        | 1.50 KB  | 459 B   |
-| integrations/types.js             | 93 B     | 27 B    |
-| integrations/webhook-handler.js   | 2.22 KB  | 681 B   |
-| integrations/websocket-client.js  | 2.98 KB  | 914 B   |
-| router/index.js                   | 2.21 KB  | 679 B   |
-| ssr/index.js                      | 4.12 KB  | 1.23 KB |
-| storage/async-types.js            | 50 B     | 15 B    |
-| storage/database-storage.js       | 3.47 KB  | 1.04 KB |
-| storage/factory.js                | 1.30 KB  | 398 B   |
-| storage/index.js                  | 612 B    | 183 B   |
-| storage/indexeddb-storage.js      | 6.20 KB  | 1.86 KB |
-| storage/memory-storage.js         | 1.92 KB  | 591 B   |
-| storage/types.js                  | 44 B     | 13 B    |
-| storage/web-storage.js            | 2.85 KB  | 874 B   |
-| store/index.js                    | 129 B    | 38 B    |
-| store/store-integration.test.js   | 15.84 KB | 4.75 KB |
-| store/store.js                    | 2.75 KB  | 846 B   |
-| store/store.test.js               | 7.96 KB  | 2.39 KB |
-| testing/assertions.js             | 5.76 KB  | 1.73 KB |
-| testing/dom-testing.js            | 16.82 KB | 5.05 KB |
-| testing/index.js                  | 598 B    | 179 B   |
-| testing/test-runner.js            | 5.46 KB  | 1.64 KB |
-| ui/index.js                       | 1.47 KB  | 451 B   |
-| utils/component-utils.js          | 3.13 KB  | 961 B   |
-| utils/component-utils.test.js     | 3.96 KB  | 1.19 KB |
-| utils/index.js                    | 127 B    | 38 B    |
+| File | Size | Gzip |
+|------|------|------|
+| context/context.js | 2.53 KB | 778 B |
+| context/context.test.js | 6.07 KB | 1.82 KB |
+| context/index.js | 122 B | 36 B |
+| core/index.js | 847 B | 254 B |
+| dev-reports/bundle-analyzer.js | 1.36 KB | 417 B |
+| dev-reports/coverage-analyzer.js | 2.16 KB | 664 B |
+| dev-reports/html-generator.js | 8.52 KB | 2.55 KB |
+| dev-reports/index.js | 568 B | 170 B |
+| dev-reports/markdown-generator.js | 4.75 KB | 1.42 KB |
+| dev-reports/test-reporter.js | 845 B | 253 B |
+| dev-reports/types.js | 83 B | 24 B |
+| integrations/analytics-client.js | 1.79 KB | 551 B |
+| integrations/feed-reader.js | 5.55 KB | 1.67 KB |
+| integrations/graphql-client.js | 1.79 KB | 548 B |
+| integrations/grpc-client.js | 2.21 KB | 677 B |
+| integrations/index.js | 953 B | 285 B |
+| integrations/mcp-client.js | 3.41 KB | 1.02 KB |
+| integrations/oauth-client.js | 3.57 KB | 1.07 KB |
+| integrations/rest-client.js | 3.13 KB | 961 B |
+| integrations/sse-client.js | 1.50 KB | 459 B |
+| integrations/types.js | 93 B | 27 B |
+| integrations/webhook-handler.js | 2.22 KB | 681 B |
+| integrations/websocket-client.js | 2.98 KB | 914 B |
+| router/index.js | 2.21 KB | 679 B |
+| ssr/index.js | 4.12 KB | 1.23 KB |
+| storage/async-types.js | 50 B | 15 B |
+| storage/database-storage.js | 3.47 KB | 1.04 KB |
+| storage/factory.js | 1.30 KB | 398 B |
+| storage/index.js | 612 B | 183 B |
+| storage/indexeddb-storage.js | 6.20 KB | 1.86 KB |
+| storage/memory-storage.js | 1.92 KB | 591 B |
+| storage/types.js | 44 B | 13 B |
+| storage/web-storage.js | 2.85 KB | 874 B |
+| store/index.js | 129 B | 38 B |
+| store/store-integration.test.js | 15.84 KB | 4.75 KB |
+| store/store.js | 2.75 KB | 846 B |
+| store/store.test.js | 7.96 KB | 2.39 KB |
+| testing/assertions.js | 5.76 KB | 1.73 KB |
+| testing/dom-testing.js | 16.82 KB | 5.05 KB |
+| testing/index.js | 598 B | 179 B |
+| testing/test-runner.js | 5.43 KB | 1.63 KB |
+| ui/index.js | 1.47 KB | 451 B |
+| ui-chalk/index.js | 403 B | 120 B |
+| utils/colors.js | 1.32 KB | 406 B |
+| utils/component-utils.js | 3.13 KB | 961 B |
+| utils/component-utils.test.js | 3.96 KB | 1.19 KB |
+| utils/index.js | 166 B | 49 B |
 
 ## ✅ Test Results
 
@@ -77,13 +79,14 @@
 
 ## 🎯 Code Coverage
 
-| Metric     | Coverage         |
-| ---------- | ---------------- |
-| Lines      | 92.27% (406/440) |
+| Metric | Coverage |
+|--------|----------|
+| Lines | 92.27% (406/440) |
 | Statements | 92.27% (406/440) |
-| Functions  | 93.18% (41/44)   |
-| Branches   | 93.18% (82/88)   |
+| Functions | 93.18% (41/44) |
+| Branches | 93.18% (82/88) |
+
 
 ---
 
-_Generated by @sldm/dev-reports_
+*Generated by @sldm/dev-reports*

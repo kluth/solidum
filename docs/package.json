@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "dev": "node build.js && python -m http.server 8080 --directory dist",
-    "build": "pnpm --filter @sldm/core build && pnpm --filter @sldm/utils build && pnpm --filter @sldm/ui build && pnpm --filter @sldm/ui-chalk build && pnpm --filter @sldm/router build && pnpm --filter @sldm/store build && pnpm --filter @sldm/context build && pnpm --filter @sldm/ssr build && tsc && node build.js"
+    "build": "pnpm --filter @sldm/utils build && pnpm --filter @sldm/testing build && pnpm --filter @sldm/core build && pnpm --filter @sldm/ui build && pnpm --filter @sldm/ui-chalk build && pnpm --filter @sldm/router build && pnpm --filter @sldm/store build && pnpm --filter @sldm/context build && pnpm --filter @sldm/ssr build && tsc && node build.js"
   },
   "dependencies": {
     "@sldm/core": "workspace:*",
