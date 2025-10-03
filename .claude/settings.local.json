@@ -66,7 +66,11 @@
       "Bash(npm:*)",
       "Bash(find:*)",
       "Bash(\"C:\\Program Files\\GitHub CLI\\gh.exe\" repo create kluth/solidum-storage --public --description \"Unified storage abstraction for localStorage, sessionStorage, IndexedDB, and databases\")",
-      "Bash(\"C:\\Program Files\\GitHub CLI\\gh.exe\" repo create kluth/solidum-dev-reports --public --description \"Beautiful development reports for bundle size, tests, coverage, and more\")"
+      "Bash(\"C:\\Program Files\\GitHub CLI\\gh.exe\" repo create kluth/solidum-dev-reports --public --description \"Beautiful development reports for bundle size, tests, coverage, and more\")",
+      "Bash(\"C:\\Program Files\\GitHub CLI\\gh.exe\" repo view --json hasPages)",
+      "Bash(\"C:\\Program Files\\GitHub CLI\\gh.exe\" workflow run deploy-pages.yml)",
+      "Bash(git tag:*)",
+      "Bash(git log:*)"
     ],
     "deny": [],
     "ask": []

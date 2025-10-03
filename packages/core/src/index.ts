@@ -25,6 +25,10 @@ export { createElement, Fragment, render, mount, onMount, onCleanup } from './do
 
 export type { VNode, ComponentFunction, JSX } from './dom/index.js';
 
+// WebML Template System
+export { webml, render as renderTemplate, when, map } from './template/html.js';
+export type { TemplateResult } from './template/html.js';
+
 // Note: Context, Store, and Utils have been moved to separate packages:
 // - @sldm/context for Context API
 // - @sldm/store for Store Pattern

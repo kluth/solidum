@@ -1,5 +1,5 @@
-import { createElement } from '@sldm/core';
-import { mergeProps, cn } from '@sldm/utils';
+import { webml, renderTemplate } from '@sldm/core';
+import { cn } from '@sldm/utils';
 
 export interface ButtonProps {
   variant?: 'primary' | 'secondary' | 'outline' | 'ghost';
@@ -7,7 +7,6 @@ export interface ButtonProps {
   disabled?: boolean;
   children?: unknown;
   className?: string;
-  // eslint-disable-next-line no-unused-vars
   onClick?: (e: Event) => void;
   [key: string]: unknown;
 }
@@ -19,6 +18,7 @@ export function Button(props: ButtonProps) {
     disabled = false,
     children,
     className,
+    onClick,
     ...rest
   } = props;
 
@@ -32,16 +32,17 @@ export function Button(props: ButtonProps) {
     className
   );
 
-  return createElement(
-    'button',
-    mergeProps(
-      {
-        className: classes,
-        disabled,
-        type: 'button',
-      },
-      rest
-    ),
-    children
-  );
+  const template = webml`
+    <button
+      class="${classes}"
+      ${disabled ? 'disabled' : ''}
+      type="button"
+      ${onClick ? `onclick="${onClick}"` : ''}
+      ${Object.entries(rest).map(([key, value]) => `${key}="${value}"`).join(' ')}
+    >
+      ${children}
+    </button>
+  `;
+
+  return renderTemplate(template);
 }
