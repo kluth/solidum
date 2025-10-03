@@ -1,6 +1,7 @@
 import { createElement } from '@sldm/core';
 import { navigate } from '@sldm/router';
 import { Container, Stack, Button, Card, Badge, Avatar, Progress, Spinner, GlassCard, Chart3D, DataTable, Tabs, Switch, } from '@sldm/ui';
+import { ThemeSwitcher } from './theme-switcher.js';
 export function HomePage() {
     // Sample data for Chart3D
     const chartData = [
@@ -27,6 +28,8 @@ export function HomePage() {
         className: 'home-page',
         style: { position: 'relative', overflow: 'hidden' },
     }, 
+    // Theme Switcher
+    ThemeSwitcher(), 
     // Hero Section with Glassmorphism
     createElement('section', {
         className: 'hero',

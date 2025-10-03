@@ -20,6 +20,12 @@ cpSync(
   join(distDir, 'styles.css')
 );
 
+// Copy Chalk UI styles
+cpSync(
+  join(__dirname, '../packages/ui-chalk/dist/styles.css'),
+  join(distDir, 'chalk-styles.css')
+);
+
 // Bundle client-side JavaScript
 console.log('Bundling client-side JavaScript...');
 await esbuild.build({

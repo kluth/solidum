@@ -15,6 +15,7 @@ import {
   Tabs,
   Switch,
 } from '@sldm/ui';
+import { ThemeSwitcher } from './theme-switcher.js';
 
 export function HomePage() {
   // Sample data for Chart3D
@@ -47,6 +48,9 @@ export function HomePage() {
       className: 'home-page',
       style: { position: 'relative', overflow: 'hidden' },
     },
+
+    // Theme Switcher
+    ThemeSwitcher(),
 
     // Hero Section with Glassmorphism
     createElement(

@@ -4,6 +4,7 @@ import { createRouter } from '@sldm/router';
 import { ComponentsPage } from './pages/components.js';
 import { HomePage } from './pages/index.js';
 import { ReactivityPage } from './pages/reactivity.js';
+import { setTheme, getTheme } from './pages/theme-store.js';
 
 // eslint-disable-next-line no-console
 console.log('🚀 Solidum client.js loaded!', 'readyState:', document.readyState);
@@ -24,6 +25,18 @@ const router = createRouter({
   },
 });
 
+// Initialize theme on load
+function initializeTheme() {
+  const theme = getTheme();
+  const link = document.createElement('link');
+  link.id = 'theme-stylesheet';
+  link.rel = 'stylesheet';
+  link.href = theme === 'chalk' ? '/chalk-styles.css' : '/styles.css';
+  document.head.appendChild(link);
+
+  document.body.classList.add(`${theme}-theme`);
+}
+
 // Mount the app when DOM is ready
 if (document.readyState === 'loading') {
   // eslint-disable-next-line no-console
@@ -31,11 +44,13 @@ if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', () => {
     // eslint-disable-next-line no-console
     console.log('✅ DOMContentLoaded fired!');
+    initializeTheme();
     mountApp();
   });
 } else {
   // eslint-disable-next-line no-console
   console.log('⚡ DOM already ready, mounting immediately...');
+  initializeTheme();
   mountApp();
 }
 
@@ -44,6 +59,13 @@ window.addEventListener('routechange', event => {
   const customEvent = event as CustomEvent<{ path: string; component: string }>;
   // eslint-disable-next-line no-console
   console.log('🔄 Route changed to:', customEvent.detail.path);
+  mountApp();
+});
+
+// Listen for theme changes
+window.addEventListener('themechange', () => {
+  // eslint-disable-next-line no-console
+  console.log('🎨 Theme changed, remounting...');
   mountApp();
 });
 

@@ -56,6 +56,9 @@ importers:
       '@sldm/ui':
         specifier: workspace:*
         version: link:../packages/ui
+      '@sldm/ui-chalk':
+        specifier: workspace:*
+        version: link:../packages/ui-chalk
       '@sldm/utils':
         specifier: workspace:*
         version: link:../packages/utils
