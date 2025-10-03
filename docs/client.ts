@@ -31,7 +31,7 @@ function initializeTheme() {
   const link = document.createElement('link');
   link.id = 'theme-stylesheet';
   link.rel = 'stylesheet';
-  link.href = theme === 'chalk' ? '/chalk-styles.css' : '/styles.css';
+  link.href = theme === 'chalk' ? './chalk-styles.css' : './styles.css';
   document.head.appendChild(link);
 
   document.body.classList.add(`${theme}-theme`);
