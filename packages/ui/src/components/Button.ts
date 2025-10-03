@@ -1,5 +1,6 @@
-import { webml, renderTemplate } from '@sldm/core';
+import { renderTemplate } from '@sldm/core';
 import { cn } from '@sldm/utils';
+import template from './Button.webml.js';
 
 export interface ButtonProps {
   variant?: 'primary' | 'secondary' | 'outline' | 'ghost';
@@ -32,17 +33,18 @@ export function Button(props: ButtonProps) {
     className
   );
 
-  const template = webml`
-    <button
-      class="${classes}"
-      ${disabled ? 'disabled' : ''}
-      type="button"
-      ${onClick ? `onclick="${onClick}"` : ''}
-      ${Object.entries(rest).map(([key, value]) => `${key}="${value}"`).join(' ')}
-    >
-      ${children}
-    </button>
-  `;
+  // Prepare template props
+  const restAttrs = Object.entries(rest)
+    .map(([key, value]) => `${key}="${value}"`)
+    .join(' ');
 
-  return renderTemplate(template);
+  const templateProps = {
+    classes,
+    disabled,
+    onClick,
+    restAttrs,
+    children
+  };
+
+  return renderTemplate(template(templateProps));
 }

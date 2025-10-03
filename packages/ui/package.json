@@ -16,6 +16,7 @@
     "dist"
   ],
   "scripts": {
+    "prebuild": "node scripts/compile-webml.js",
     "build": "tsc && npm run build:css",
     "build:css": "node scripts/build-css.js",
     "test": "echo 'No tests yet'",

@@ -1,5 +1,6 @@
-import { createElement } from '@sldm/core';
+import { renderTemplate } from '@sldm/core';
 import { cn } from '@sldm/utils';
+import template from './Card.webml.js';
 
 export interface CardProps {
   padding?: 'none' | 'sm' | 'md' | 'lg';
@@ -30,5 +31,15 @@ export function Card(props: CardProps) {
     className
   );
 
-  return createElement('div', { className: classes, ...rest }, children);
+  const restAttrs = Object.entries(rest)
+    .map(([key, value]) => `${key}="${value}"`)
+    .join(' ');
+
+  const templateProps = {
+    classes,
+    restAttrs,
+    children
+  };
+
+  return renderTemplate(template(templateProps));
 }

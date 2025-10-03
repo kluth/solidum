@@ -3,7 +3,7 @@
   {{#if disabled}}disabled{{/if}}
   type="button"
   {{#if onClick}}onclick="{{onClick}}"{{/if}}
-  {{#each rest}}{{key}}="{{value}}"{{/each}}
+  {{restAttrs}}
 >
   {{children}}
 </button>

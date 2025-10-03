@@ -32,8 +32,9 @@ export function webml(strings: TemplateStringsArray, ...values: unknown[]): Temp
 
 /**
  * Render a template result to a DOM element
+ * Returns a VNode-compatible structure for compatibility with createElement
  */
-export function render(result: TemplateResult, container?: HTMLElement): HTMLElement {
+export function render(result: TemplateResult, container?: HTMLElement): any {
   if (!result || result.type !== 'webml') {
     throw new Error('Invalid template result');
   }
@@ -62,8 +63,12 @@ export function render(result: TemplateResult, container?: HTMLElement): HTMLEle
         htmlString += value.map(v => renderValue(v)).join('');
       } else if (isTemplateResult(value)) {
         // Nested template
-        const nestedEl = render(value);
-        htmlString += nestedEl.outerHTML;
+        const nestedEl: any = render(value);
+        if (nestedEl instanceof HTMLElement) {
+          htmlString += nestedEl.outerHTML;
+        } else if (nestedEl && nestedEl._element) {
+          htmlString += nestedEl._element.outerHTML;
+        }
       } else if (value instanceof HTMLElement) {
         // Actual DOM element
         htmlString += value.outerHTML;
@@ -91,7 +96,13 @@ export function render(result: TemplateResult, container?: HTMLElement): HTMLEle
     container.appendChild(element);
   }
 
-  return element;
+  // Return VNode-like structure for compatibility
+  return {
+    type: element.tagName.toLowerCase(),
+    props: {},
+    _element: element,  // Store actual element for access
+    _isWebMLNode: true
+  };
 }
 
 function renderValue(value: unknown): string {
