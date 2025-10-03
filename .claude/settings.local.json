@@ -70,7 +70,13 @@
       "Bash(\"C:\\Program Files\\GitHub CLI\\gh.exe\" repo view --json hasPages)",
       "Bash(\"C:\\Program Files\\GitHub CLI\\gh.exe\" workflow run deploy-pages.yml)",
       "Bash(git tag:*)",
-      "Bash(git log:*)"
+      "Bash(git log:*)",
+      "Bash(git mv:*)",
+      "Bash(where act)",
+      "Read(//c/Program Files/**)",
+      "Read(//c/**)",
+      "Bash(/tmp/act.exe --list)",
+      "Bash(/tmp/act.exe:*)"
     ],
     "deny": [],
     "ask": []

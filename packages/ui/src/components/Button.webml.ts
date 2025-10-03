@@ -1,6 +1,7 @@
 import { webml } from '@sldm/core';
+import type { TemplateResult } from '@sldm/core';
 
-export default function template(props: any) {
+export default function template(props: Record<string, unknown>): TemplateResult {
   return webml`<button
   class="${props.classes}"
   ${props.disabled ? `disabled` : ''}
