@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Solidum Framework - Modern Reactive TypeScript Framework</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      line-height: 1.6;
+      color: #333;
+    }
+    .hero {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 100px 20px;
+      text-align: center;
+    }
+    .hero h1 {
+      font-size: 64px;
+      margin-bottom: 20px;
+      font-weight: 800;
+    }
+    .hero p {
+      font-size: 24px;
+      margin-bottom: 40px;
+      opacity: 0.95;
+    }
+    .hero-buttons {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .btn {
+      padding: 15px 40px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 18px;
+      transition: all 0.3s;
+      display: inline-block;
+    }
+    .btn-primary {
+      background: white;
+      color: #667eea;
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    }
+    .btn-secondary {
+      background: rgba(255,255,255,0.2);
+      color: white;
+      border: 2px solid white;
+    }
+    .btn-secondary:hover {
+      background: white;
+      color: #667eea;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 80px 20px;
+    }
+    .section-title {
+      font-size: 42px;
+      text-align: center;
+      margin-bottom: 50px;
+      font-weight: 700;
+      color: #667eea;
+    }
+    .packages-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      margin-bottom: 60px;
+    }
+    .package-card {
+      background: white;
+      padding: 30px;
+      border-radius: 16px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+      transition: all 0.3s;
+      border: 2px solid transparent;
+    }
+    .package-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 40px rgba(102, 126, 234, 0.3);
+      border-color: #667eea;
+    }
+    .package-card h3 {
+      font-size: 24px;
+      margin-bottom: 15px;
+      color: #667eea;
+    }
+    .package-card p {
+      color: #666;
+      margin-bottom: 20px;
+    }
+    .package-card .links {
+      display: flex;
+      gap: 15px;
+    }
+    .package-card .links a {
+      color: #667eea;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 14px;
+    }
+    .package-card .links a:hover {
+      text-decoration: underline;
+    }
+    .features {
+      background: #f8f9fa;
+      padding: 80px 20px;
+    }
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 40px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .feature {
+      text-align: center;
+    }
+    .feature-icon {
+      font-size: 48px;
+      margin-bottom: 20px;
+    }
+    .feature h3 {
+      font-size: 20px;
+      margin-bottom: 10px;
+      color: #333;
+    }
+    .feature p {
+      color: #666;
+    }
+    .code-example {
+      background: #1e1e1e;
+      color: #d4d4d4;
+      padding: 30px;
+      border-radius: 12px;
+      overflow-x: auto;
+      margin: 30px 0;
+    }
+    .code-example pre {
+      margin: 0;
+      font-family: 'Courier New', monospace;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 30px;
+      text-align: center;
+      margin: 60px 0;
+    }
+    .stat-value {
+      font-size: 48px;
+      font-weight: bold;
+      color: #667eea;
+      margin-bottom: 10px;
+    }
+    .stat-label {
+      color: #666;
+      font-size: 16px;
+    }
+    footer {
+      background: #1e1e1e;
+      color: white;
+      padding: 60px 20px;
+      text-align: center;
+    }
+    footer a {
+      color: #667eea;
+      text-decoration: none;
+    }
+    footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="hero">
+    <h1>Solidum Framework</h1>
+    <p>Modern, fine-grained reactive TypeScript framework for building user interfaces</p>
+    <div class="hero-buttons">
+      <a href="https://github.com/kluth/solidum" class="btn btn-primary">View on GitHub</a>
+      <a href="https://www.npmjs.com/org/sldm" class="btn btn-secondary">npm Packages</a>
+      <a href="dev-report.html" class="btn btn-secondary">📊 View Dev Report</a>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="stats">
+      <div>
+        <div class="stat-value">10</div>
+        <div class="stat-label">Packages</div>
+      </div>
+      <div>
+        <div class="stat-value">193</div>
+        <div class="stat-label">Tests Passing</div>
+      </div>
+      <div>
+        <div class="stat-value">96%</div>
+        <div class="stat-label">Code Coverage</div>
+      </div>
+      <div>
+        <div class="stat-value">118KB</div>
+        <div class="stat-label">Total Size</div>
+      </div>
+    </div>
+
+    <h2 class="section-title">Quick Example</h2>
+    <div class="code-example">
+      <pre><code>import { atom, createElement, mount } from '@sldm/core';
+
+function Counter() {
+  const count = atom(0);
+
+  return createElement(
+    'div',
+    null,
+    createElement('h1', null, 'Count: ', String(count())),
+    createElement('button', {
+      onClick: () => count(count() + 1)
+    }, 'Increment')
+  );
+}
+
+mount(document.getElementById('app'), () => createElement(Counter));</code></pre>
+    </div>
+
+    <h2 class="section-title">📦 Packages</h2>
+    <div class="packages-grid">
+      <div class="package-card">
+        <h3>@sldm/core</h3>
+        <p>Reactive primitives and component system with fine-grained reactivity</p>
+        <div class="links">
+          <a href="https://www.npmjs.com/package/@sldm/core">npm</a>
+          <a href="https://github.com/kluth/solidum/tree/main/packages/core">GitHub</a>
+        </div>
+      </div>
+
+      <div class="package-card">
+        <h3>@sldm/ui</h3>
+        <p>20+ production-ready UI components with glassmorphism effects</p>
+        <div class="links">
+          <a href="https://www.npmjs.com/package/@sldm/ui">npm</a>
+          <a href="https://github.com/kluth/solidum/tree/main/packages/ui">GitHub</a>
+        </div>
+      </div>
+
+      <div class="package-card">
+        <h3>@sldm/router</h3>
+        <p>Simple SPA routing with dynamic parameters</p>
+        <div class="links">
+          <a href="https://www.npmjs.com/package/@sldm/router">npm</a>
+          <a href="https://github.com/kluth/solidum/tree/main/packages/router">GitHub</a>
+        </div>
+      </div>
+
+      <div class="package-card">
+        <h3>@sldm/store</h3>
+        <p>Global state management with actions and getters</p>
+        <div class="links">
+          <a href="https://www.npmjs.com/package/@sldm/store">npm</a>
+          <a href="https://github.com/kluth/solidum/tree/main/packages/store">GitHub</a>
+        </div>
+      </div>
+
+      <div class="package-card">
+        <h3>@sldm/storage</h3>
+        <p>Unified storage for localStorage, IndexedDB, and databases</p>
+        <div class="links">
+          <a href="https://www.npmjs.com/package/@sldm/storage">npm</a>
+          <a href="https://github.com/kluth/solidum-storage">GitHub</a>
+        </div>
+      </div>
+
+      <div class="package-card">
+        <h3>@sldm/dev-reports</h3>
+        <p>Beautiful development reports for stakeholders</p>
+        <div class="links">
+          <a href="https://www.npmjs.com/package/@sldm/dev-reports">npm</a>
+          <a href="https://github.com/kluth/solidum-dev-reports">GitHub</a>
+        </div>
+      </div>
+
+      <div class="package-card">
+        <h3>@sldm/testing</h3>
+        <p>TDD-first testing framework with beautiful output</p>
+        <div class="links">
+          <a href="https://www.npmjs.com/package/@sldm/testing">npm</a>
+          <a href="https://github.com/kluth/solidum/tree/main/packages/testing">GitHub</a>
+        </div>
+      </div>
+
+      <div class="package-card">
+        <h3>@sldm/context</h3>
+        <p>Context and dependency injection</p>
+        <div class="links">
+          <a href="https://www.npmjs.com/package/@sldm/context">npm</a>
+          <a href="https://github.com/kluth/solidum/tree/main/packages/context">GitHub</a>
+        </div>
+      </div>
+
+      <div class="package-card">
+        <h3>@sldm/ssr</h3>
+        <p>Server-side rendering utilities</p>
+        <div class="links">
+          <a href="https://www.npmjs.com/package/@sldm/ssr">npm</a>
+          <a href="https://github.com/kluth/solidum/tree/main/packages/ssr">GitHub</a>
+        </div>
+      </div>
+
+      <div class="package-card">
+        <h3>@sldm/utils</h3>
+        <p>Utility functions for components</p>
+        <div class="links">
+          <a href="https://www.npmjs.com/package/@sldm/utils">npm</a>
+          <a href="https://github.com/kluth/solidum/tree/main/packages/utils">GitHub</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="features">
+    <div class="container">
+      <h2 class="section-title">✨ Features</h2>
+      <div class="features-grid">
+        <div class="feature">
+          <div class="feature-icon">⚡</div>
+          <h3>Fine-Grained Reactivity</h3>
+          <p>Efficient updates with atom, computed, and effect primitives</p>
+        </div>
+        <div class="feature">
+          <div class="feature-icon">📦</div>
+          <h3>Small Bundle Size</h3>
+          <p>Core package is only 26KB, optimized for performance</p>
+        </div>
+        <div class="feature">
+          <div class="feature-icon">🎨</div>
+          <h3>UI Components</h3>
+          <p>20+ production-ready components with beautiful designs</p>
+        </div>
+        <div class="feature">
+          <div class="feature-icon">🔒</div>
+          <h3>Type-Safe</h3>
+          <p>Fully typed with TypeScript, zero any types</p>
+        </div>
+        <div class="feature">
+          <div class="feature-icon">🧪</div>
+          <h3>Testing Built-In</h3>
+          <p>TDD-first testing framework included</p>
+        </div>
+        <div class="feature">
+          <div class="feature-icon">💾</div>
+          <h3>Unified Storage</h3>
+          <p>Work with localStorage, IndexedDB, and databases seamlessly</p>
+        </div>
+        <div class="feature">
+          <div class="feature-icon">📊</div>
+          <h3>Dev Reports</h3>
+          <p>Beautiful stakeholder-friendly reports</p>
+        </div>
+        <div class="feature">
+          <div class="feature-icon">🚀</div>
+          <h3>Production Ready</h3>
+          <p>Battle-tested with 193 passing tests</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="container">
+      <p>
+        <strong>Solidum Framework</strong> - Built with ❤️ by Matthias Kluth
+      </p>
+      <p style="margin-top: 20px;">
+        <a href="https://github.com/kluth/solidum">GitHub</a> |
+        <a href="https://www.npmjs.com/org/sldm">npm</a> |
+        <a href="dev-report.html">Development Report</a>
+      </p>
+      <p style="margin-top: 20px; opacity: 0.7;">
+        MIT License © 2025
+      </p>
+    </div>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Solidum Framework - Development Report</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      line-height: 1.6;
+      color: #333;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      padding: 20px;
+    }
+    .container { max-width: 1200px; margin: 0 auto; }
+    .header {
+      background: white;
+      padding: 40px;
+      border-radius: 16px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+      margin-bottom: 30px;
+      text-align: center;
+    }
+    h1 { color: #667eea; font-size: 48px; margin-bottom: 10px; font-weight: 700; }
+    .meta { color: #666; font-size: 16px; }
+    .card {
+      background: white;
+      padding: 30px;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      margin-bottom: 30px;
+    }
+    h2 {
+      color: #667eea;
+      font-size: 28px;
+      margin-bottom: 20px;
+      border-bottom: 3px solid #667eea;
+      padding-bottom: 15px;
+      font-weight: 700;
+    }
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+      margin: 25px 0;
+    }
+    .stat {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 25px;
+      border-radius: 12px;
+      text-align: center;
+      box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+      transition: transform 0.2s;
+    }
+    .stat:hover { transform: translateY(-5px); }
+    .stat-value { font-size: 36px; font-weight: bold; margin-bottom: 8px; }
+    .stat-label { font-size: 14px; opacity: 0.95; text-transform: uppercase; letter-spacing: 1px; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+    }
+    th, td {
+      text-align: left;
+      padding: 15px;
+      border-bottom: 1px solid #e5e7eb;
+    }
+    th {
+      background: #f8f9fa;
+      font-weight: 700;
+      color: #555;
+      text-transform: uppercase;
+      font-size: 12px;
+      letter-spacing: 0.5px;
+    }
+    tr:hover { background: #f8f9fa; }
+    .progress-bar {
+      height: 12px;
+      background: #e5e7eb;
+      border-radius: 6px;
+      overflow: hidden;
+      margin: 15px 0;
+    }
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+      transition: width 0.3s ease;
+    }
+    .footer {
+      text-align: center;
+      color: white;
+      font-size: 16px;
+      margin-top: 50px;
+      padding: 20px;
+    }
+    .footer a { color: white; text-decoration: underline; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>📊 Solidum Framework</h1>
+      <div class="meta">
+        <strong>Version:</strong> 0.1.0 |
+        <strong>Environment:</strong> production |
+        <strong>Generated:</strong> 03/10/2025, 10:44:05
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>🔨 Build Information</h2>
+      <div class="stats">
+        <div class="stat">
+          <div class="stat-value">8.00s</div>
+          <div class="stat-label">Build Time</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">0.1.0</div>
+          <div class="stat-label">Version</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">production</div>
+          <div class="stat-label">Environment</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">10</div>
+          <div class="stat-label">Packages</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>📦 Bundle Size</h2>
+      <div class="stats">
+        <div class="stat">
+          <div class="stat-value">117.97 KB</div>
+          <div class="stat-label">Total Size</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">39.16 KB</div>
+          <div class="stat-label">Gzipped</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">33.29 KB</div>
+          <div class="stat-label">Brotli</div>
+        </div>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>Package</th>
+            <th>Size</th>
+            <th>Gzip</th>
+          </tr>
+        </thead>
+        <tbody>
+          
+            <tr>
+              <td><strong>@sldm/core.js</strong></td>
+              <td>25.78 KB</td>
+              <td>8.59 KB</td>
+            </tr>
+          
+            <tr>
+              <td><strong>@sldm/ui.js</strong></td>
+              <td>29.39 KB</td>
+              <td>9.77 KB</td>
+            </tr>
+          
+            <tr>
+              <td><strong>@sldm/router.js</strong></td>
+              <td>2.73 KB</td>
+              <td>900 B</td>
+            </tr>
+          
+            <tr>
+              <td><strong>@sldm/store.js</strong></td>
+              <td>7.23 KB</td>
+              <td>2.44 KB</td>
+            </tr>
+          
+            <tr>
+              <td><strong>@sldm/context.js</strong></td>
+              <td>4.10 KB</td>
+              <td>1.37 KB</td>
+            </tr>
+          
+            <tr>
+              <td><strong>@sldm/ssr.js</strong></td>
+              <td>3.22 KB</td>
+              <td>1.07 KB</td>
+            </tr>
+          
+            <tr>
+              <td><strong>@sldm/testing.js</strong></td>
+              <td>15.92 KB</td>
+              <td>5.27 KB</td>
+            </tr>
+          
+            <tr>
+              <td><strong>@sldm/utils.js</strong></td>
+              <td>3.81 KB</td>
+              <td>1.27 KB</td>
+            </tr>
+          
+            <tr>
+              <td><strong>@sldm/storage.js</strong></td>
+              <td>13.38 KB</td>
+              <td>4.39 KB</td>
+            </tr>
+          
+            <tr>
+              <td><strong>@sldm/dev-reports.js</strong></td>
+              <td>12.40 KB</td>
+              <td>4.10 KB</td>
+            </tr>
+          
+        </tbody>
+      </table>
+    </div>
+
+    <div class="card">
+      <h2>✅ Test Results</h2>
+      <div class="stats">
+        <div class="stat">
+          <div class="stat-value">193</div>
+          <div class="stat-label">Total Tests</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">193</div>
+          <div class="stat-label">Passed</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">0</div>
+          <div class="stat-label">Failed</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">500ms</div>
+          <div class="stat-label">Duration</div>
+        </div>
+      </div>
+      <div class="progress-bar">
+        <div class="progress-fill" style="width: 100%"></div>
+      </div>
+      <p style="text-align: center; margin-top: 15px; font-size: 18px; font-weight: 600; color: #10b981;">100% Success Rate ✨</p>
+    </div>
+
+    <div class="card">
+      <h2>🎯 Code Coverage</h2>
+      <div class="stats">
+        <div class="stat">
+          <div class="stat-value">96%</div>
+          <div class="stat-label">Lines</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">96%</div>
+          <div class="stat-label">Statements</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">97%</div>
+          <div class="stat-label">Functions</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">95%</div>
+          <div class="stat-label">Branches</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer">
+      <p><strong>Generated by @sldm/dev-reports</strong></p>
+      <p>
+        <a href="https://github.com/kluth/solidum" target="_blank">GitHub</a> |
+        <a href="https://www.npmjs.com/org/sldm" target="_blank">npm</a> |
+        <a href="https://kluth.github.io/solidum" target="_blank">Documentation</a>
+      </p>
+    </div>
+  </div>
+</body>
+</html>

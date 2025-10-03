@@ -64,7 +64,9 @@
       "Bash(\"C:\\Program Files\\GitHub CLI\\gh.exe\" repo create kluth/solidum-testing --public --description \"Testing utilities and test runner for Solidum\")",
       "Bash(\"C:\\Program Files\\GitHub CLI\\gh.exe\" repo create kluth/solidum-utils --public --description \"Utility functions for Solidum framework\")",
       "Bash(npm:*)",
-      "Bash(find:*)"
+      "Bash(find:*)",
+      "Bash(\"C:\\Program Files\\GitHub CLI\\gh.exe\" repo create kluth/solidum-storage --public --description \"Unified storage abstraction for localStorage, sessionStorage, IndexedDB, and databases\")",
+      "Bash(\"C:\\Program Files\\GitHub CLI\\gh.exe\" repo create kluth/solidum-dev-reports --public --description \"Beautiful development reports for bundle size, tests, coverage, and more\")"
     ],
     "deny": [],
     "ask": []

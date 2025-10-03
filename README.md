@@ -1,411 +1,262 @@
-# Solidum
+# Solidum Framework
 
-> **A fine-grained reactive JavaScript framework for building user interfaces**
+> **A modern, fine-grained reactive TypeScript framework for building user interfaces**
 
-Solidum is a lightweight, performant framework that combines fine-grained reactivity with a flexible component model. Build modern web applications with reactive primitives, centralized state management, and a rich extensibility system.
+Solidum is a comprehensive framework ecosystem that combines fine-grained reactivity with practical tools for building production-ready web applications. From reactive primitives to UI components, routing, state management, and developer tooling - everything you need is here.
 
-> **Note**: This project uses the `@sldm` npm organization for package publishing.
+[![npm version](https://img.shields.io/npm/v/@sldm/core.svg)](https://www.npmjs.com/package/@sldm/core)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
-## Features
+## 📦 Packages
 
-- **Fine-Grained Reactivity**: Efficient updates with atom, computed, and effect primitives
-- **Smart Batching**: Automatic update batching for optimal performance
-- **Context API**: Dependency injection without prop drilling
-- **Store Pattern**: Centralized state management with actions, getters, and effects
-- **Component Utilities**: Helper functions for building component libraries
-- **JSX Alternative**: Component system using createElement
-- **Type-Safe**: Fully typed TypeScript with strict mode
-- **Extensible**: Easy to build libraries like Material UI, state management, forms, etc.
+### Core Framework
 
-## Documentation
+- **[@sldm/core](./packages/core)** - Reactive primitives and component system
+- **[@sldm/ui](./packages/ui)** - Production-ready UI component library
+- **[@sldm/router](./packages/router)** - Simple SPA routing
+- **[@sldm/store](./packages/store)** - Global state management
+- **[@sldm/context](./packages/context)** - Context and dependency injection
+- **[@sldm/ssr](./packages/ssr)** - Server-side rendering utilities
+- **[@sldm/utils](./packages/utils)** - Utility functions
 
-📚 **[View the full documentation](https://kluth.github.io/solidum/)**
+### Developer Tools
 
-The comprehensive documentation includes:
+- **[@sldm/testing](./packages/testing)** - TDD-first testing framework
+- **[@sldm/storage](./packages/storage)** - Unified storage abstraction (localStorage, IndexedDB, databases)
+- **[@sldm/dev-reports](./packages/dev-reports)** - Beautiful development reports for stakeholders
 
-- Detailed guides and tutorials
-- Complete API reference
-- Interactive examples
-- Best practices
-
-The documentation is automatically deployed to GitHub Pages on every push to master.
-
-### Local Documentation
-
-To run the documentation site locally:
+## 🚀 Quick Start
 
 ```bash
-cd docs
-pnpm install
-pnpm dev
-```
-
-Then visit `http://localhost:5173`
-
-## Installation
-
-```bash
+# Install core package
 npm install @sldm/core
+
+# Or install with UI components
+npm install @sldm/core @sldm/ui
+
+# Full stack
+npm install @sldm/core @sldm/ui @sldm/router @sldm/store
 ```
 
-## Quick Start
+### Hello World
 
 ```typescript
-import { atom, computed, effect, createElement, mount } from '@sldm/core';
+import { atom, createElement, mount } from '@sldm/core';
 
-// Create reactive state
+function Counter() {
+  const count = atom(0);
+
+  return createElement(
+    'div',
+    null,
+    createElement('h1', null, 'Count: ', String(count())),
+    createElement('button', { onClick: () => count(count() + 1) }, 'Increment')
+  );
+}
+
+mount(document.getElementById('app'), () => createElement(Counter));
+```
+
+### With UI Components
+
+```typescript
+import { atom } from '@sldm/core';
+import { Button, Card } from '@sldm/ui';
+
+function App() {
+  const count = atom(0);
+
+  return Card(
+    {
+      variant: 'elevated',
+      padding: 'large'
+    },
+    createElement('h1', null, `Count: ${count()}`),
+    Button(
+      {
+        variant: 'primary',
+        onClick: () => count(count() + 1)
+      },
+      'Increment'
+    )
+  );
+}
+```
+
+## 🎯 Core Features
+
+### Fine-Grained Reactivity
+
+```typescript
+import { atom, computed, effect } from '@sldm/core';
+
 const count = atom(0);
 const doubled = computed(() => count() * 2);
 
-// React to changes
 effect(() => {
   console.log(`Count: ${count()}, Doubled: ${doubled()}`);
 });
 
-// Update state
-count(5); // Console: Count: 5, Doubled: 10
-
-// Build UI
-function Counter() {
-  const count = atom(0);
-
-  return createElement(
-    'div',
-    null,
-    createElement('h1', null, 'Count: ', String(count())),
-    createElement(
-      'button',
-      {
-        onClick: () => count(count() + 1),
-      },
-      'Increment'
-    )
-  );
-}
-
-// Mount to DOM
-mount(document.getElementById('app'), () => createElement(Counter));
+count(5); // Logs: "Count: 5, Doubled: 10"
 ```
 
-## Core Concepts
-
-### Reactive Primitives
-
-#### Atom - Mutable State
+### State Management
 
 ```typescript
-import { atom } from '@sldm/core';
+import { createStore } from '@sldm/store';
 
-// Create atom with initial value
-const count = atom(0);
-
-// Read value
-console.log(count()); // 0
-
-// Write value
-count(5);
-
-// Subscribe to changes
-const unsubscribe = count.subscribe(newValue => {
-  console.log('Count changed:', newValue);
-});
-
-// Unsubscribe when done
-unsubscribe();
-```
-
-#### Computed - Derived State
-
-```typescript
-import { atom, computed } from '@sldm/core';
-
-const firstName = atom('John');
-const lastName = atom('Doe');
-
-const fullName = computed(() => {
-  return `${firstName()} ${lastName()}`;
-});
-
-console.log(fullName()); // "John Doe"
-
-firstName('Jane');
-console.log(fullName()); // "Jane Doe"
-```
-
-#### Effect - Side Effects
-
-```typescript
-import { atom, effect } from '@sldm/core';
-
-const count = atom(0);
-
-// Effect runs when dependencies change
-effect(() => {
-  console.log('Count is:', count());
-  document.title = `Count: ${count()}`;
-});
-
-count(5); // Updates document.title
-```
-
-#### Batch - Optimize Updates
-
-```typescript
-import { atom, batch } from '@sldm/core';
-
-const firstName = atom('John');
-const lastName = atom('Doe');
-
-// Batch multiple updates into one notification
-batch(() => {
-  firstName('Jane');
-  lastName('Smith');
-});
-// Subscribers only notified once
-```
-
-### Context API
-
-Pass data through component tree without prop drilling:
-
-```typescript
-import { createContext, useContext, createElement } from '@sldm/core';
-
-// Create context
-const ThemeContext = createContext();
-
-// Provide value
-function App() {
-  const theme = atom({ mode: 'dark', primary: '#667eea' });
-
-  return createElement(ThemeContext.Provider, { value: theme }, createElement(Button));
-}
-
-// Consume value
-function Button() {
-  const theme = useContext(ThemeContext);
-
-  return createElement(
-    'button',
-    {
-      style: { color: theme().primary },
-    },
-    'Click me'
-  );
-}
-```
-
-### Store Pattern
-
-Centralized state management for complex applications:
-
-```typescript
-import { createStore } from '@sldm/core';
-
-const todoStore = createStore({
-  // Initial state
-  state: {
-    todos: [],
-    filter: 'all',
-  },
-
-  // Derived state
-  getters: {
-    filteredTodos(state) {
-      return state.todos.filter(todo => {
-        if (state.filter === 'active') return !todo.completed;
-        if (state.filter === 'completed') return todo.completed;
-        return true;
-      });
-    },
-  },
-
-  // State updates (pure functions)
+const store = createStore({
+  state: { count: 0, todos: [] },
   actions: {
-    addTodo(state, text) {
-      return {
-        ...state,
-        todos: [...state.todos, { id: Date.now(), text, completed: false }],
-      };
-    },
-    toggleTodo(state, id) {
-      return {
-        ...state,
-        todos: state.todos.map(todo =>
-          todo.id === id ? { ...todo, completed: !todo.completed } : todo
-        ),
-      };
-    },
+    increment: (state) => ({ ...state, count: state.count + 1 }),
+    addTodo: (state, text) => ({
+      ...state,
+      todos: [...state.todos, { id: Date.now(), text }]
+    })
   },
-
-  // Async operations
-  effects: {
-    async loadTodos({ dispatch }) {
-      const todos = await api.getTodos();
-      todos.forEach(todo => dispatch('addTodo', todo.text));
-    },
-  },
+  getters: {
+    completedTodos: (state) => state.todos.filter(t => t.completed)
+  }
 });
 
-// Dispatch actions
-todoStore.dispatch('addTodo', 'Learn Solidum');
-
-// Select reactive state
-const todos = todoStore.select(state => state.todos);
-console.log(todos());
-
-// Run effects
-await todoStore.effects.loadTodos();
+store.dispatch('increment');
+const todos = store.select(state => state.todos);
 ```
 
-### Component Utilities
-
-Helper functions for building component libraries:
+### Routing
 
 ```typescript
-import { mergeProps, cn } from '@sldm/core';
+import { createRouter } from '@sldm/router';
 
-// Conditional class names
-const classes = cn(
-  'btn',
-  'btn-primary',
-  {
-    'btn-active': isActive,
-    'btn-disabled': isDisabled,
-  },
-  ['extra-class-1', 'extra-class-2']
-);
+const router = createRouter({
+  '/': HomePage,
+  '/about': AboutPage,
+  '/users/:id': UserPage
+});
 
-// Merge props intelligently
-const merged = mergeProps(
-  { className: 'base', onClick: handler1, style: { color: 'red' } },
-  { className: 'extra', onClick: handler2, style: { fontSize: '16px' } }
-);
-// Result: {
-//   className: 'base extra',
-//   onClick: [both handlers chained],
-//   style: { color: 'red', fontSize: '16px' }
-// }
+router.navigate('/users/123');
 ```
 
-## Component System
-
-### Creating Components
+### Storage
 
 ```typescript
-import { createElement, atom } from '@sldm/core';
+import { createStorage, IndexedDBAdapter } from '@sldm/storage';
 
-function Counter() {
-  const count = atom(0);
+// Simple storage
+const storage = createStorage('local');
+storage.set('user', { name: 'John', age: 30 });
 
-  return createElement(
-    'div',
-    { className: 'counter' },
-    createElement('h1', null, 'Count: ', String(count())),
-    createElement(
-      'button',
-      {
-        onClick: () => count(count() + 1),
-      },
-      'Increment'
-    ),
-    createElement(
-      'button',
-      {
-        onClick: () => count(count() - 1),
-      },
-      'Decrement'
-    )
-  );
-}
+// IndexedDB for complex data
+const db = new IndexedDBAdapter({
+  dbName: 'my-app',
+  storeName: 'users'
+});
+
+await db.set('user-1', { name: 'John', email: 'john@example.com' });
+const users = await db.query(user => user.age > 18);
 ```
 
-### Component Props
+### Development Reports
 
 ```typescript
-function Greeting({ name, age }) {
-  return createElement(
-    'div',
-    null,
-    createElement('h1', null, `Hello, ${name}!`),
-    createElement('p', null, `You are ${age} years old.`)
-  );
-}
+import {
+  BundleAnalyzer,
+  TestReporter,
+  HTMLReportGenerator
+} from '@sldm/dev-reports';
 
-// Usage
-createElement(Greeting, { name: 'Alice', age: 30 });
+const bundleAnalyzer = new BundleAnalyzer();
+const testReporter = new TestReporter();
+const htmlGenerator = new HTMLReportGenerator();
+
+const report = {
+  build: { name: 'my-app', version: '1.0.0', buildTime: 5000 },
+  bundle: bundleAnalyzer.analyze('my-app', bundles),
+  tests: testReporter.generate('my-app', testSuites),
+  timestamp: Date.now()
+};
+
+const html = htmlGenerator.generate(report);
+// Beautiful stakeholder-friendly report!
 ```
 
-### Lifecycle Hooks
+## 📚 Documentation
+
+Full documentation is available at **[kluth.github.io/solidum](https://kluth.github.io/solidum/)**
+
+## 🧪 Testing
+
+Solidum includes a built-in testing framework:
 
 ```typescript
-import { onMount, onCleanup } from '@sldm/core';
+import { describe, it, expect, runTests } from '@sldm/testing';
 
-function Timer() {
-  const seconds = atom(0);
-
-  onMount(() => {
-    const interval = setInterval(() => {
-      seconds(seconds() + 1);
-    }, 1000);
-
-    onCleanup(() => {
-      clearInterval(interval);
-    });
+describe('Counter', () => {
+  it('should increment', () => {
+    const count = atom(0);
+    count(count() + 1);
+    expect(count()).toBe(1);
   });
+});
 
-  return createElement('div', null, `Seconds: ${seconds()}`);
-}
+runTests();
 ```
 
-## Examples
+## 🏗️ Architecture
 
-### Todo App
+```
+@sldm
+├── core          # Reactive primitives, components
+├── ui            # UI component library (20+ components)
+├── router        # SPA routing
+├── store         # State management
+├── context       # Dependency injection
+├── ssr           # Server-side rendering
+├── utils         # Utility functions
+├── testing       # Testing framework
+├── storage       # Storage abstraction
+└── dev-reports   # Development reporting
+```
 
-See [examples/todo-app](./examples/todo-app) for a comprehensive example showcasing:
+## 🎨 UI Components
 
-- Reactive primitives (atom, computed, effect)
-- Store pattern for state management
-- Context API for theme management
-- Component utilities (cn)
-- Lifecycle hooks (onMount)
-- LocalStorage persistence
+The `@sldm/ui` package includes 20+ production-ready components:
 
-Run it:
+- **Button** - Multiple variants, sizes, loading states
+- **Card** - Elevated, outlined, glassmorphism effects
+- **Input** - Text, email, password with validation
+- **Tabs** - Component-level reactivity
+- **Modal** - Portal-based with backdrop
+- **Dropdown** - Accessible with keyboard navigation
+- And many more...
+
+## 💾 Storage Solutions
+
+The `@sldm/storage` package provides unified storage APIs:
+
+- **Synchronous**: localStorage, sessionStorage, in-memory
+- **Asynchronous**: IndexedDB, database adapters
+- **Type-Safe**: Full TypeScript support
+- **Queryable**: Advanced filtering and sorting
+- **Prefixing**: Namespace isolation
+
+## 📊 Developer Reports
+
+Generate beautiful reports for stakeholders:
+
+- **Bundle Size Analysis** - Track sizes with compression metrics
+- **Test Results** - Success rates and durations
+- **Code Coverage** - Lines, statements, functions, branches
+- **Build Information** - Times, versions, environments
+- **Multiple Formats** - HTML, Markdown, JSON
+
+## 🚦 Development
 
 ```bash
-cd examples/todo-app
-python -m http.server 8080
-# Open http://localhost:8080
-```
+# Clone repository
+git clone https://github.com/kluth/solidum.git
+cd solidum
 
-## Architecture
-
-```
-@sldm/core
-├── reactive/      # Reactive primitives (atom, computed, effect, batch)
-├── context/       # Context API for dependency injection
-├── store/         # Store pattern for state management
-├── utils/         # Component utilities (mergeProps, cn)
-└── dom/           # Component system and rendering
-```
-
-## Testing
-
-```bash
-# Run all tests
-pnpm test
-
-# Run specific package tests
-pnpm --filter @sldm/core test
-
-# Watch mode
-pnpm --filter @sldm/core test:watch
-```
-
-## Development
-
-```bash
 # Install dependencies
 pnpm install
 
@@ -417,134 +268,50 @@ pnpm test
 
 # Type check
 pnpm typecheck
+
+# Lint
+pnpm lint
+
+# Format
+pnpm format
 ```
 
-## API Reference
+## 📦 Publishing
 
-### Reactive Primitives
+All packages are published to npm under the `@sldm` organization:
 
-- `atom<T>(initialValue: T): Atom<T>` - Create mutable reactive state
-- `computed<T>(fn: () => T): Computed<T>` - Create derived state
-- `effect(fn: () => void): Dispose` - Run side effects
-- `batch(fn: () => void): void` - Batch multiple updates
+```bash
+# Prepare for publishing
+pnpm publish:prepare
 
-### Context API
-
-- `createContext<T>(defaultValue?: T): Context<T>` - Create context
-- `useContext<T>(context: Context<T>): T` - Consume context value
-
-### Store Pattern
-
-- `createStore<State, Actions, Getters, Effects>(config): Store` - Create store
-
-### Component Utilities
-
-- `mergeProps(...sources: Props[]): Props` - Merge props intelligently
-- `cn(...classes: ClassValue[]): string` - Conditional class names
-
-### Component System
-
-- `createElement(type, props, ...children): VNode` - Create virtual node
-- `Fragment` - Fragment component for grouping
-- `render(vnode, document?): Node` - Render to DOM
-- `mount(container, component, document?): Dispose` - Mount component
-- `onMount(fn: () => void): void` - Lifecycle hook
-- `onCleanup(fn: () => void): void` - Cleanup hook
-
-## Extensibility
-
-Solidum is designed to be extensible. Build your own:
-
-### UI Component Libraries
-
-```typescript
-import { cn, mergeProps, useContext } from '@sldm/core';
-
-export function Button({ variant = 'primary', size = 'md', ...props }) {
-  const theme = useContext(ThemeContext);
-
-  return createElement(
-    'button',
-    mergeProps(
-      {
-        className: cn('btn', `btn-${variant}`, `btn-${size}`, props.className),
-      },
-      props
-    )
-  );
-}
+# Publish all packages
+pnpm publish:all
 ```
 
-### State Management Libraries
+## 🤝 Contributing
 
-```typescript
-import { createStore, createContext } from '@sldm/core';
+Contributions are welcome! Please see [CONTRIBUTING.md](./CONTRIBUTING.md).
 
-export function createGlobalStore(config) {
-  const store = createStore(config);
-  const StoreContext = createContext();
+## 📄 License
 
-  return {
-    store,
-    Provider: ({ children }) => {
-      return createElement(StoreContext.Provider, { value: store }, children);
-    },
-    useStore: () => useContext(StoreContext),
-  };
-}
-```
+MIT © Matthias Kluth
 
-### Form Libraries
+## 🔗 Links
 
-```typescript
-import { atom, computed } from '@sldm/core';
+- [Documentation](https://kluth.github.io/solidum)
+- [npm Organization](https://www.npmjs.com/org/sldm)
+- [GitHub](https://github.com/kluth/solidum)
+- [Issues](https://github.com/kluth/solidum/issues)
 
-export function useForm(config) {
-  const values = atom(config.initialValues);
-  const errors = atom({});
-  const touched = atom({});
+## 🙏 Acknowledgments
 
-  const isValid = computed(() => {
-    return Object.keys(errors()).length === 0;
-  });
-
-  return { values, errors, touched, isValid, handleSubmit, register };
-}
-```
-
-## Performance
-
-- **Fine-Grained Updates**: Only affected components re-render
-- **Automatic Batching**: Multiple updates batched automatically
-- **Computed Caching**: Derived values cached until dependencies change
-- **Memory Efficient**: Small bundle size, minimal overhead
-
-## Browser Support
-
-Works in all modern browsers supporting:
-
-- ES6 modules
-- Proxy
-- Symbol
-- WeakMap
-
-## Contributing
-
-Contributions welcome! Please see [CONTRIBUTING.md](./CONTRIBUTING.md).
-
-## License
-
-MIT
-
-## Acknowledgments
-
-Inspired by:
+Inspired by the best ideas from:
 
 - [SolidJS](https://www.solidjs.com/) - Fine-grained reactivity
 - [React](https://react.dev/) - Component model
-- [Vue](https://vuejs.org/) - Reactivity system
-- [Svelte](https://svelte.dev/) - Compiler optimizations
+- [Vue](https://vuejs.org/) - Developer experience
+- [Svelte](https://svelte.dev/) - Simplicity
 
 ---
 
-**Built with ❤️ for reactive web applications**
+**Built with ❤️ by Matthias Kluth**
