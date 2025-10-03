@@ -18,28 +18,18 @@ export function getTheme(): Theme {
 export function setTheme(theme: Theme): void {
   if (!isBrowser) return;
 
-  // eslint-disable-next-line no-console
-  console.log('🎨 setTheme called with:', theme);
-
   themeAtom(theme);
   localStorage.setItem('solidum-theme', theme);
 
   // Update stylesheet
   const existingLink = document.getElementById('theme-stylesheet') as HTMLLinkElement;
-  // eslint-disable-next-line no-console
-  console.log('📎 Existing link:', existingLink);
   if (existingLink) {
-    const newHref = theme === 'chalk' ? './chalk-styles.css' : './styles.css';
-    // eslint-disable-next-line no-console
-    console.log('🔗 Updating href to:', newHref);
-    existingLink.href = newHref;
+    existingLink.href = theme === 'chalk' ? './chalk-styles.css' : './styles.css';
   }
 
   // Update body class
   document.body.classList.remove('chalk-theme', 'default-theme');
   document.body.classList.add(`${theme}-theme`);
-  // eslint-disable-next-line no-console
-  console.log('📝 Body classes:', document.body.classList.toString());
 
   // Trigger re-render
   window.dispatchEvent(new CustomEvent('themechange', { detail: { theme } }));
