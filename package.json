@@ -9,7 +9,7 @@
     "build:docs": "pnpm --filter @sldm/docs build",
     "test": "pnpm -r --workspace-concurrency=1 test",
     "test:parallel": "pnpm -r test",
-    "test:unit": "pnpm -r --filter '!@sldm/integrations' test",
+    "test:unit": "pnpm -r --filter=!@sldm/integrations test",
     "test:watch": "pnpm -r test:watch",
     "test:ci": "pnpm -r --workspace-concurrency=1 test --reporter=verbose",
     "dev": "pnpm -r --parallel dev",
