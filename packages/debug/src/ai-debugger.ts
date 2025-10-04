@@ -75,10 +75,11 @@ export class AIDebugger {
   private async initializeAI(): Promise<void> {
     try {
       // Dynamic import to avoid hard dependency
+      // @ts-ignore - Optional peer dependency, may not be available at compile time
       const { createWebAIClient } = await import('@sldm/web-ai');
       this.aiClient = createWebAIClient();
 
-      if (!this.aiClient.isAvailable()) {
+      if (this.aiClient && !this.aiClient.isAvailable()) {
         console.warn(
           '⚠️  Web AI not available. AI-powered debugging features disabled.\n' +
             'To enable: Use Chrome 127+ with AI features enabled.'
