@@ -8,6 +8,7 @@
     "build": "pnpm --filter @sldm/utils build && pnpm --filter @sldm/testing build && pnpm --filter @sldm/core build && pnpm --filter @sldm/debug build && pnpm --filter @sldm/web-ai build && pnpm --filter @sldm/ui build && pnpm --filter @sldm/ui-chalk build && pnpm --filter @sldm/router build && pnpm --filter @sldm/store build && pnpm --filter @sldm/context build && pnpm --filter @sldm/ssr build && pnpm --filter @sldm/storage build && pnpm --filter @sldm/integrations build && pnpm --filter @sldm/dev-reports build",
     "build:docs": "pnpm --filter @sldm/docs build",
     "test": "pnpm -r --workspace-concurrency=1 test",
+    "test:parallel": "pnpm -r test",
     "test:watch": "pnpm -r test:watch",
     "test:ci": "pnpm -r --workspace-concurrency=1 test --reporter=verbose",
     "dev": "pnpm -r --parallel dev",
