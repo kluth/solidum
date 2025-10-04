@@ -3,11 +3,16 @@
   "compilerOptions": {
     "outDir": "./dist",
     "rootDir": "./src",
+    "composite": true,
     "declaration": true,
     "declarationMap": true,
     "lib": ["ES2022", "DOM"],
     "types": ["node"]
   },
   "include": ["src"],
-  "exclude": ["**/*.test.ts", "dist", "node_modules"]
+  "exclude": ["**/*.test.ts", "dist", "node_modules"],
+  "references": [
+    { "path": "../core" },
+    { "path": "../utils" }
+  ]
 }

@@ -235,11 +235,11 @@ importers:
   packages/ui:
     dependencies:
       '@sldm/core':
-        specifier: ^0.1.0
-        version: 0.1.0
+        specifier: workspace:*
+        version: link:../core
       '@sldm/utils':
-        specifier: ^0.1.0
-        version: 0.1.0
+        specifier: workspace:*
+        version: link:../utils
     devDependencies:
       '@types/node':
         specifier: ^20.11.0
@@ -1154,10 +1154,6 @@ packages:
 
   /@sldm/core@0.1.0:
     resolution: {integrity: sha512-5iS0LDgxPVZIt8Sn33jS3Tikhw0Q6XK1aJfQIFVi5Ozv1EAwGMHmKiulPYEou4xbyMG3kwcEnxuZ+KYqinIS5w==}
-    dev: false
-
-  /@sldm/utils@0.1.0:
-    resolution: {integrity: sha512-QuwHKUd3JzwcJhCHaU8XEOT9KtIqiwEYYkK5s4iM5TR5fYLBdZSc6rf3XFsJF4uXgewiZRp+x3YJsWmvIwSWLQ==}
     dev: false
 
   /@types/estree@1.0.8:

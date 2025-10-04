@@ -27,8 +27,8 @@
     "lint:fix": "eslint src/**/*.{ts,js} --fix"
   },
   "dependencies": {
-    "@sldm/core": "^0.1.0",
-    "@sldm/utils": "^0.1.0"
+    "@sldm/core": "workspace:*",
+    "@sldm/utils": "workspace:*"
   },
   "devDependencies": {
     "@types/node": "^20.11.0",
