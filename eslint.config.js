@@ -115,6 +115,19 @@ export default [
     },
   },
   {
-    ignores: ['node_modules/**', 'dist/**', '**/*.d.ts', '**/*.js.map', '**/*.d.ts.map'],
+    ignores: [
+      'node_modules/**',
+      'dist/**',
+      '**/*.d.ts',
+      '**/*.js.map',
+      '**/*.d.ts.map',
+      'docs/dist_backup/**',
+      'docs/client.js',
+      'docs/pages/**',
+      'docs/node_modules/**',
+      'packages/*/dist/**',
+      'packages/debug/examples/**',
+      'cli/**',
+    ],
   },
 ];

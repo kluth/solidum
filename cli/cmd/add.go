@@ -19,7 +19,8 @@ Available packages:
   - store     : @sldm/store (State management)
   - context   : @sldm/context (Dependency injection)
   - ssr       : @sldm/ssr (Server-side rendering)
-  - testing   : @sldm/testing (Test utilities)`,
+  - testing   : @sldm/testing (Test utilities)
+  - debug     : @sldm/debug (Debugging utilities)`,
 	Args: cobra.ExactArgs(1),
 	RunE: runAdd,
 }
@@ -39,6 +40,7 @@ func runAdd(cmd *cobra.Command, args []string) error {
 		"context": "@sldm/context",
 		"ssr":     "@sldm/ssr",
 		"testing": "@sldm/testing",
+		"debug":   "@sldm/debug",
 	}
 
 	packageName, ok := packageMap[pkg]

@@ -1,6 +1,6 @@
 {
   "name": "@sldm/dev-reports",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Beautiful development reports for bundle size, tests, coverage, and more",
   "type": "module",
   "main": "./dist/index.js",

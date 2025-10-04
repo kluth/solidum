@@ -22,6 +22,7 @@ Solidum is a comprehensive framework ecosystem that combines fine-grained reacti
 ### Developer Tools
 
 - **[@sldm/testing](./packages/testing)** - TDD-first testing framework
+- **[@sldm/debug](./packages/debug)** - Comprehensive debugging utilities with logging, performance monitoring, and more
 - **[@sldm/storage](./packages/storage)** - Unified storage abstraction (localStorage, IndexedDB, databases)
 - **[@sldm/dev-reports](./packages/dev-reports)** - Beautiful development reports for stakeholders
 
@@ -69,13 +70,13 @@ function App() {
   return Card(
     {
       variant: 'elevated',
-      padding: 'large'
+      padding: 'large',
     },
     createElement('h1', null, `Count: ${count()}`),
     Button(
       {
         variant: 'primary',
-        onClick: () => count(count() + 1)
+        onClick: () => count(count() + 1),
       },
       'Increment'
     )
@@ -108,15 +109,15 @@ import { createStore } from '@sldm/store';
 const store = createStore({
   state: { count: 0, todos: [] },
   actions: {
-    increment: (state) => ({ ...state, count: state.count + 1 }),
+    increment: state => ({ ...state, count: state.count + 1 }),
     addTodo: (state, text) => ({
       ...state,
-      todos: [...state.todos, { id: Date.now(), text }]
-    })
+      todos: [...state.todos, { id: Date.now(), text }],
+    }),
   },
   getters: {
-    completedTodos: (state) => state.todos.filter(t => t.completed)
-  }
+    completedTodos: state => state.todos.filter(t => t.completed),
+  },
 });
 
 store.dispatch('increment');
@@ -131,7 +132,7 @@ import { createRouter } from '@sldm/router';
 const router = createRouter({
   '/': HomePage,
   '/about': AboutPage,
-  '/users/:id': UserPage
+  '/users/:id': UserPage,
 });
 
 router.navigate('/users/123');
@@ -149,21 +150,45 @@ storage.set('user', { name: 'John', age: 30 });
 // IndexedDB for complex data
 const db = new IndexedDBAdapter({
   dbName: 'my-app',
-  storeName: 'users'
+  storeName: 'users',
 });
 
 await db.set('user-1', { name: 'John', email: 'john@example.com' });
 const users = await db.query(user => user.age > 18);
 ```
 
+### Debugging
+
+```typescript
+import { logger, createDebug, PerformanceMonitor } from '@sldm/debug';
+
+// Simple logging
+logger.info('Application started');
+logger.debug('User data', { userId: 123 });
+logger.error('Error occurred', error);
+
+// Performance monitoring
+const perfMonitor = new PerformanceMonitor();
+perfMonitor.mark('start');
+await loadData();
+const measurement = perfMonitor.measure('load-data', 'start');
+
+// Complete debug instance
+const debug = await createDebug({
+  enablePerformance: true,
+  enableReactive: true,
+  enableComponentTree: true,
+});
+
+// Export logs in various formats
+const html = debug.logger.export('html');
+const json = debug.logger.export('json');
+```
+
 ### Development Reports
 
 ```typescript
-import {
-  BundleAnalyzer,
-  TestReporter,
-  HTMLReportGenerator
-} from '@sldm/dev-reports';
+import { BundleAnalyzer, TestReporter, HTMLReportGenerator } from '@sldm/dev-reports';
 
 const bundleAnalyzer = new BundleAnalyzer();
 const testReporter = new TestReporter();
@@ -173,7 +198,7 @@ const report = {
   build: { name: 'my-app', version: '1.0.0', buildTime: 5000 },
   bundle: bundleAnalyzer.analyze('my-app', bundles),
   tests: testReporter.generate('my-app', testSuites),
-  timestamp: Date.now()
+  timestamp: Date.now(),
 };
 
 const html = htmlGenerator.generate(report);

@@ -221,6 +221,74 @@ func ViteConfigTemplate() string {
 export default defineConfig({
   build: {
     target: 'es2020',
+    minify: 'esbuild',
+    sourcemap: true,
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          vendor: ['@sldm/core'],
+        },
+      },
+    },
+  },
+  server: {
+    port: 3000,
+    strictPort: false,
+    open: true,
+  },
+  optimizeDeps: {
+    include: ['@sldm/core'],
+  },
+});
+`
+}
+
+func ESLintConfigTemplate() string {
+	return `{
+  "extends": ["eslint:recommended", "plugin:@typescript-eslint/recommended"],
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint"],
+  "root": true,
+  "env": {
+    "browser": true,
+    "es2020": true
+  },
+  "rules": {
+    "@typescript-eslint/no-unused-vars": ["warn", { "argsIgnorePattern": "^_" }],
+    "@typescript-eslint/no-explicit-any": "warn"
+  }
+}
+`
+}
+
+func PrettierConfigTemplate() string {
+	return `{
+  "semi": true,
+  "singleQuote": true,
+  "tabWidth": 2,
+  "trailingComma": "es5",
+  "printWidth": 100
+}
+`
+}
+
+func VitestConfigTemplate() string {
+	return `import { defineConfig } from 'vitest/config';
+
+export default defineConfig({
+  test: {
+    globals: true,
+    environment: 'jsdom',
+    coverage: {
+      provider: 'v8',
+      reporter: ['text', 'json', 'html'],
+      exclude: [
+        'node_modules/',
+        'dist/',
+        '**/*.config.ts',
+        '**/*.d.ts',
+      ],
+    },
   },
 });
 `

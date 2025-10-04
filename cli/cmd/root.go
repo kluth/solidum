@@ -19,7 +19,22 @@ func Execute() error {
 }
 
 func init() {
+	// Project scaffolding
 	rootCmd.AddCommand(newCmd)
 	rootCmd.AddCommand(generateCmd)
 	rootCmd.AddCommand(addCmd)
+
+	// Development workflow
+	rootCmd.AddCommand(devCmd)
+	rootCmd.AddCommand(buildCmd)
+	rootCmd.AddCommand(testCmd)
+
+	// Code quality
+	rootCmd.AddCommand(typecheckCmd)
+	rootCmd.AddCommand(lintCmd)
+	rootCmd.AddCommand(formatCmd)
+
+	// Maintenance
+	rootCmd.AddCommand(cleanCmd)
+	rootCmd.AddCommand(publishCmd)
 }

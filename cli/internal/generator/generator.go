@@ -73,6 +73,26 @@ func CreateProject(config ProjectConfig) error {
 		return err
 	}
 
+	// Create vite.config.ts
+	if err := createViteConfig(config.Path); err != nil {
+		return err
+	}
+
+	// Create .eslintrc.json
+	if err := createESLintConfig(config.Path); err != nil {
+		return err
+	}
+
+	// Create .prettierrc
+	if err := createPrettierConfig(config.Path); err != nil {
+		return err
+	}
+
+	// Create vitest.config.ts
+	if err := createVitestConfig(config.Path); err != nil {
+		return err
+	}
+
 	return nil
 }
 
@@ -139,13 +159,30 @@ func createPackageJSON(config ProjectConfig) error {
 		"version": "0.1.0",
 		"type":    "module",
 		"scripts": map[string]string{
-			"dev":   "vite",
-			"build": "tsc && vite build",
+			"dev":           "vite",
+			"build":         "tsc && vite build",
+			"preview":       "vite preview",
+			"typecheck":     "tsc --noEmit",
+			"lint":          "eslint . --ext .ts,.tsx",
+			"lint:fix":      "eslint . --ext .ts,.tsx --fix",
+			"format":        "prettier --write \"src/**/*.{ts,tsx}\"",
+			"format:check":  "prettier --check \"src/**/*.{ts,tsx}\"",
+			"test":          "vitest",
+			"test:ui":       "vitest --ui",
+			"test:coverage": "vitest --coverage",
 		},
 		"dependencies": packageDeps(config.Packages),
 		"devDependencies": map[string]string{
-			"typescript": "^5.3.0",
-			"vite":       "^5.0.0",
+			"@typescript-eslint/eslint-plugin": "^6.0.0",
+			"@typescript-eslint/parser":        "^6.0.0",
+			"@vitest/coverage-v8":              "^1.0.0",
+			"@vitest/ui":                       "^1.0.0",
+			"eslint":                           "^8.0.0",
+			"jsdom":                            "^24.0.0",
+			"prettier":                         "^3.0.0",
+			"typescript":                       "^5.3.0",
+			"vite":                             "^5.0.0",
+			"vitest":                           "^1.0.0",
 		},
 	}
 
@@ -199,6 +236,30 @@ func createGitIgnore(path string) error {
 func createReadme(config ProjectConfig) error {
 	content := templates.ReadmeTemplate(config.Name)
 	filePath := filepath.Join(config.Path, "README.md")
+	return os.WriteFile(filePath, []byte(content), 0644)
+}
+
+func createViteConfig(path string) error {
+	content := templates.ViteConfigTemplate()
+	filePath := filepath.Join(path, "vite.config.ts")
+	return os.WriteFile(filePath, []byte(content), 0644)
+}
+
+func createESLintConfig(path string) error {
+	content := templates.ESLintConfigTemplate()
+	filePath := filepath.Join(path, ".eslintrc.json")
+	return os.WriteFile(filePath, []byte(content), 0644)
+}
+
+func createPrettierConfig(path string) error {
+	content := templates.PrettierConfigTemplate()
+	filePath := filepath.Join(path, ".prettierrc")
+	return os.WriteFile(filePath, []byte(content), 0644)
+}
+
+func createVitestConfig(path string) error {
+	content := templates.VitestConfigTemplate()
+	filePath := filepath.Join(path, "vitest.config.ts")
 	return os.WriteFile(filePath, []byte(content), 0644)
 }
 

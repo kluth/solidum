@@ -5,113 +5,177 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.0] - 2024-10-04
+
+### Added
+
+#### New Packages
+
+- **@sldm/debug** - Comprehensive debugging and monitoring utilities
+  - Structured logging with multiple levels (TRACE, DEBUG, INFO, WARN, ERROR, FATAL)
+  - Namespace-based log organization
+  - Multiple output formatters (JSON, HTML, Markdown, Plain text)
+  - Real-time log streaming (SSE, WebSocket)
+  - Performance monitoring (FPS, memory, custom measurements)
+  - Reactive state debugging with time-travel
+  - Component tree visualization (ASCII, Mermaid)
+  - Debug API server for external tools
+  - Persistent logging support
+
+#### CLI Enhancements
+
+- **Enhanced Solidum CLI** with comprehensive workflow commands
+  - `solidum build` - Build with parallel execution support
+  - `solidum test` - Run tests with coverage and UI options
+  - `solidum dev` - Development server with HMR
+  - `solidum typecheck` - TypeScript type checking
+  - `solidum lint` - ESLint with auto-fix
+  - `solidum format` - Prettier code formatting
+  - `solidum clean` - Clean build artifacts and dependencies
+  - `solidum publish` - Full publish workflow with safety checks
+  - Parallel package builds for monorepo
+  - Watch modes for all commands
+  - Package-specific operations
+
+#### Project Template Improvements
+
+- Enhanced generated project templates with:
+  - Optimized `vite.config.ts` with code splitting and sourcemaps
+  - `vitest.config.ts` for comprehensive testing
+  - `.eslintrc.json` for code quality
+  - `.prettierrc` for consistent formatting
+  - Complete npm scripts (dev, build, test, lint, format, typecheck)
+  - Better dependency management
+
+#### Documentation
+
+- Added comprehensive README for @sldm/debug package
+- Updated CLI documentation with all new commands
+- Added usage examples for debug package
+- Updated main README with debug package
+
+### Enhanced
+
+#### Build System
+
+- Parallel package builds with dependency resolution
+- Layer-based build order for optimal performance
+- Support for package-specific builds
+- Watch mode for continuous development
+
+#### Developer Experience
+
+- Improved error messages and logging
+- Better TypeScript support across all packages
+- Enhanced test coverage reporting
+- Streamlined development workflow
+
+### Fixed
+
+- Removed duplicate `packages/packages` directory
+- Cleaned up temporary and log files
+- Updated outdated documentation
+- Fixed package dependency order in builds
+
 ## [0.1.0] - 2024-10-01
 
 ### Added
 
-#### Core System
+#### Core Framework
 
-- `Agent` base class for building custom autonomous agents
-- `WorkflowEngine` for multi-phase workflow orchestration
-- `TaskExecutor` for task execution with timeout and retry logic
-- `ReflectionLoop` for self-validation and quality assessment
-- Event system for monitoring agent execution
-- Comprehensive error handling and recovery
+- **@sldm/core** - Fine-grained reactive primitives
+  - `atom` - Reactive state containers
+  - `computed` - Derived reactive values
+  - `effect` - Side-effect execution
+  - `batch` - Batched updates for performance
+  - `createElement` - Virtual DOM element creation
+  - `mount` - Component mounting and rendering
 
-#### LLM Integration
+- **@sldm/ui** - Production-ready UI component library
+  - Button, Card, Container, Stack components
+  - Responsive design system
+  - Theme support
+  - Accessibility features
 
-- `LLMProvider` abstract base class for provider-agnostic LLM integration
-- `ClaudeProvider` implementation with Anthropic Claude support
-- Streaming support for real-time generation
-- Token usage tracking and budgeting
-- Automatic retry logic with exponential backoff
+- **@sldm/ui-chalk** - Terminal UI components
+  - Styled terminal output
+  - Progress bars and spinners
+  - Tables and layouts
 
-#### FSL (Feature Specification Language)
+- **@sldm/router** - Simple SPA routing
+  - Route definitions
+  - Navigation utilities
+  - History management
 
-- `FSLSpec` type definitions for structured feature specifications
-- `FSLParser` for parsing FSL from objects and strings
-- `FSLValidator` for validating specifications
-- Support for constraints, edge cases, performance requirements
-- Test scenario definitions
-- Example code snippets
+- **@sldm/store** - Global state management
+  - Centralized state stores
+  - Action dispatching
+  - Middleware support
 
-#### Code Generation
+- **@sldm/context** - Dependency injection
+  - Context providers
+  - Dependency resolution
+  - Scoped services
 
-- `ImplementationGenerator` for generating TypeScript code from FSL specs
-- `TestGenerator` for creating comprehensive test suites
-- `PromptTemplates` with engineered prompts for high-quality output
-- Support for analysis phase with implementation planning
-- Streaming generation support
-- Automatic code cleanup (markdown fence removal)
+- **@sldm/ssr** - Server-side rendering
+  - SSR utilities
+  - Hydration support
+  - Stream rendering
 
-#### Quality Validation
+- **@sldm/utils** - Utility functions
+  - Common helpers
+  - Type utilities
 
-- `CodeQualityValidator` with LLM-based code review
-- Static analysis for basic quality metrics
-- `TestRunner` for parsing and simulating test execution
-- `CoverageAnalyzer` for estimating and analyzing test coverage
-- Quality score calculation
-- Issue detection and reporting
+#### Developer Tools
 
-#### Agents
+- **@sldm/testing** - TDD-first testing framework
+  - Test utilities for reactive components
+  - Mocking and assertions
 
-- `ImplementationAgent` - Autonomous agent for spec-to-code generation
-  - 4-phase workflow: Analyzing → Implementing → Testing → Validating
-  - Configurable analysis and validation options
-  - Event-driven progress monitoring
-  - Result extraction methods
+- **@sldm/storage** - Unified storage abstraction
+  - localStorage adapter
+  - IndexedDB adapter
+  - Database integration
 
-#### Examples
+- **@sldm/integrations** - Third-party integrations
+  - API clients
+  - Service integrations
 
-- Atom implementation example (reactive state primitive)
-  - Complete FSL specification
-  - Event listening demonstration
-  - Full workflow execution
-  - Result extraction and display
-- Basic agent example (Fibonacci function)
-  - Minimal setup demonstration
-  - Quick start template
+- **@sldm/dev-reports** - Development reports
+  - Progress tracking
+  - Build reports
+  - Stakeholder communication
 
-#### Testing
+#### CLI Tool
 
-- Comprehensive test suite with Vitest
-- Unit tests for core functionality
-- FSL validation tests
-- Reflection loop tests
-- Coverage analyzer tests
-- > 80% code coverage
+- **Solidum CLI** - Project scaffolding and code generation
+  - `solidum new` - Create new projects
+  - `solidum generate` - Generate components and pages
+  - `solidum add` - Add packages to projects
+  - Template support (basic, spa, ssr)
+  - Component and page generators
+
+#### Development Infrastructure
+
+- TypeScript monorepo setup
+- pnpm workspace configuration
+- Comprehensive build pipeline
+- Testing infrastructure with Vitest
+- ESLint and Prettier configuration
+- Git hooks with Husky
+- CI/CD ready
 
 #### Documentation
 
-- Comprehensive README with quick start guide
-- API reference documentation
-- Architecture overview
+- Main README with quick start
+- Individual package READMEs
+- API documentation
+- Examples and tutorials
 - Contributing guidelines
-- Examples and usage patterns
-- MIT License
-
-#### Development Tools
-
-- TypeScript 5.x with strict mode
-- ESLint configuration
-- Prettier formatting
-- tsup for fast builds (ESM + CJS)
-- Vitest for testing
-- V8 coverage reporting
 
 ### Notes
 
-This is the initial release of Solidum, providing a solid foundation for building
-autonomous AI agents that generate code, tests, and documentation from structured
-specifications.
+This release establishes Solidum as a complete framework ecosystem for building modern web applications with fine-grained reactivity, comprehensive tooling, and excellent developer experience.
 
-Future releases will include:
-
-- Support for additional LLM providers (OpenAI, Mistral, etc.)
-- More specialized agent types
-- Enhanced FSL features
-- Performance optimizations
-- Additional validators and quality checks
-- More comprehensive examples
-
-[0.1.0]: https://github.com/solidum/solidum/releases/tag/v0.1.0
+[0.2.0]: https://github.com/kluth/solidum/releases/tag/v0.2.0
+[0.1.0]: https://github.com/kluth/solidum/releases/tag/v0.1.0

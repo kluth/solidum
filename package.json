@@ -1,11 +1,11 @@
 {
   "name": "@sldm/monorepo",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "description": "Modern full-stack TypeScript framework built from the ground up",
   "type": "module",
   "scripts": {
-    "build": "pnpm --filter @sldm/utils build && pnpm --filter @sldm/testing build && pnpm --filter @sldm/core build && pnpm --filter @sldm/ui build && pnpm --filter @sldm/ui-chalk build && pnpm --filter @sldm/router build && pnpm --filter @sldm/store build && pnpm --filter @sldm/context build && pnpm --filter @sldm/ssr build && pnpm --filter @sldm/storage build && pnpm --filter @sldm/integrations build && pnpm --filter @sldm/dev-reports build",
+    "build": "pnpm --filter @sldm/utils build && pnpm --filter @sldm/testing build && pnpm --filter @sldm/core build && pnpm --filter @sldm/debug build && pnpm --filter @sldm/ui build && pnpm --filter @sldm/ui-chalk build && pnpm --filter @sldm/router build && pnpm --filter @sldm/store build && pnpm --filter @sldm/context build && pnpm --filter @sldm/ssr build && pnpm --filter @sldm/storage build && pnpm --filter @sldm/integrations build && pnpm --filter @sldm/dev-reports build",
     "build:docs": "pnpm --filter @sldm/docs build",
     "test": "pnpm -r --workspace-concurrency=1 test",
     "test:watch": "pnpm -r test:watch",
