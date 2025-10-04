@@ -1,6 +1,6 @@
 {
   "name": "@sldm/integrations",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Integration adapters for feeds, APIs, MCPs, authentication, and third-party services",
   "type": "module",
   "main": "./dist/index.js",

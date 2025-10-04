@@ -1,6 +1,6 @@
 {
   "name": "@sldm/docs",
-  "version": "0.1.0",
+  "version": "0.3.0",
   "description": "Documentation site for Solidum framework - built with Solidum!",
   "private": true,
   "type": "module",

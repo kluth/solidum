@@ -1,6 +1,6 @@
 {
   "name": "@sldm/core",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Reactive primitives and core runtime for Solidum framework",
   "type": "module",
   "main": "./dist/index.js",
