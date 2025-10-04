@@ -34,17 +34,16 @@ import {
   registerEffectDependency,
 } from './tracking.js';
 
-// eslint-disable-next-line no-unused-vars
 export type Subscriber<T> = (_value: T) => void;
-// eslint-disable-next-line no-unused-vars
+
 export type Setter<T> = T | ((_prev: T) => T);
 export type Unsubscribe = () => void;
 
 export interface Atom<T> {
   (): T;
-  // eslint-disable-next-line no-unused-vars
+
   (value: Setter<T>): void;
-  // eslint-disable-next-line no-unused-vars
+
   subscribe(subscriber: Subscriber<T>): Unsubscribe;
 }
 
@@ -78,7 +77,7 @@ export function atom<T>(initialValue: T): Atom<T> {
   }
 
   function atomFn(): T;
-  // eslint-disable-next-line no-redeclare, no-unused-vars
+  // eslint-disable-next-line no-redeclare
   function atomFn(newValue: Setter<T>): void;
   // eslint-disable-next-line no-redeclare
   function atomFn(newValue?: Setter<T>): T | void {
@@ -103,7 +102,7 @@ export function atom<T>(initialValue: T): Atom<T> {
 
     // Write
     const nextValue =
-      typeof newValue === 'function' ? (newValue as (_prev: T) => T)(value) : newValue; // eslint-disable-line no-unused-vars
+      typeof newValue === 'function' ? (newValue as (_prev: T) => T)(value) : newValue;
 
     // Skip notification if value hasn't changed
     if (Object.is(nextValue, value)) {

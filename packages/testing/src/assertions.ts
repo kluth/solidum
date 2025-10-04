@@ -5,9 +5,9 @@
 export class AssertionError extends Error {
   constructor(
     message: string,
-    // eslint-disable-next-line no-unused-vars
+
     public actual: unknown,
-    // eslint-disable-next-line no-unused-vars
+
     public expected: unknown
   ) {
     super(message);
@@ -16,31 +16,29 @@ export class AssertionError extends Error {
 }
 
 export interface Matchers<T> {
-  // eslint-disable-next-line no-unused-vars
   toBe(_expected: T): void;
-  // eslint-disable-next-line no-unused-vars
+
   toEqual(_expected: T): void;
   toBeNull(): void;
   toBeUndefined(): void;
   toBeDefined(): void;
   toBeTruthy(): void;
   toBeFalsy(): void;
-  // eslint-disable-next-line no-unused-vars
+
   toBeGreaterThan(_expected: number): void;
-  // eslint-disable-next-line no-unused-vars
+
   toBeLessThan(_expected: number): void;
-  // eslint-disable-next-line no-unused-vars
+
   toContain(_expected: unknown): void;
-  // eslint-disable-next-line no-unused-vars
+
   toHaveLength(_expected: number): void;
-  // eslint-disable-next-line no-unused-vars
+
   toThrow(_expected?: string | RegExp): void;
 }
 
 export interface NotMatchers<T> {
-  // eslint-disable-next-line no-unused-vars
   toBe(_expected: T): void;
-  // eslint-disable-next-line no-unused-vars
+
   toEqual(_expected: T): void;
   toBeNull(): void;
   toBeUndefined(): void;

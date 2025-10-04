@@ -14,7 +14,7 @@ export interface SelectProps {
   disabled?: boolean;
   error?: boolean;
   className?: string;
-  // eslint-disable-next-line no-unused-vars
+
   onChange?: (value: string) => void;
   [key: string]: unknown;
 }

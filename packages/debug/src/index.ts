@@ -41,6 +41,10 @@ export { ReactiveDebugger, EffectDebugger, TimeTravelDebugger } from './reactive
 // Component tree
 export { ComponentTree } from './component-tree';
 
+// AI-powered debugger
+export { AIDebugger, createAIDebugger } from './ai-debugger';
+export type { ErrorAnalysis, DebugHint, AIDebuggerConfig } from './ai-debugger';
+
 /**
  * Create a comprehensive debug instance with all utilities
  */

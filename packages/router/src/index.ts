@@ -53,7 +53,6 @@ function addBasePath(path: string): string {
  * Initialize the router with route configuration
  */
 export function createRouter(options: RouterOptions): {
-  // eslint-disable-next-line no-unused-vars
   navigate: (_path: string) => void;
   getCurrentPage: () => string;
   getCurrentPath: () => string;

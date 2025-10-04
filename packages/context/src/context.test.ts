@@ -165,7 +165,6 @@ describe('createContext()', () => {
       return createElement('div', null, String(count()));
     }
 
-    // eslint-disable-next-line no-unused-vars
     let updateCount: ((_value?: number) => number) | undefined;
 
     function Provider() {

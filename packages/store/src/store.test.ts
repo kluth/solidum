@@ -220,7 +220,7 @@ describe('createStore()', () => {
           return { ...state, count: state.count + 1 };
         },
       },
-      // eslint-disable-next-line no-unused-vars
+
       middleware: _store => next => (action, payload) => {
         actions.push(action);
         return next(action, payload);

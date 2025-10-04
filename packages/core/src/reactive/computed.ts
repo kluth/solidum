@@ -34,7 +34,7 @@ import {
 
 export interface Computed<T> {
   (): T;
-  // eslint-disable-next-line no-unused-vars
+
   subscribe(subscriber: Subscriber<T>): Unsubscribe;
 }
 

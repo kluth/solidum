@@ -65,7 +65,6 @@ export interface QueryOptions {
  * Query utilities for finding elements
  */
 export class DOMQueries {
-  // eslint-disable-next-line no-unused-vars
   constructor(private container: Element | Document = document) {}
 
   /**
@@ -511,7 +510,7 @@ export class DOMAssertions {
 export interface RenderResult {
   container: HTMLElement;
   queries: DOMQueries;
-  // eslint-disable-next-line no-unused-vars
+
   rerender: (component: () => unknown) => void;
   unmount: () => void;
 }
@@ -530,7 +529,6 @@ export function render(
   // We'll need to import mount from core, but for now let's assume it's available
   let dispose: (() => void) | undefined;
 
-  // eslint-disable-next-line no-unused-vars
   const renderComponent = (_comp: () => unknown) => {
     if (dispose) {
       dispose();

@@ -12,7 +12,7 @@ export interface SliderProps {
   gradient?: boolean;
   animated?: boolean;
   className?: string;
-  // eslint-disable-next-line no-unused-vars
+
   onChange?: (value: number) => void;
   [key: string]: unknown;
 }

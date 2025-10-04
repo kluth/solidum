@@ -12,7 +12,7 @@ export interface InputProps {
   rightIcon?: string;
   animated?: boolean;
   className?: string;
-  // eslint-disable-next-line no-unused-vars
+
   onInput?: (value: string) => void;
   [key: string]: unknown;
 }

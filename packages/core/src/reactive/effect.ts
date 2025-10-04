@@ -38,7 +38,6 @@
 import type { Unsubscribe } from './atom.js';
 import { setEffectTracking, type TrackingContext } from './tracking.js';
 
-// eslint-disable-next-line no-unused-vars
 export type EffectFn = (_onCleanup: (_cleanup: () => void) => void) => void;
 export type Dispose = () => void;
 

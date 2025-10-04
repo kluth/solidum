@@ -22,16 +22,25 @@
   "scripts": {
     "build": "tsc",
     "dev": "tsc --watch",
-    "test": "echo 'No tests yet'",
+    "test": "tsx src/ai-debugger.test.ts",
     "typecheck": "tsc --noEmit",
     "clean": "rm -rf dist"
   },
   "dependencies": {
     "@sldm/core": "workspace:*"
   },
+  "peerDependencies": {
+    "@sldm/web-ai": "workspace:*"
+  },
+  "peerDependenciesMeta": {
+    "@sldm/web-ai": {
+      "optional": true
+    }
+  },
   "devDependencies": {
-    "typescript": "^5.3.0",
-    "vitest": "^1.0.0"
+    "@sldm/testing": "workspace:*",
+    "tsx": "^4.7.0",
+    "typescript": "^5.3.0"
   },
   "keywords": [
     "solidum",

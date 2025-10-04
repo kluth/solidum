@@ -6,7 +6,7 @@ export interface DataTableColumn<T = unknown> {
   header: string;
   sortable?: boolean;
   draggable?: boolean;
-  // eslint-disable-next-line no-unused-vars
+
   render?: (_value: unknown, _row: T) => unknown;
   width?: string;
 }
@@ -23,9 +23,9 @@ export interface DataTableProps<T = unknown> {
   stickyHeader?: boolean;
   animated?: boolean;
   className?: string;
-  // eslint-disable-next-line no-unused-vars
+
   onSort?: (_key: string, _direction: 'asc' | 'desc') => void;
-  // eslint-disable-next-line no-unused-vars
+
   onRowDrag?: (_fromIndex: number, _toIndex: number) => void;
 }
 

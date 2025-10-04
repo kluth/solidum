@@ -7,7 +7,7 @@ export interface SwitchProps {
   size?: 'sm' | 'md' | 'lg';
   label?: string;
   className?: string;
-  // eslint-disable-next-line no-unused-vars
+
   onChange?: (checked: boolean) => void;
   [key: string]: unknown;
 }

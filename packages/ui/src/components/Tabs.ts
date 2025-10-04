@@ -15,7 +15,7 @@ export interface TabsProps {
   variant?: 'line' | 'enclosed' | 'pills';
   animated?: boolean;
   className?: string;
-  // eslint-disable-next-line no-unused-vars
+
   onChange?: (tabId: string) => void;
 }
 

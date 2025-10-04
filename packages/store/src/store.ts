@@ -4,7 +4,6 @@
  * Centralized state management for complex applications
  */
 
-/* eslint-disable no-unused-vars */
 import { atom } from '@sldm/core';
 import { computed } from '@sldm/core';
 import { batch as batchFn } from '@sldm/core';
