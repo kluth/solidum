@@ -16,6 +16,7 @@ import {
   Switch,
 } from '@sldm/ui';
 import { ThemeSwitcher } from './theme-switcher.js';
+import { Navigation } from '../components/Navigation.js';
 
 export function HomePage() {
   // Sample data for Chart3D
@@ -48,6 +49,9 @@ export function HomePage() {
       className: 'home-page',
       style: { position: 'relative', overflow: 'hidden' },
     },
+
+    // Navigation
+    Navigation(),
 
     // Theme Switcher
     ThemeSwitcher(),

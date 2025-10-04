@@ -1,11 +1,15 @@
 import { createElement } from '@sldm/core';
 import { navigate } from '@sldm/router';
 import { Container, Card, Button } from '@sldm/ui';
+import { Navigation } from '../components/Navigation.js';
 
 export function ReactivityPage() {
   return createElement(
     'div',
     { className: 'reactivity-page' },
+
+    // Navigation
+    Navigation(),
 
     // Hero Section
     createElement(

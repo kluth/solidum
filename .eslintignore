@@ -1,0 +1,14 @@
+# Built files
+dist/
+*.tsbuildinfo
+
+# Documentation site built files
+docs/dist/
+docs/app.js
+docs/app.js.map
+docs/*.html
+docs/*.css
+docs/dist_backup/
+
+# Node modules
+node_modules/
