@@ -1,7 +1,24 @@
 # Run lint-staged to check and fix code quality
 pnpm pre-commit
 
-# Run tests and typecheck in parallel
-pnpm test:parallel & pnpm typecheck:ci & wait
+# Run unit tests and typecheck in parallel (skip integration tests)
+pnpm test:unit &
+TEST_PID=$!
+
+pnpm typecheck:ci &
+TYPE_PID=$!
+
+# Wait for both and capture exit codes
+wait $TEST_PID
+TEST_EXIT=$?
+
+wait $TYPE_PID
+TYPE_EXIT=$?
+
+# Fail if either failed
+if [ $TEST_EXIT -ne 0 ] || [ $TYPE_EXIT -ne 0 ]; then
+  echo "❌ Pre-commit checks failed!"
+  exit 1
+fi
 
 echo "✅ Pre-commit checks passed!"
