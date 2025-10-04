@@ -5,6 +5,7 @@ import type {
   LoggerConfig,
   OutputFormat,
   PerformanceEntry,
+  Formatter,
 } from './types';
 import { LogLevel as Level } from './types';
 

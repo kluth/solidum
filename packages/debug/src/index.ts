@@ -44,26 +44,28 @@ export { ComponentTree } from './component-tree';
 /**
  * Create a comprehensive debug instance with all utilities
  */
-export function createDebug(config?: {
+export async function createDebug(config?: {
   loggerConfig?: import('./types').LoggerConfig;
   enablePerformance?: boolean;
   enableReactive?: boolean;
   enableComponentTree?: boolean;
 }) {
-  const logger = createLogger(config?.loggerConfig);
-  const stream = new (await import('./stream')).DebugStream();
+  const { Logger } = await import('./logger');
+  const loggerInstance = new Logger(config?.loggerConfig);
+  const { DebugStream } = await import('./stream');
+  const stream = new DebugStream();
 
   // Connect logger to stream
-  logger.subscribe(entry => stream.push(entry));
+  loggerInstance.subscribe((entry: import('./types').LogEntry) => stream.push(entry));
 
   const debug = {
-    logger,
+    logger: loggerInstance,
     stream,
     performance: config?.enablePerformance
       ? new (await import('./performance')).PerformanceMonitor()
       : undefined,
     reactive: config?.enableReactive
-      ? new (await import('./reactive')).ReactiveDebugger({ logger })
+      ? new (await import('./reactive')).ReactiveDebugger({ logger: loggerInstance })
       : undefined,
     componentTree: config?.enableComponentTree
       ? new (await import('./component-tree')).ComponentTree()
@@ -80,17 +82,19 @@ export function createDebug(config?: {
 /**
  * Default debug instance for quick usage
  */
+import { logger as defaultLogger } from './logger';
+
 export const debug = {
-  logger,
-  trace: logger.trace.bind(logger),
-  debug: logger.debug.bind(logger),
-  info: logger.info.bind(logger),
-  warn: logger.warn.bind(logger),
-  error: logger.error.bind(logger),
-  fatal: logger.fatal.bind(logger),
-  time: logger.timeStart.bind(logger),
-  timeEnd: logger.timeEnd.bind(logger),
-  group: logger.group.bind(logger),
-  groupEnd: logger.groupEnd.bind(logger),
-  table: logger.table.bind(logger),
+  logger: defaultLogger,
+  trace: defaultLogger.trace.bind(defaultLogger),
+  debug: defaultLogger.debug.bind(defaultLogger),
+  info: defaultLogger.info.bind(defaultLogger),
+  warn: defaultLogger.warn.bind(defaultLogger),
+  error: defaultLogger.error.bind(defaultLogger),
+  fatal: defaultLogger.fatal.bind(defaultLogger),
+  time: defaultLogger.timeStart.bind(defaultLogger),
+  timeEnd: defaultLogger.timeEnd.bind(defaultLogger),
+  group: defaultLogger.group.bind(defaultLogger),
+  groupEnd: defaultLogger.groupEnd.bind(defaultLogger),
+  table: defaultLogger.table.bind(defaultLogger),
 };
