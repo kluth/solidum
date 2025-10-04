@@ -101,7 +101,7 @@ func buildMonorepoParallel() error {
 		// Layer 2: Depends on utils
 		{"@sldm/testing", "@sldm/core"},
 		// Layer 3: Depends on core
-		{"@sldm/debug", "@sldm/ui", "@sldm/ui-chalk", "@sldm/router", "@sldm/store", "@sldm/context"},
+		{"@sldm/debug", "@sldm/web-ai", "@sldm/ui", "@sldm/ui-chalk", "@sldm/router", "@sldm/store", "@sldm/context"},
 		// Layer 4: Depends on multiple packages
 		{"@sldm/ssr", "@sldm/storage", "@sldm/integrations"},
 		// Layer 5: Final packages

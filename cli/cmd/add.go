@@ -20,7 +20,8 @@ Available packages:
   - context   : @sldm/context (Dependency injection)
   - ssr       : @sldm/ssr (Server-side rendering)
   - testing   : @sldm/testing (Test utilities)
-  - debug     : @sldm/debug (Debugging utilities)`,
+  - debug     : @sldm/debug (Debugging utilities)
+  - web-ai    : @sldm/web-ai (Google Web AI integration)`,
 	Args: cobra.ExactArgs(1),
 	RunE: runAdd,
 }
@@ -41,6 +42,7 @@ func runAdd(cmd *cobra.Command, args []string) error {
 		"ssr":     "@sldm/ssr",
 		"testing": "@sldm/testing",
 		"debug":   "@sldm/debug",
+		"web-ai":  "@sldm/web-ai",
 	}
 
 	packageName, ok := packageMap[pkg]

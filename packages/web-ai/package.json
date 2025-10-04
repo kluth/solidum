@@ -1,0 +1,47 @@
+{
+  "name": "@sldm/web-ai",
+  "version": "0.2.0",
+  "description": "Google Web AI (Gemini Nano) integration for Solidum",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsup src/index.ts src/types.ts src/client.ts src/reactive.ts --format esm --dts --clean",
+    "dev": "tsup src/index.ts src/types.ts src/client.ts src/reactive.ts --format esm --dts --watch",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint src --ext .ts,.tsx",
+    "test": "echo 'No tests yet'"
+  },
+  "keywords": [
+    "solidum",
+    "web-ai",
+    "gemini-nano",
+    "chrome-ai",
+    "google-ai",
+    "ai",
+    "llm"
+  ],
+  "author": "Solidum Team",
+  "license": "MIT",
+  "peerDependencies": {
+    "@sldm/core": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "tsup": "^8.0.0",
+    "typescript": "^5.3.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
